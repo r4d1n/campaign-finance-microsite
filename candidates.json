@@ -1,0 +1,102 @@
+{
+  "D" : [
+    {
+      "name_last" : "Chafee",
+      "name_first" : "Lincoln",
+      "FEC_ID" : "P60008075"
+    },
+    {
+      "name_last" : "Clinton",
+      "name_first" : "Hillary",
+      "FEC_ID" : "P00003392"
+    },
+    {
+      "name_last" : "O'Malley",
+      "name_first" : "Martin",
+      "FEC_ID" : "P60007671"
+    },
+    {
+      "name_last" : "Sanders",
+      "name_first" : "Bernie",
+      "FEC_ID" : "P60007168"
+    },
+    {
+      "name_last" : "Webb",
+      "name_first" : "Jim",
+      "FEC_ID" : "P60008885"
+    }
+  ],
+
+  "R" : [
+    {
+      "name_last" : "Bush",
+      "name_first" : "Jeb",
+      "FEC_ID" : "P60008059"
+    },
+    {
+      "name_last" : "Carson",
+      "name_first" : "Ben",
+      "FEC_ID" : "P60005915"
+    },
+    {
+      "name_last" : "Christie",
+      "name_first" : "Chris",
+      "FEC_ID" : "P60008521"
+    },
+    {
+      "name_last" : "Cruz",
+      "name_first" : "Ted",
+      "FEC_ID" : "P60006111"
+    },
+    {
+      "name_last" : "Fiorina",
+      "name_first" : "Carly",
+      "FEC_ID" : "P60007242"
+    },
+    {
+      "name_last" : "Graham",
+      "name_first" : "Lindsey",
+      "FEC_ID" : "P60007697"
+    },
+    {
+      "name_last" : "Huckabee",
+      "name_first" : "Mike",
+      "FEC_ID" : "P80003478"
+    },
+    {
+      "name_last" : "Jindal",
+      "name_first" : "Bobby",
+      "FEC_ID" : "P60008398"
+    },
+    {
+      "name_last" : "Pataki",
+      "name_first" : "George",
+      "FEC_ID" : "P60007572"
+    },
+    {
+      "name_last" : "Paul",
+      "name_first" : "Rand",
+      "FEC_ID" : "P40003576"
+    },
+    {
+      "name_last" : "Perry",
+      "name_first" : "Rick",
+      "FEC_ID" : "P20003281"
+    },
+    {
+      "name_last" : "Rubio",
+      "name_first" : "Marco",
+      "FEC_ID" : "P60006723"
+    },
+    {
+      "name_last" : "Santorum",
+      "name_first" : "Rick",
+      "FEC_ID" : "P20002721"
+    },
+    {
+      "name_last" : "Trump",
+      "name_first" : "Donald",
+      "FEC_ID" : "P80001571"
+    }
+  ]
+}
