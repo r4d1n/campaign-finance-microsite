@@ -2,7 +2,23 @@ var  gulp = require('gulp'),
   shell = require('gulp-shell');
 
 gulp.task('server', function () {
-  shell.task(['http-server'])
+  var nodemon = require('gulp-nodemon');
+  nodemon({
+  "script": "app.js",
+  "ext": "js json es6",
+  "env": { "NODE_ENV": "development" },
+  "ignore": [
+    "node_modules/**",
+    "public/**",
+    "src/**",
+    "dist/**",
+    "views/**",
+    "webpack.config.js",
+    "gulpfile.js",
+    "gulpfile.es6",
+    "package.json"
+  ]
+});
 });
 
 // CLI for webpack dev
@@ -14,4 +30,4 @@ gulp.task('webpack', shell.task(['webpack']));
 
 
 // gulp.task('default', ['server']);
-gulp.task('default', ['server','dev-webpack']);
+gulp.task('default', ['server', 'dev-webpack']);
