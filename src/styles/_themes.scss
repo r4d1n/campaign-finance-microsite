@@ -1,9 +1,14 @@
 .base-theme {
-  background-color: $base-theme-dark;
+  background-color: $base-theme-light;
   color: $base-gray-dark;
 }
 
-.gray-theme {
+.gray-theme-light {
+  background-color: $base-gray-light;
+  color: $base-gray-dark;
+}
+
+.gray-theme-dark {
   background-color: $base-gray-dark;
   color: $base-gray-light;
 }

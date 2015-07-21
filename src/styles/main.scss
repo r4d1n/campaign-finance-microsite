@@ -1,23 +1,42 @@
 @import 'reset';
 @import 'variables';
-@import 'table';
 @import 'themes';
+@import 'table';
+@import 'filter';
 
 body {
   font-family: $base-font-family;
   background-color: $base-theme-light;
+  padding-top: $spacing-unit + 5px;
 }
+
 header {
-.header-bar {
   width: 100%;
-  height: $spacing-unit;
   margin: auto;
+  margin-bottom: $spacing-unit / 2;
+  padding: $spacing-unit / 5;
   position: fixed;
   top: 0;
   border: 1px solid $base-theme-dark;
   background-color: $base-theme-light;
-}
-  padding-bottom: $spacing-unit;
+  height: $spacing-unit;
+  .header-bar {
+    height: 100%;
+    width: 98%;
+    margin: 0 auto;
+    .location {
+      height: 100%;
+      margin: 0;
+      width: 32%;
+      display: inline-block;
+      &.active {
+        background-color: $base-theme-dark;
+      }
+      &.inactive {
+        visibility: hidden;
+      }
+    }
+  }
 }
 
 main {
@@ -25,12 +44,5 @@ main {
 }
 
 footer {
-  height: $spacing-unit * 4;
-  .filter-bar {
-    width: 100%;
-    height: $spacing-unit * 2;
-    margin: auto;
-    border: 1px solid $base-theme-dark;
-    background-color: $base-theme-light;
-  }
+  height: $spacing-unit * 6;
 }

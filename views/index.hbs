@@ -1,6 +1,10 @@
 <!-- <div id='container'>{{{ markup }}}</div> -->
 <header>
-  <div class='header-bar'></div>
+  <div class='header-bar'>
+    <div class='location active'></div>
+    <div class='location inactive'></div>
+    <div class='location inactive'></div>
+  </div>
 </header>
 
 <main>
@@ -9,7 +13,7 @@
     <table>
       <!-- <caption>My table caption</caption> -->
       <thead>
-        <tr class='gray-theme'>
+        <tr class='gray-theme-light'>
           <th>Name</th>
           <th>Raised</th>
           <th>Spent</th>
@@ -112,5 +116,27 @@
 </main>
 
 <footer>
-  <div class='filter-bar'></div>
-</footer>
+  <div class='filter-bar base-theme'>
+    <div class='filter-group'>
+      <span>Filter: </span>
+      <span class='toggle-choice chosen'>On</span>
+      <span class='toggle-choice'>Off</span>
+    </div>
+    <div class='filter-group'>
+      <span class='toggle-choice'>Democrat</span>
+      <span class='toggle-choice'>Republican</span>
+      <span class='toggle-choice chosen'>Both</span>
+    </div>
+    <div class='filter-group'>
+      <span class='toggle-choice chosen'> Spent </span>
+      <span class='toggle-choice'> Raised </span>
+    </div>
+    <div class='filter-group'>
+      <span class='toggle-choice chosen'> More </span>
+      <span class='toggle-choice'> Less </span>
+      <span>Than</span>
+    </div>
+    <div class='filter-group'>
+      <input type='text' placeholder='$' value='$' />
+    </div>
+  </footer>

@@ -1,0 +1,30 @@
+.filter-bar {
+  text-align: center;
+  position: fixed;
+  bottom: $spacing-unit;
+  // left: 5%;
+  width: 100%;
+  height: inherit;
+  margin: 0 auto;
+  padding: $spacing-unit / 4;
+  font-family: $monospace-font-family;
+  // background-color: $base-theme-light;
+  h3 {
+    display: inline-block;
+  }
+  .filter-group {
+    padding-bottom: $spacing-unit / 5;
+    margin: 3px;
+  }
+  .toggle-choice {
+    padding: 0 $spacing-unit / 5;
+  }
+  .chosen {
+    border: 3px solid $base-theme-dark;
+  }
+  input {
+    width: 80%;
+    height: $spacing-unit;
+    border: 1.5px solid $base-theme-dark;
+  }
+}
