@@ -10,23 +10,30 @@ env('.env');
 
 var app = express();
 
-app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.engine('.hbs', exphbs({
+    defaultLayout: 'main',
+    partialsDir: 'views/partials/',
+    extname: '.hbs'
+ }));
 app.set('view engine', '.hbs');
+
+app.use('/', require('./routes/index')); // render views
+app.use(express.static(__dirname + '/public'));
+
+app.locals.development = !!(process.env.NODE_ENV==='development');
 
 // to support URL-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(express.static(__dirname + '/public'));
+var port = process.env.PORT || 3000;
+var server = app.listen(port, function () {
 
+  var host = server.address().address
+  var port = server.address().port
 
-// var port = process.env.PORT || 3000;
-// var server = app.listen(port, function () {
-//
-//   var host = server.address().address
-//   var port = server.address().port
-//
-//   console.log('App listening at http://%s:%s', host, port)
-//
-// })
+  console.log('App listening at http://%s:%s', host, port)
+
+})
+
 fetch.getData();
 module.exports = app;
