@@ -3,14 +3,15 @@ require('babel/register');
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var fetch = require('./lib/fetch')
+var exphbs  = require('express-handlebars');
+var fetch = require('./lib/fetch');
+var env = require('node-env-file');
+env('.env');
+
 var app = express();
 
-var express = require('express');
-var exphbs  = require('express-handlebars');
-
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.set('view engine', '.hbs');
 
 // to support URL-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }))
