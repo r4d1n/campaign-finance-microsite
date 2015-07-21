@@ -10,7 +10,19 @@ let router = express.Router();
 
 // GET home page.
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('table');
+});
+
+router.get('/table', function(req, res, next) {
+  res.render('table');
+});
+
+router.get('/icon', function(req, res, next) {
+  res.render('icon');
+});
+
+router.get('/chart', function(req, res, next) {
+  res.render('chart');
 });
 
 module.exports = router;
