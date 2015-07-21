@@ -1,10 +1,19 @@
-$gop-theme-primary: #CC2D1C;
-$gop-theme-accent: #FF4948;
+$base-theme-light: #FFF7FB;
+$base-theme-dark: #EC81FF;
 
-$dem-theme-primary: #172B99;
-$dem-theme-accent: #1451CC;
+$base-gray-light: #666;
+$base-gray-dark: #999;
 
-$base-theme-primary: #F3FFB5;
-// $base-theme-accent: ;
+$gop-theme-dark: #99172b;
+// $gop-theme-light: #FF4948;
+$gop-theme-light: #FF6D6C;
+
+$dem-theme-dark: #172B99;
+// $dem-theme-light: #1451CC;
+$dem-theme-light: #4273d6;
 
 $base-font-family: "canada-type-gibson", sans-serif;
+
+$spacing-unit:     25px;
+
+$table-width: 350px;

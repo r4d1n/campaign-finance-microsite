@@ -1,6 +1,36 @@
 @import 'reset';
 @import 'variables';
+@import 'table';
+@import 'themes';
 
 body {
   font-family: $base-font-family;
+  background-color: $base-theme-light;
+}
+header {
+.header-bar {
+  width: 100%;
+  height: $spacing-unit;
+  margin: auto;
+  position: fixed;
+  top: 0;
+  border: 1px solid $base-theme-dark;
+  background-color: $base-theme-light;
+}
+  padding-bottom: $spacing-unit;
+}
+
+main {
+  height: 300px;
+}
+
+footer {
+  height: $spacing-unit * 4;
+  .filter-bar {
+    width: 100%;
+    height: $spacing-unit * 2;
+    margin: auto;
+    border: 1px solid $base-theme-dark;
+    background-color: $base-theme-light;
+  }
 }

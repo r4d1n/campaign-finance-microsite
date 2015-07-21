@@ -1,0 +1,15 @@
+table {
+  margin: $spacing-unit auto;
+  width: $table-width;
+  height: auto;
+}
+
+td,th {
+  padding: $spacing-unit / 3;
+  width: 33%;
+  text-align: center;
+}
+
+tr {
+  border-bottom: 2.5px solid #fff;
+}
