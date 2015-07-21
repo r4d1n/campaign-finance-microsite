@@ -8,6 +8,7 @@ body {
   font-family: $base-font-family;
   background-color: $base-theme-light;
   padding-top: $spacing-unit + 5px;
+  font-size: 1em;
 }
 
 header {
@@ -44,5 +45,8 @@ main {
 }
 
 footer {
-  height: $spacing-unit * 6;
+  width: 100%;
+  // height: $spacing-unit * 6;
+  position: fixed;
+  bottom: $spacing-unit;
 }

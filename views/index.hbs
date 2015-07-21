@@ -118,11 +118,6 @@
 <footer>
   <div class='filter-bar base-theme'>
     <div class='filter-group'>
-      <span>Filter: </span>
-      <span class='toggle-choice chosen'>On</span>
-      <span class='toggle-choice'>Off</span>
-    </div>
-    <div class='filter-group'>
       <span class='toggle-choice'>Democrat</span>
       <span class='toggle-choice'>Republican</span>
       <span class='toggle-choice chosen'>Both</span>
@@ -132,11 +127,13 @@
       <span class='toggle-choice'> Raised </span>
     </div>
     <div class='filter-group'>
-      <span class='toggle-choice chosen'> More </span>
-      <span class='toggle-choice'> Less </span>
-      <span>Than</span>
+      <span aria-label='greater-than' class='toggle-choice chosen'> > </span>
+      <span aria-label='less-than' class='toggle-choice'> < </span>
     </div>
     <div class='filter-group'>
       <input type='text' placeholder='$' value='$' />
+    </div>
+    <div class='filter-group'>
+      <span>Clear Filter</span>
     </div>
   </footer>
