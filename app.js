@@ -44,5 +44,5 @@ var server = app.listen(port, function () {
 
 })
 
-// fetch.getData();
+// fetch.requestAndSaveResource();
 module.exports = app;
