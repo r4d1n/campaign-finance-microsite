@@ -10,7 +10,7 @@ let router = express.Router();
 
 // GET home page.
 router.get('/', function(req, res, next) {
-  res.render('table');
+  res.render('index');
 });
 
 router.get('/table', function(req, res, next) {

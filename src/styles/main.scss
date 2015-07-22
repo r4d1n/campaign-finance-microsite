@@ -56,3 +56,13 @@ footer {
   position: fixed;
   bottom: $spacing-unit;
 }
+
+figure {
+  width: 80%;
+  margin: $spacing-unit auto;
+  img {
+    margin: $spacing-unit auto;
+    max-width: 500px;
+    width: 100%;
+  }
+}
