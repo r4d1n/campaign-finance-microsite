@@ -1,0 +1,46 @@
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "name": "BUSH, JEB",
+      "fec_id": "P60008059",
+      "pcc": null,
+      "party": "R",
+      "candidate_url": "/candidate/2016/bush-jeb/P60008059/",
+      "race_url": "/presidential/",
+      "ie_url": "/outside-spending/#?ordering=-expenditure_date_formatted&candidate_id_checked=P60008059",
+      "is_incumbent": false,
+      "cycle": "2016",
+      "not_seeking_reelection": false,
+      "other_office_sought": null,
+      "other_fec_id": null,
+      "election_year": 2016,
+      "state": "US",
+      "office": "P",
+      "office_district": "00",
+      "term_class": null,
+      "candidate_status": "D",
+      "total_expenditures": "97000.00",
+      "expenditures_supporting": "97000.00",
+      "expenditures_opposing": "0.00",
+      "total_receipts": "11429897.64",
+      "total_contributions": "10983577.49",
+      "total_disbursements": "3078087.31",
+      "cash_on_hand": "8351810.33",
+      "cash_on_hand_date": "2015-06-30",
+      "district": {
+        "race_name": "President",
+        "state": null,
+        "office": "P",
+        "office_district": "",
+        "term_class": null,
+        "id": 1522
+      },
+      "outstanding_loans": "401104.53",
+      "cand_is_gen_winner": null,
+      "status": ""
+    }
+  ]
+}

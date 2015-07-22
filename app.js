@@ -10,6 +10,11 @@ env('.env');
 
 var app = express();
 
+// mongodb connection
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/money');
+
+// register handlebars
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   partialsDir: 'views/partials/',
