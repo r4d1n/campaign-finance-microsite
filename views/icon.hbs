@@ -8,11 +8,31 @@
 
 <main>
   <div class='big-num-bar'>
+    <h1>$1,000,000</h1>
+    <div>
+      has been
+      <select class="" name="">
+        <option value="raised">raised for</option>
+        <option value="spent">spent on</option>
+      </select>
+    </div>
+    <div>
+      <!-- <span> -->
+        <select class="" name="">
+          <option value="total">Every</option>
+          <option value="Hilary">Hilary's</option>
+          <option value="Donald">Donald's</option>
+          <option value="Jeb">Jeb's</option>
+          <option value="Bernie">Bernie's</option>
+        </select>
+      <!-- </span> -->
+      official campaign.
+    </div>
 
   </div>
   <div class='icon-list-container'>
     {{#repeat count=1000}}
-    <span class='icon'>
+    <span class='icon-holder'>
       <i class="fa fa-usd"></i>
     </span>
     {{/repeat}}
@@ -22,8 +42,9 @@
 <footer>
   <div class='icon-bar base-theme'>
     <div class='filter-group'>
-      <button class='icon-share-btn'>Share</button>
-      <button class='icon-up-btn'><i class="fa fa-arrow-up"></i></span>
-      </div>
+      <h1 class='scale'><i class="fa fa-usd"></i> = $1,000</h1>
+      <button class='icon-share-btn'>SHARE</button>
+      <!-- <button class='icon-up-btn'><i class="fa fa-arrow-up"></i></span> -->
     </div>
-  </footer>
+  </div>
+</footer>

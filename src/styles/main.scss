@@ -12,14 +12,6 @@ body {
   font-size: 1em;
 }
 
-button {
-  font-family: inherit;
-  background-color: $base-theme-light;
-  border: 1px solid $base-theme-dark;
-  color: $base-theme-dark;
-  border-radius: 5px;
-}
-
 header {
   z-index: 4;
   width: 100%;
@@ -66,4 +58,47 @@ figure {
     max-width: 500px;
     width: 100%;
   }
+}
+
+button {
+  font-family: inherit;
+  background-color: $base-theme-light;
+  border: 1px solid $base-gray-dark;
+  color: $base-gray-dark;
+  border-radius: 10px;
+}
+
+select {
+  font-family: inherit;
+  font-size: $spacing-unit / 2 ;
+  background-color: $base-theme-light;
+  border: 1px solid $base-theme-dark;
+  color: $base-theme-dark;
+  border-radius: 10px;
+  // line-height: $spacing-unit;
+  // height: $spacing-unit;
+}
+
+// some hacks to make the select work across browsers
+@media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
+    select {
+        height:30px;
+        line-height:30px;
+        background:#f4f4f4;
+    }
+}
+select::-moz-focus-inner { /*Remove button padding in FF*/
+    border: 0;
+    padding: 0;
+}
+@-moz-document url-prefix() { /* targets Firefox only */
+    select {
+        padding: $spacing-unit / 2 0!important;
+    }
+}
+@media screen\0 { /* IE Hacks: targets IE 8, 9 and 10 */
+    select {
+        height: $spacing-unit;
+        line-height:$spacing-unit;
+    }
 }
