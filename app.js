@@ -11,10 +11,14 @@ env('.env');
 var app = express();
 
 app.engine('.hbs', exphbs({
-    defaultLayout: 'main',
-    partialsDir: 'views/partials/',
-    extname: '.hbs'
- }));
+  defaultLayout: 'main',
+  partialsDir: 'views/partials/',
+  extname: '.hbs',
+  helpers: {
+    repeat: require('handlebars-helper-repeat')
+  }
+}));
+
 app.set('view engine', '.hbs');
 
 app.use('/', require('./routes/index')); // render views
@@ -35,5 +39,5 @@ var server = app.listen(port, function () {
 
 })
 
-fetch.getData();
+// fetch.getData();
 module.exports = app;

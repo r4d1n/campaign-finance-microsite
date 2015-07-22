@@ -21,6 +21,7 @@
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
     "express-handlebars": "^2.0.1",
+    "handlebars-helper-repeat": "^0.3.1",
     "lodash": "^3.10.0",
     "node-env-file": "^0.1.7",
     "request": "^2.59.0",

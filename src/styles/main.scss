@@ -1,14 +1,23 @@
 @import 'reset';
 @import 'variables';
 @import 'themes';
-@import 'table';
 @import 'filter';
+@import 'table';
+@import 'icon';
 
 body {
-  font-family: $base-font-family;
+  font-family: $monospace-font-family;
   background-color: $base-theme-light;
   padding-top: $spacing-unit + 5px;
   font-size: 1em;
+}
+
+button {
+  font-family: inherit;
+  background-color: $base-theme-light;
+  border: 1px solid $base-theme-dark;
+  color: $base-theme-dark;
+  border-radius: 5px;
 }
 
 header {
@@ -24,11 +33,12 @@ header {
   .header-bar {
     height: 100%;
     width: 98%;
+    z-index: 3;
     margin: 0 auto;
     .location {
       height: 100%;
       margin: 0;
-      width: 32%;
+      width: 30%;
       display: inline-block;
       &.active {
         background-color: $base-theme-dark;
@@ -38,10 +48,6 @@ header {
       }
     }
   }
-}
-
-main {
-  height: 300px;
 }
 
 footer {
