@@ -7,15 +7,15 @@ var Schema = mongoose.Schema;
 var RecordSchema = new Schema({
 	name: String,
 	party: String,
-	fec_id: String,
-	campaign_raised: String,
-	campaign_spent: String,
-	total_independent: String,
-	independent_for: String,
-	independent_against: String,
-	cash_on_hand: String,
-	cash_date: String,
-  requested_at: Date
+	fecId: String,
+	officialRaised: String,
+	officialSpent: String,
+	independentTotal: String,
+	independentFor: String,
+	independentAgainst: String,
+	cashOnHand: String,
+	cashDate: String,
+  requestedAt: Date
 });
 
 module.exports = mongoose.model('Record', RecordSchema);

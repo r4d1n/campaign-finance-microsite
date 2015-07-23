@@ -1,6 +1,6 @@
-require('babel/register');
-
 'use strict';
+
+require('babel/register');
 
 var express = require('express');
 var path = require('path');
@@ -27,7 +27,7 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
-// fetch.init();
+fetch.init();
 
 app.use('/', require('./routes/index')); // render views
 app.use(express.static(__dirname + '/public'));
