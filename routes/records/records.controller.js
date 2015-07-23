@@ -1,6 +1,6 @@
 'use strict';
 
-let Record = require('./record.model');
+let Record = require('../../models/record.model');
 
 let controller = {};
 

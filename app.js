@@ -24,6 +24,8 @@ app.engine('.hbs', exphbs({
   }
 }));
 
+fetch.init();
+
 app.set('view engine', '.hbs');
 
 app.use('/', require('./routes/index')); // render views
@@ -44,5 +46,4 @@ var server = app.listen(port, function () {
 
 })
 
-// fetch.requestAndSaveResource();
 module.exports = app;

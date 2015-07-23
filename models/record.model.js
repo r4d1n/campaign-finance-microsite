@@ -1,14 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose');
-// var timestamps = require('mongoose-timestamp');
 
 var Schema = mongoose.Schema;
-
-// mongoose.plugin(timestamps,  {
-//   createdAt: 'created_at',
-//   updatedAt: 'updated_at'
-// });
 
 var RecordSchema = new Schema({
 	name: String,
