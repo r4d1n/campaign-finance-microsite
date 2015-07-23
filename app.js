@@ -2,6 +2,8 @@
 
 require('babel/register');
 
+var config = require('./config');
+
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -13,7 +15,14 @@ var app = express();
 
 // mongodb connection
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/money');
+
+if (process.env.NODE_ENV==='development') {
+  mongoose.connect('mongodb://localhost/' + config.DEV_DB);
+}
+
+if (process.env.NODE_ENV==='test') {
+  mongoose.connect('mongodb://localhost/' + config.TEST_DB);
+}
 
 // register handlebars
 app.engine('.hbs', exphbs({

@@ -1,5 +1,6 @@
 var  gulp = require('gulp'),
-shell = require('gulp-shell');
+shell = require('gulp-shell'),
+config = require('./config');
 
 gulp.task('server', function () {
   var nodemon = require('gulp-nodemon');
@@ -20,6 +21,9 @@ gulp.task('server', function () {
     ]
   });
 });
+
+// gulp.task('seed', shell.task(['babel-node seed.js']));
+gulp.task('drop-local', shell.task(["mongo " + config.DEV_DB + " --eval 'db.dropDatabase()'"]));
 
 // CLI for webpack dev
 // http://webpack.github.io/docs/webpack-dev-server.html#cli

@@ -1,0 +1,4 @@
+{
+  "DEV_DB" : "campaign-dev",
+  "TEST_DB" : "campaign-test"
+}

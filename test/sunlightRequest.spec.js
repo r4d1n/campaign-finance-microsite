@@ -1,5 +1,7 @@
 'use strict';
 
+process.env.NODE_ENV = 'test'
+
 let Record = require('../models/record.model.js');
 let Timestamp = require('../models/timestamp.model.js');
 
@@ -67,17 +69,18 @@ suite('Sunlight API Request Functions', function() {
   test('save a data object', function(done) {
     timestamp = Date.now();
     getData(links[0], timestamp)
-    .then ((data) => {
+    .then((data) => {
+      console.log(data)
       return saveRecord(data)
     })
-    .then((data) => {
+    .then((record) => {
       attrs.forEach((element, index) => {
-        assert.ok(data[element])
+        assert.ok(record[element])
       });
       done();
     })
     .catch((err) => {
       done(err);
     });
-  }); // end request test
+  }); // end save test
 });
