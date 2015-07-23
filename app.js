@@ -27,7 +27,7 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 var sunlightReq = require('./lib/sunlightReq');
-sunlightReq.init();
+// sunlightReq.init();
 
 app.use('/', require('./routes/index')); // render views
 app.use(express.static(__dirname + '/public'));

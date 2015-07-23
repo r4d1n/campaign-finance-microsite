@@ -28,4 +28,6 @@ gulp.task('dev-webpack', shell.task([['webpack-dev-server --color --port ' + 808
 
 gulp.task('webpack', shell.task(['webpack']));
 
+gulp.task('test', shell.task(['node_modules/.bin/mocha -u tdd -R spec --compilers js:mocha-traceur']));
+
 gulp.task('default', ['server', 'dev-webpack']);
