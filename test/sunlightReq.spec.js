@@ -8,9 +8,15 @@ let assert = require('chai').assert;
 let app  = require('../app.js');
 let port = 3333;
 
+let sunlightReq = require('../lib/sunlightReq');
+let saveRecord = require('../lib/sunlightReq/saveRecord');
+let getData = require('../lib/sunlightReq/getData');
+let saveTimestamp = require('../lib/sunlightReq/saveTimestamp');
+let links = require('../lib/sunlightReq/links');
 
-suite('first suite', function() {
+suite('Sunlight API Request Functions', function() {
   let server;
+  let timestamp;
 
   setup(function(done) {
     // start the app each time, return server object to close
@@ -25,15 +31,20 @@ suite('first suite', function() {
 
   teardown(function() {
     // remove any added items from the local db
+    Timestamp.find({requestedAt: timestamp}).remove().exec();
+    Record.find({requestedAt: timestamp}).remove().exec();
+
     // close the express server connection
     server.close();
   });
 
-  test('', function(done) {
-    console.log('a test')
-    assert.fail();
-
-    // done()
-  }); // end test
+  test('create a new timestamp', function(done) {
+    saveTimestamp()
+    .then((time) => {
+      assert.ok(time);
+      timestamp = time; // set global for clean up
+      done();
+    })
+  }); // end timestamp test
 
 });
