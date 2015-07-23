@@ -6,7 +6,6 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
-var fetch = require('./lib/fetch');
 var env = require('node-env-file');
 env('.env');
 
@@ -27,7 +26,8 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
-fetch.init();
+var sunlightReq = require('./lib/sunlightReq');
+sunlightReq.init();
 
 app.use('/', require('./routes/index')); // render views
 app.use(express.static(__dirname + '/public'));
