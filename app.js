@@ -1,5 +1,7 @@
 require('babel/register');
 
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -23,10 +25,9 @@ app.engine('.hbs', exphbs({
     repeat: require('handlebars-helper-repeat')
   }
 }));
-
-fetch.init();
-
 app.set('view engine', '.hbs');
+
+// fetch.init();
 
 app.use('/', require('./routes/index')); // render views
 app.use(express.static(__dirname + '/public'));
