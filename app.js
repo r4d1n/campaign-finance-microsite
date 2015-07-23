@@ -26,10 +26,12 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
-var sunlightRequest = require('./lib/sunlightRequest');
+// var sunlightRequest = require('./lib/sunlightRequest');
 // sunlightRequest.init();
 
 app.use('/', require('./routes/index')); // render views
+app.use('/api/records', require('./routes/api/records'));
+
 app.use(express.static(__dirname + '/public'));
 
 app.locals.development = !!(process.env.NODE_ENV==='development');
