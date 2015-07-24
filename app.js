@@ -17,6 +17,8 @@ var app = express();
 var mongoose = require('mongoose');
 
 if (process.env.NODE_ENV==='development') {
+  // var sunlightRequest = require('./lib/sunlightRequest');
+  // sunlightRequest.init();
   mongoose.connect('mongodb://localhost/' + config.DEV_DB);
 }
 
@@ -35,8 +37,6 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
-// var sunlightRequest = require('./lib/sunlightRequest');
-// sunlightRequest.init();
 
 app.use('/', require('./routes/index')); // render views
 app.use('/api/records', require('./routes/api/records'));

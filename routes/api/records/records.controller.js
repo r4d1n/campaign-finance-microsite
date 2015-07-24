@@ -21,19 +21,24 @@ controller.getAllRecords = function(req, res, next) {
 };
 
 controller.getMostRecent = function(req, res, next) {
-
-  // Project
-  // .where('start')
-  // .lte(req.query.end)
-  // .where('end')
-  // .gte(req.query.start)
-  // .sort({end : 1}) // closest deadlines first
-  // .exec((err,doc) => {
-  //   if (err) {
-  //     res.status(500).json({status:'error', message: err});
-  //   }
-  //   res.json(doc);
-  // })
+  Timestamp
+  .find()
+  .sort({_id: 1})
+  .limit(1)
+  .exec((err, timestamp) => {
+    if (err) {
+      throw err;
+    }
+    Record
+    .where('requestedAt')
+    .equals(timestamp[0].requestedAt)
+    .exec((err, result) => {
+      if (err) {
+        res.status(500).json({status:'error', message: err});
+      }
+      res.json(result);
+    })
+  })
 };
 
 module.exports = controller;

@@ -1,6 +1,6 @@
 'use strict';
 
-process.env.NODE_ENV = 'test'
+process.env.NODE_ENV = 'test';
 
 let Record = require('../models/record.model.js');
 let Timestamp = require('../models/timestamp.model.js');
@@ -70,7 +70,6 @@ suite('Sunlight API Request Functions', function() {
     timestamp = Date.now();
     getData(links[0], timestamp)
     .then((data) => {
-      console.log(data)
       return saveRecord(data)
     })
     .then((record) => {

@@ -7,3 +7,5 @@ require('../styles/main.scss');
 // import * from './barChart';
 
 console.log('running js in the browser')
+
+require('./barChart')

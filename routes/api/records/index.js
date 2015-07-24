@@ -9,6 +9,6 @@ var router = express.Router();
 
 /* GET JSON */
 router.get('/', controller.getAllRecords); // needs query string
-router.get('/timestamp/:time', controller.getMostRecent);
+router.get('/recent', controller.getMostRecent);
 
 module.exports = router;
