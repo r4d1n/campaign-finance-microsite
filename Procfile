@@ -1,2 +1,2 @@
-web: node app.js
-clock: node clock.js
+web: node --harmony app.js
+clock: node --harmony clock.js
