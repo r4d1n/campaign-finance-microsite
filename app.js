@@ -8,10 +8,14 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
-var env = require('node-env-file');
-env('.env');
 
 var app = express();
+
+
+if (process.env.NODE_ENV==='development' || process.env.NODE_ENV==='test') {
+  var env = require('node-env-file');
+  env('.env');
+}
 
 // mongodb connection
 var mongoose = require('mongoose');

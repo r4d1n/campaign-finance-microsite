@@ -8,8 +8,7 @@ var CronJob = require('cron').CronJob;
 var job = new CronJob({
   cronTime: '00 00 00 * * 0-6',
   onTick: function() {
-    var time = new Date();
-    console.log('Executing Sunlight Requests,' time);
+    console.log('Executing Sunlight Requests');
     sunlightRequest.init();
   },
   start: true,
