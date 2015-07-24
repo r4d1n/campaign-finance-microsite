@@ -1,6 +1,6 @@
-'use strict';
+// 'use strict';
 
-require('babel/register');
+// require('babel/register');
 
 var sunlightRequest = require('./lib/sunlightRequest');
 
