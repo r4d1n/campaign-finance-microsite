@@ -30,6 +30,10 @@ if (process.env.NODE_ENV==='test') {
   mongoose.connect('mongodb://localhost/' + config.TEST_DB);
 }
 
+if (process.env.NODE_ENV==='production') {
+  mongoose.connect(process.env.MONGOLAB_URI);
+}
+
 // register handlebars
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
