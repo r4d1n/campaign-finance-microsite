@@ -19,6 +19,7 @@
   "dependencies": {
     "babel": "^5.6.23",
     "body-parser": "^1.13.2",
+    "cron": "^1.0.9",
     "d3": "^3.5.6",
     "express": "^4.13.1",
     "express-handlebars": "^2.0.1",
