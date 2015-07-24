@@ -5,7 +5,12 @@ process.env.NODE_ENV = 'test';
 let Record = require('../models/record.model.js');
 let Timestamp = require('../models/timestamp.model.js');
 
-let assert = require('chai').assert;
+let chai = require('chai');
+let chaiAsPromised = require("chai-as-promised");
+
+chai.use(chaiAsPromised);
+
+let assert = chai.assert;
 
 let app  = require('../app.js');
 let port = 3333;
@@ -56,6 +61,7 @@ suite('Sunlight API Request Functions', function() {
   }); // end timestamp test
 
   test('make a data request', function(done) {
+    // todo: use chai-as-promised here, stub ajax
     getData(links[0], timestamp)
     .then((data)=> {
       assert(typeof data === "object");

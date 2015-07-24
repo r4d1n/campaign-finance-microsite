@@ -8,37 +8,47 @@ let controller = {};
 // functions for answering JSON requests
 
 // get all projects within the relevant time frame
-controller.getAllRecords = function(req, res, next) {
+controller.allRecords = function(req, res, next) {
   Record
   .find()
   .sort({ requestedAt : 1 })
   .exec((err,doc) => {
     if (err) {
       res.status(500).json({status:'error', message: err});
+    } else {
+      res.json(doc);
     }
-    res.json(doc);
-  })
-};
+  });
+}
 
-controller.getMostRecent = function(req, res, next) {
+controller.latestRecords = function(req, res, next) {
   Timestamp
   .find()
-  .sort({_id: 1})
+  .sort({requestedAt : -1})
   .limit(1)
-  .exec((err, timestamp) => {
-    if (err) {
-      throw err;
-    }
-    Record
+  .exec()
+  .then((timestamp) => {
+    return Record
+    .find()
     .where('requestedAt')
     .equals(timestamp[0].requestedAt)
-    .exec((err, result) => {
-      if (err) {
-        res.status(500).json({status:'error', message: err});
-      }
+    .exec()
+    .then((result) => {
       res.json(result);
     })
+    .catch((err) => {
+      res.status(500).json({status:'error', message: err});
+    })
   })
-};
+}
+//
+// function latestTimestamp () {
+//   return new Timestamp
+//   .find()
+//   .sort({requestedAt : -1})
+//   .limit(1)
+//   .exec()
+// })
+// };
 
 module.exports = controller;

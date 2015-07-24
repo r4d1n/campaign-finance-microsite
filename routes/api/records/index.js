@@ -8,7 +8,7 @@ var router = express.Router();
 // all routes prefixed with /api/records/
 
 /* GET JSON */
-router.get('/', controller.getAllRecords); // needs query string
-router.get('/recent', controller.getMostRecent);
+router.get('/', controller.allRecords); // needs query string
+router.get('/latest', controller.latestRecords);
 
 module.exports = router;
