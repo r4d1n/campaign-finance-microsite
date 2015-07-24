@@ -17,7 +17,9 @@ let saveTimestamp = require('../lib/sunlightRequest/saveTimestamp');
 let links = require('../lib/sunlightRequest/links');
 let attrs = ['name', 'party', 'fecId', 'officialRaised',
 'officialSpent', 'independentTotal', 'independentFor',
-'independentAgainst', 'cashOnHand', 'cashDate', 'requestedAt']
+'independentAgainst', 'cashOnHand', 'cashDate', 'requestedAt'];
+
+let sample = require('./sample');
 
 suite('Sunlight API Request Functions', function() {
   let server;
@@ -32,6 +34,7 @@ suite('Sunlight API Request Functions', function() {
         done();
       }
     });
+
   });
 
   teardown(function() {
@@ -46,16 +49,15 @@ suite('Sunlight API Request Functions', function() {
   test('create a new timestamp', function(done) {
     saveTimestamp()
     .then((time) => {
-      assert.ok(time);
       timestamp = time; // set global for clean up
+      assert.ok(time);
       done();
     })
   }); // end timestamp test
 
   test('make a data request', function(done) {
-    timestamp = Date.now();
     getData(links[0], timestamp)
-    .then((data) => {
+    .then((data)=> {
       assert(typeof data === "object");
       assert.ok(data.name);
       assert.ok(data.timestamp);
@@ -68,10 +70,11 @@ suite('Sunlight API Request Functions', function() {
 
   test('save a data object', function(done) {
     timestamp = Date.now();
-    getData(links[0], timestamp)
-    .then((data) => {
-      return saveRecord(data)
-    })
+    /* borrow 2 lines from actual getData fn to simulate its resolved value */
+    let data = sample['results'][0];
+    data.timestamp = timestamp;
+
+    saveRecord(data)
     .then((record) => {
       attrs.forEach((element, index) => {
         assert.ok(record[element])
