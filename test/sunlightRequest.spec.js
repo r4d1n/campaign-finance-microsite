@@ -2,10 +2,14 @@
 
 process.env.NODE_ENV = 'test';
 
+let request = require('request');
+
 let Record = require('../models/record.model.js');
 let Timestamp = require('../models/timestamp.model.js');
 
 let chai = require('chai');
+let sinon = require('sinon');
+
 let chaiAsPromised = require("chai-as-promised");
 
 chai.use(chaiAsPromised);
@@ -25,30 +29,30 @@ let attrs = ['name', 'party', 'fecId', 'officialRaised',
 'independentAgainst', 'cashOnHand', 'cashDate', 'requestedAt'];
 
 let sample = require('./sample');
+let fakeRes = require('./res');
 
 suite('Sunlight API Request Functions', function() {
   let server;
   let timestamp;
 
   setup(function(done) {
-    // start the app each time, return server object to close
-    server = app.listen(port, function (err, result) {
-      if (err) {
-        done(err);
-      } else {
-        done();
-      }
-    });
+    sinon
+    .stub(request, 'get')
+    .yields(null,fakeRes);
 
+    done();
   });
 
-  teardown(function() {
+  teardown(function(done) {
     // remove any added items from the local db
     Timestamp.find({requestedAt: timestamp}).remove().exec();
     Record.find({requestedAt: timestamp}).remove().exec();
 
-    // close the express server connection
-    server.close();
+    // clean up global timestamp and restore stubbed request method
+    timestamp = undefined;
+    request.get.restore();
+
+    done();
   });
 
   test('create a new timestamp', function(done) {
@@ -56,22 +60,28 @@ suite('Sunlight API Request Functions', function() {
     .then((time) => {
       timestamp = time; // set global for clean up
       assert.ok(time);
-      done();
     })
+    .catch((err) => {
+      done(err);
+    })
+    done();
   }); // end timestamp test
 
   test('make a data request', function(done) {
+    let spy = sinon.spy();
+    timestamp = Date.now();
     // todo: use chai-as-promised here, stub ajax
-    getData(links[0], timestamp)
-    .then((data)=> {
-      assert(typeof data === "object");
-      assert.ok(data.name);
-      assert.ok(data.timestamp);
-      done();
+    getData('/a/test/url', timestamp)
+    .then((data) => {
+      spy(data);
+      assert.ok(request.get.called);
+      assert.ok(spy.calledWith(data));
+      assert.equal(data.timestamp, timestamp);
     })
     .catch((err) => {
       done(err);
     });
+    done();
   }); // end request test
 
   test('save a data object', function(done) {
@@ -85,10 +95,10 @@ suite('Sunlight API Request Functions', function() {
       attrs.forEach((element, index) => {
         assert.ok(record[element])
       });
-      done();
     })
     .catch((err) => {
       done(err);
     });
+    done();
   }); // end save test
 });
