@@ -2,6 +2,7 @@
 
 require('babel/register');
 
+var mongoose = require('mongoose');
 var sunlightRequest = require('./lib/sunlightRequest');
 
 if (process.env.NODE_ENV==='production') {
