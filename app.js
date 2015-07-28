@@ -45,7 +45,7 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
-
+// routes
 app.use('/', require('./routes/index')); // render views
 app.use('/api/records', require('./routes/api/records'));
 

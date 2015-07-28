@@ -4,6 +4,10 @@ require('babel/register');
 
 var sunlightRequest = require('./lib/sunlightRequest');
 
+if (process.env.NODE_ENV==='production') {
+  mongoose.connect(process.env.MONGOLAB_URI);
+}
+
 var CronJob = require('cron').CronJob;
 var job = new CronJob({
   cronTime: '00 00 00 * * 0-6',
