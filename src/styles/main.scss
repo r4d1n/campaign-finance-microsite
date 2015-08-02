@@ -7,7 +7,7 @@
 
 body {
   font-family: $monospace-font-family;
-  background-color: $base-theme-light;
+  background-color: $base-white;
   padding-top: $spacing-unit + 5px;
   font-size: 1em;
 }
@@ -21,7 +21,7 @@ header {
   position: fixed;
   top: 0;
   border: 1px solid $base-theme-dark;
-  background-color: $base-theme-light;
+  background-color: $base-white;
   height: $spacing-unit;
   .header-bar {
     height: 100%;

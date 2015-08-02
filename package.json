@@ -4,6 +4,7 @@
   "description": "a tiny site about politics",
   "main": "app.js",
   "scripts": {
+    "start": "node --harmony app.js",
     "test": "gulp test"
   },
   "repository": {
@@ -18,7 +19,9 @@
   "homepage": "https://github.com/r4d1n/campaign-finance-microsite",
   "dependencies": {
     "babel": "^5.6.23",
+    "babel-core": "^5.8.3",
     "body-parser": "^1.13.2",
+    "cron": "^1.0.9",
     "d3": "^3.5.6",
     "express": "^4.13.1",
     "express-handlebars": "^2.0.1",
@@ -53,5 +56,6 @@
     "traceur": "0.0.91",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
-  }
+  },
+   "engines" : { "node" : ">=0.12.0" }
 }

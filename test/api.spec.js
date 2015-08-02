@@ -20,32 +20,32 @@ let port = 3333;
 
 suite('Record Retrieval API', function() {
   let server;
-  let timestamp;
+  let timestamp1;
+  let timestamp2;
+  let data1;
+  let data2;
   let timesArr = [];
-  let data;
-  let secondTimestamp;
-  let secondData;
 
   setup(function(done) {
 
-    timestamp = Date.now();
-    saveTimestamp(timestamp)
-    .then(() => {
-      data = sample.results[0];
-      data.timestamp = timestamp;
-      return saveRecord(data);
+    timestamp1 = Date.now();
+    saveTimestamp(timestamp1)
+    .then((timestamp1) => {
+      data1 = sample.results[0];
+      data1.timestamp = timestamp1;
+      return saveRecord(data1);
     })
     .then(() => {
-      secondData = sample.results[0];
-      secondTimestamp = Date.now();
-      secondData.timestamp = secondTimestamp;
-      return saveTimestamp(secondTimestamp);
+      timestamp2 = Date.now();
+      return saveTimestamp(timestamp2);
+    })
+    .then((timestamp2) => {
+      data2 = sample.results[0];
+      data2.timestamp = timestamp2;
+      return saveRecord(data2);
     })
     .then(() => {
-      return saveRecord(secondData);
-    })
-    .then(() => {
-      timesArr.push(timestamp, secondTimestamp);
+      timesArr.push(timestamp1, timestamp2);
       // start the app each time, return server object to close
       server = app.listen(port, function (err, result) {
         if (err) {
@@ -83,6 +83,7 @@ suite('Record Retrieval API', function() {
     .end(function(err, res){
       if (err) return done(err);
       assert(res.body.length > 0, "body length should be greater than zero");
+      assert.equal(+new Date(res.body[0].requestedAt), +new Date(timestamp2));
       done();
     });
   })

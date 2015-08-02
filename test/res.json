@@ -1,0 +1,37 @@
+{
+  "statusCode": 200,
+  "body": "{\"count\": 1, \"next\": null, \"previous\": null, \"results\": [{\"name\": \"CHAFEE, LINCOLN DAVENPORT MR.\", \"fec_id\": \"P60008075\", \"pcc\": null, \"party\": \"D\", \"candidate_url\": \"/candidate/2016/chafee-lincoln-davenport-mr/P60008075/\", \"race_url\": \"/presidential/\", \"ie_url\": \"/outside-spending/#?ordering=-expenditure_date_formatted&candidate_id_checked=P60008075\", \"is_incumbent\": false, \"cycle\": \"2016\", \"not_seeking_reelection\": false, \"other_office_sought\": null, \"other_fec_id\": null, \"election_year\": 2016, \"state\": \"US\", \"office\": \"P\", \"office_district\": \"00\", \"term_class\": null, \"candidate_status\": \"D\", \"total_expenditures\": \"0.00\", \"expenditures_supporting\": \"0.00\", \"expenditures_opposing\": \"0.00\", \"total_receipts\": \"392743.17\", \"total_contributions\": \"28387.00\", \"total_disbursements\": \"63757.48\", \"cash_on_hand\": \"328985.69\", \"cash_on_hand_date\": \"2015-06-30\", \"district\": {\"race_name\": \"President\", \"state\": null, \"office\": \"P\", \"office_district\": \"\", \"term_class\": null, \"id\": 1522}, \"outstanding_loans\": \"363694.14\", \"cand_is_gen_winner\": null, \"status\": \"\"}]}",
+  "headers": {
+    "server": "nginx/1.1.19",
+    "content-type": "application/json; charset=utf-8",
+    "vary": "Accept-Encoding, Accept",
+    "expires": "Fri, 24 Jul 2015 20:16:53 GMT",
+    "last-modified": "Fri, 24 Jul 2015 20:15:53 GMT",
+    "allow": "GET, HEAD, OPTIONS",
+    "cache-control": "max-age=60",
+    "content-length": "1067",
+    "date": "Fri, 24 Jul 2015 20:18:15 GMT",
+    "x-varnish": "1050184279 1050181003",
+    "age": "59",
+    "via": "1.1 varnish",
+    "connection": "close"
+  },
+  "request": {
+    "uri": {
+      "protocol": "http:",
+      "slashes": true,
+      "auth": null,
+      "host": "realtime.influenceexplorer.com",
+      "port": 80,
+      "hostname": "realtime.influenceexplorer.com",
+      "hash": null,
+      "search": "?format=json&page=1&page_size=10&fec_id=P60008075&apikey=e23217499ccf442faaf7c5bbff5a91cb",
+      "query": "format=json&page=1&page_size=10&fec_id=P60008075&apikey=e23217499ccf442faaf7c5bbff5a91cb",
+      "pathname": "/api/candidates/",
+      "path": "/api/candidates/?format=json&page=1&page_size=10&fec_id=P60008075&apikey=e23217499ccf442faaf7c5bbff5a91cb",
+      "href": "http://realtime.influenceexplorer.com/api/candidates/?format=json&page=1&page_size=10&fec_id=P60008075&apikey=e23217499ccf442faaf7c5bbff5a91cb"
+    },
+    "method": "GET",
+    "headers": {}
+  }
+}

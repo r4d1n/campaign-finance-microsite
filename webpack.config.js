@@ -7,8 +7,8 @@ module.exports = {
     index: './src/js/index.js'
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: 'dist/',
+    path: path.join(__dirname, 'public/dist'),
+    publicPath: 'public/dist/',
     filename: 'bundle.js',
     chunkFilename: '[chunkhash].js'
   },

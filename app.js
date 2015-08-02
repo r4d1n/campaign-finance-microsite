@@ -8,10 +8,14 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
-var env = require('node-env-file');
-env('.env');
 
 var app = express();
+
+
+if (process.env.NODE_ENV==='development' || process.env.NODE_ENV==='test') {
+  var env = require('node-env-file');
+  env('.env');
+}
 
 // mongodb connection
 var mongoose = require('mongoose');
@@ -24,6 +28,10 @@ if (process.env.NODE_ENV==='development') {
 
 if (process.env.NODE_ENV==='test') {
   mongoose.connect('mongodb://localhost/' + config.TEST_DB);
+}
+
+if (process.env.NODE_ENV==='production') {
+  // mongoose.connect(process.env.MONGOLAB_URI);
 }
 
 // register handlebars
