@@ -2,7 +2,12 @@
 
 require('babel/register');
 
+var mongoose = require('mongoose');
 var sunlightRequest = require('./lib/sunlightRequest');
+
+if (process.env.NODE_ENV==='production') {
+  mongoose.connect(process.env.MONGOLAB_URI);
+}
 
 var CronJob = require('cron').CronJob;
 var job = new CronJob({

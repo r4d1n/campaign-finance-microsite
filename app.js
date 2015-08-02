@@ -31,7 +31,7 @@ if (process.env.NODE_ENV==='test') {
 }
 
 if (process.env.NODE_ENV==='production') {
-  // mongoose.connect(process.env.MONGOLAB_URI);
+  mongoose.connect(process.env.MONGOLAB_URI);
 }
 
 // register handlebars
@@ -45,7 +45,7 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
-
+// routes
 app.use('/', require('./routes/index')); // render views
 app.use('/api/records', require('./routes/api/records'));
 
