@@ -1,6 +1,6 @@
 'use strict';
 
-function filterCandidate (name, arr) {
+function filterByName (name, arr) {
   let regex = new RegExp(name);
   let one = arr.filter((element) {
     return regex.exec(element);
@@ -12,8 +12,6 @@ function filterCandidate (name, arr) {
   }
 }
 
-
-
 module.exports = {
-  filterCandidate : filterCandidate;
+  filterByName : filterByName;
 }
