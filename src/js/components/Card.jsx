@@ -21,16 +21,19 @@ let Card = React.createClass({
         console.log(res)
         let oneCandidate = (function () {
           return res.body.filter((el) => {
-          // just doing donald for now
+          // just hardcoding one for now
           return /TRUMP/.exec(el.name)
-        })[0]
+        })[0] // filter returns an array
       })()
-        console.log(oneCandidate)
+      let data = oneCandidate;
+      let firstName = util.firstName(data.name);
+      let raisedString = util.formatDollarAmount(data.officialRaised)
         this.setState({
-          data: oneCandidate,
-          firstName: util.firstName(oneCandidate.name)
+          data: data,
+          firstName: firstName,
+          raisedString: raisedString
         })
-        console.log(this.state.firstName)
+        console.log(this.state.data)
       } else if (err) {
         console.error(err);
       }
@@ -39,7 +42,9 @@ let Card = React.createClass({
   render: function () {
     return (
       <div>
-        <NumberBar data={this.state.data} />
+        <NumberBar
+          firstName={this.state.firstName}
+          raisedString={this.state.raisedString} />
         <Chart data={this.state.data} />
         <InfoFigure />
       </div>

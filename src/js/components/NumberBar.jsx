@@ -5,9 +5,9 @@ let NumberBar = React.createClass({
     return (
       <section>
         <div className='big-num-bar'>
-          <h3>Donald Has Raised: </h3>
+          <h3>{this.props.firstName} Has Raised: </h3>
           <hr/>
-          <h1>$1,000,000</h1>
+          <h1>${this.props.raisedString}</h1>
           <hr/>
         </div>
       </section>
