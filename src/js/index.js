@@ -8,9 +8,9 @@ require('../styles/main.scss');
 
 
 // client side js modules
-let NumberBar = require('./components/NumberBar.jsx')
+let Card = require('./components/Card.jsx')
 
 // require('./viz')
 console.log('running js in the browser')
 
-NumberBar.init();
+Card.init();
