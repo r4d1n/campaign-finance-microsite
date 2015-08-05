@@ -1,7 +1,7 @@
 'use strict';
 
 let NumberBar = React.createClass({
-  render () {
+  render: function() {
     return (
       <section>
         <div className='big-num-bar'>

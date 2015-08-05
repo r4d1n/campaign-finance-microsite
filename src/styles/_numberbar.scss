@@ -1,0 +1,23 @@
+.big-num-bar {
+  text-transform: uppercase;
+  width: 80%;
+  margin: $spacing-unit / 2 auto;
+  position: relative;
+  top: $spacing-unit;
+  padding: $spacing-unit / 5 $spacing-unit / 4 $spacing-unit / 5 $spacing-unit / 4;
+  // border: 1px solid $base-theme-dark;
+  background-color: $base-white;
+  h1 {
+    padding-bottom: $spacing-unit / 3;
+    font-size: 56px;
+    text-align: center;
+  }
+
+  div {
+    padding-bottom: $spacing-unit / 3;
+    width: 100%;
+    font-size: $spacing-unit;
+    text-align: center;
+    line-height:$spacing-unit;
+  }
+}

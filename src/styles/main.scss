@@ -1,6 +1,7 @@
 @import 'reset';
 @import 'variables';
 @import 'themes';
+@import 'numberbar';
 @import 'chart';
 @import 'bio';
 @import 'filter';
@@ -10,33 +11,6 @@ body {
   background-color: $base-white;
   padding-top: $spacing-unit / 2;
   font-size: 1em;
-}
-
-.big-num-bar {
-  text-transform: uppercase;
-  // z-index: 2;
-  // width: 100%;
-  width: 80%;
-  margin: $spacing-unit / 2 $spacing-unit;
-  position: relative;
-  top: $spacing-unit;
-  padding: $spacing-unit / 5 $spacing-unit / 4 $spacing-unit / 5 $spacing-unit / 4;
-  // border: 1px solid $base-theme-dark;
-  background-color: $base-white;
-  h1 {
-    padding-bottom: $spacing-unit / 3;
-    font-size: 60px;
-    text-align: center;
-  }
-  h3 {
-  }
-  div {
-    padding-bottom: $spacing-unit / 3;
-    width: 100%;
-    font-size: $spacing-unit;
-    text-align: center;
-    line-height:$spacing-unit;
-  }
 }
 
 select {

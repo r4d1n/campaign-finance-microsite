@@ -5,7 +5,8 @@ let NumberBar = require('./NumberBar.jsx')
 , Chart = require('./Chart.jsx')
 
 let Card = React.createClass({
-  render () {
+  
+  render: function () {
     return (
       <div>
         <NumberBar />
@@ -17,7 +18,8 @@ let Card = React.createClass({
 });
 
 function init() {
-  React.render(<Card />, document.getElementById('card-container'));
+  React.render(<Card url="api/records" />,
+  document.getElementById('card-container'));
 }
 
 module.exports = { init: init }

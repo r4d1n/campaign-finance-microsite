@@ -1,7 +1,7 @@
 'use strict';
 
 let InfoFigure = React.createClass({
-  render () {
+  render: function () {
     return (
       <section>
         <figure>

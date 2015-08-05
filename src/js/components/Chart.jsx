@@ -1,7 +1,7 @@
 'use strict';
 
 let Chart = React.createClass({
-  render () {
+  render: function () {
     return (
       <section>
         <div id='chart-container'></div>

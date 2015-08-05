@@ -8,6 +8,7 @@ require('../styles/main.scss');
 
 
 // client side js modules
+let util = require('./util')
 let Card = require('./components/Card.jsx')
 
 // require('./viz')
