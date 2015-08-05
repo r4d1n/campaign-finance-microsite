@@ -10,17 +10,12 @@ let controller = {};
 // get all projects within the relevant time frame
 controller.allRecords = function(req, res, next) {
   let opts = {};
-  let limit = 20;
   if (req.query.name) {
     opts.name = new RegExp(req.query.name, "i");
-  }
-  if (req.query.limit) {
-    limit = req.query.limit;
   }
   Record
   .find(opts)
   .sort({ requestedAt : 1 })
-  .limit(limit)
   .exec((err,doc) => {
     if (err) {
       res.status(500).json({status:'error', message: err});
@@ -31,6 +26,10 @@ controller.allRecords = function(req, res, next) {
 }
 
 controller.latestRecords = function(req, res, next) {
+  let limit = 5; // limits number of candidates, not timestamps
+  if (req.query.limit) {
+    limit = req.query.limit;
+  }
   Timestamp
   .find()
   .sort({requestedAt : -1})
@@ -41,6 +40,8 @@ controller.latestRecords = function(req, res, next) {
     .find()
     .where('requestedAt')
     .equals(timestamp[0].requestedAt)
+    .sort({ officialRaised : -1 })
+    .limit(limit)
     .exec()
     .then((result) => {
       res.json(result);

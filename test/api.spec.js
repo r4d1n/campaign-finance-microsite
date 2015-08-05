@@ -76,17 +76,6 @@ suite('Record Retrieval API', function() {
     .expect(200,done)
   });
 
-  test('get a single record', function(done) {
-    ajax(app)
-    .get('/api/records?limit=1')
-    .expect('Content-Type', /json/)
-    .expect(200)
-    .end(function(err, res) {
-      assert(res.body.length === 1, "body length should be 1");
-      done();
-    })
-  });
-
   test('get most recent records', function(done) {
     ajax(app)
     .get('/api/records/latest')

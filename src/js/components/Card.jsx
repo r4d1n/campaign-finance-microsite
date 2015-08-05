@@ -19,15 +19,10 @@ let Card = React.createClass({
     .end(function(err, res){
       if (res.ok) {
         console.log(res)
-        let oneCandidate = (function () {
-          return res.body.filter((el) => {
-          // just hardcoding one for now
-          return /TRUMP/.exec(el.name)
-        })[0] // filter returns an array
-      })()
-      let data = oneCandidate;
-      let firstName = util.firstName(data.name);
-      let raisedString = util.formatDollarAmount(data.officialRaised)
+        let oneCandidate = res.body[0]; // only the leader for now
+        let data = oneCandidate;
+        let firstName = util.firstName(data.name);
+        let raisedString = util.formatDollarAmount(data.officialRaised)
         this.setState({
           data: data,
           firstName: firstName,
@@ -45,7 +40,7 @@ let Card = React.createClass({
         <NumberBar
           firstName={this.state.firstName}
           raisedString={this.state.raisedString} />
-        <Chart url='/api/records/' query={this.state.firstName} />
+        <Chart query={this.state.firstName} />
         <InfoFigure />
       </div>
     );
