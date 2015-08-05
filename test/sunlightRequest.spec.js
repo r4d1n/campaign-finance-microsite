@@ -93,7 +93,7 @@ suite('Sunlight API Request Functions', function() {
     saveRecord(data)
     .then((record) => {
       attrs.forEach((element, index) => {
-        assert.ok(record[element])
+        assert.ok(String(record[element]))
       });
     })
     .catch((err) => {
