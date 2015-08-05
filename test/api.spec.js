@@ -59,10 +59,11 @@ suite('Record Retrieval API', function() {
 
   teardown(function() {
     // remove any added items from the local db
-    timesArr.forEach((timestamp) => {
-      Timestamp.find({requestedAt: timestamp}).remove().exec();
-      Record.find({requestedAt: timestamp}).remove().exec();
-    })
+    Timestamp.find({requestedAt: timestamp1}).remove().exec();
+    Record.find({requestedAt: timestamp1}).remove().exec();
+    Timestamp.find({requestedAt: timestamp2}).remove().exec();
+    Record.find({requestedAt: timestamp2}).remove().exec();
+
     timesArr = [];
     // close the express server connection
     server.close();
