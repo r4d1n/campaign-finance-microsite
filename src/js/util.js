@@ -14,7 +14,7 @@ function filterByName (name, arr) {
 
 function firstName (name) {
   let arr = name.split(',').reverse();
-  return arr[0]
+  return arr[0].trim().split(' ')[0];
 }
 
 module.exports = {
