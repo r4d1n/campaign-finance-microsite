@@ -12,22 +12,12 @@ function filterByName (name, arr) {
   }
 }
 
-function formatName (name) {
+function firstName (name) {
   let arr = name.split(',').reverse();
-  return arr.map((el) => {
-    el = el.trim().split('');
-    console.log(el);
-    let i = 1;
-    while (i < el.length) {
-      el[i] = el[i].toLowerCase();
-      ++i;
-    }
-    console.log(el.join(''));
-    return el.join('');
-  }).join(' ')
+  return arr[0]
 }
 
 module.exports = {
   filterByName: filterByName,
-  formatName: formatName
+  firstName: firstName
 }
