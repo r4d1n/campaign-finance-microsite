@@ -9,9 +9,18 @@ let controller = {};
 
 // get all projects within the relevant time frame
 controller.allRecords = function(req, res, next) {
+  let opts = {};
+  let limit = 20;
+  if (req.query.name) {
+    opts.name = new RegExp(req.query.name, "i");
+  }
+  if (req.query.limit) {
+    limit = req.query.limit;
+  }
   Record
-  .find()
+  .find(opts)
   .sort({ requestedAt : 1 })
+  .limit(limit)
   .exec((err,doc) => {
     if (err) {
       res.status(500).json({status:'error', message: err});
@@ -41,14 +50,5 @@ controller.latestRecords = function(req, res, next) {
     })
   })
 }
-//
-// function latestTimestamp () {
-//   return new Timestamp
-//   .find()
-//   .sort({requestedAt : -1})
-//   .limit(1)
-//   .exec()
-// })
-// };
 
 module.exports = controller;

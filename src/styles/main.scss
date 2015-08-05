@@ -1,71 +1,16 @@
 @import 'reset';
 @import 'variables';
 @import 'themes';
+@import 'numberbar';
+@import 'chart';
+@import 'bio';
 @import 'filter';
-@import 'table';
-@import 'icon';
 
 body {
-  font-family: $monospace-font-family;
+  font-family: $sans-font-family;
   background-color: $base-white;
-  padding-top: $spacing-unit + 5px;
+  padding-top: $spacing-unit / 2;
   font-size: 1em;
-}
-
-header {
-  z-index: 4;
-  width: 100%;
-  margin: auto;
-  margin-bottom: $spacing-unit / 2;
-  padding: $spacing-unit / 5;
-  position: fixed;
-  top: 0;
-  border: 1px solid $base-theme-dark;
-  background-color: $base-white;
-  height: $spacing-unit;
-  .header-bar {
-    height: 100%;
-    width: 98%;
-    z-index: 3;
-    margin: 0 auto;
-    .location {
-      height: 100%;
-      margin: 0;
-      width: 30%;
-      display: inline-block;
-      &.active {
-        background-color: $base-theme-dark;
-      }
-      &.inactive {
-        visibility: hidden;
-      }
-    }
-  }
-}
-
-footer {
-  width: 100%;
-  // height: $spacing-unit * 6;
-  position: fixed;
-  bottom: $spacing-unit;
-}
-
-figure {
-  width: 80%;
-  margin: $spacing-unit auto;
-  img {
-    margin: $spacing-unit auto;
-    max-width: 500px;
-    width: 100%;
-  }
-}
-
-button {
-  font-family: inherit;
-  background-color: $base-theme-light;
-  border: 1px solid $base-gray-dark;
-  color: $base-gray-dark;
-  border-radius: 10px;
 }
 
 select {
@@ -81,24 +26,24 @@ select {
 
 // some hacks to make the select work across browsers
 @media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
-    select {
-        height:30px;
-        line-height:30px;
-        background:#f4f4f4;
-    }
+  select {
+    height:30px;
+    line-height:30px;
+    background:#f4f4f4;
+  }
 }
 select::-moz-focus-inner { /*Remove button padding in FF*/
-    border: 0;
-    padding: 0;
+  border: 0;
+  padding: 0;
 }
 @-moz-document url-prefix() { /* targets Firefox only */
-    select {
-        padding: $spacing-unit / 2 0!important;
-    }
+  select {
+    padding: $spacing-unit / 2 0!important;
+  }
 }
 @media screen\0 { /* IE Hacks: targets IE 8, 9 and 10 */
-    select {
-        height: $spacing-unit;
-        line-height:$spacing-unit;
-    }
+  select {
+    height: $spacing-unit;
+    line-height:$spacing-unit;
+  }
 }

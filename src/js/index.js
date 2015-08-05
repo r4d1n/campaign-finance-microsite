@@ -1,11 +1,18 @@
 'use strict';
+console.log('running js in the browser')
+
+let React = require('react');
 
 // scss
 require('../styles/main.scss');
 
+
+
 // client side js modules
-// import * from './barChart';
+let util = require('./util')
+let Card = require('./components/Card.jsx')
 
-console.log('running js in the browser')
+// let viz = require('./viz')
 
-require('./barChart')
+Card.init();
+// viz.init()

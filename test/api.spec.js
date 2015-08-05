@@ -59,10 +59,11 @@ suite('Record Retrieval API', function() {
 
   teardown(function() {
     // remove any added items from the local db
-    timesArr.forEach((timestamp) => {
-      Timestamp.find({requestedAt: timestamp}).remove().exec();
-      Record.find({requestedAt: timestamp}).remove().exec();
-    })
+    Timestamp.find({requestedAt: timestamp1}).remove().exec();
+    Record.find({requestedAt: timestamp1}).remove().exec();
+    Timestamp.find({requestedAt: timestamp2}).remove().exec();
+    Record.find({requestedAt: timestamp2}).remove().exec();
+
     timesArr = [];
     // close the express server connection
     server.close();
@@ -75,12 +76,23 @@ suite('Record Retrieval API', function() {
     .expect(200,done)
   });
 
+  test('get a single record', function(done) {
+    ajax(app)
+    .get('/api/records?limit=1')
+    .expect('Content-Type', /json/)
+    .expect(200)
+    .end(function(err, res) {
+      assert(res.body.length === 1, "body length should be 1");
+      done();
+    })
+  });
+
   test('get most recent records', function(done) {
     ajax(app)
     .get('/api/records/latest')
     .expect('Content-Type', /json/)
     .expect(200)
-    .end(function(err, res){
+    .end(function (err, res) {
       if (err) return done(err);
       assert(res.body.length > 0, "body length should be greater than zero");
       assert.equal(+new Date(res.body[0].requestedAt), +new Date(timestamp2));
