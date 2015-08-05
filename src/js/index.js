@@ -1,4 +1,5 @@
 'use strict';
+console.log('running js in the browser')
 
 let React = require('react');
 
@@ -11,7 +12,7 @@ require('../styles/main.scss');
 let util = require('./util')
 let Card = require('./components/Card.jsx')
 
-// require('./viz')
-console.log('running js in the browser')
+// let viz = require('./viz')
 
 Card.init();
+// viz.init()

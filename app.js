@@ -21,9 +21,9 @@ if (process.env.NODE_ENV==='development' || process.env.NODE_ENV==='test') {
 var mongoose = require('mongoose');
 
 if (process.env.NODE_ENV==='development') {
-  // var sunlightRequest = require('./lib/sunlightRequest');
-  // sunlightRequest.init();
   mongoose.connect('mongodb://localhost/' + config.DEV_DB);
+  console.log(process.env.NODE_ENV)
+  // require('./lib/sunlightRequest').init()
 }
 
 if (process.env.NODE_ENV==='test') {
