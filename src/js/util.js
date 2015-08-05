@@ -20,7 +20,8 @@ function firstName (name) {
 }
 
 function formatDollarAmount(amount) {
-  let arr = _.takeWhile(amount.split(''), (n) => {
+  console.log(amount)
+  let arr = _.takeWhile(String(amount).split(''), (n) => {
     return n !== '.';
   })
   let i = arr.length - 1;

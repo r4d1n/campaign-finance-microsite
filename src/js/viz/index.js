@@ -7,23 +7,10 @@ let render = require('./render');
 
 let data;
 
-function fetchData () {
-  return new Promise((resolve, reject) => {
-    ajax
-    .get('/api/records')
-    .end(function(err, res){
-      if (err) reject(err);
-      resolve(res);
-    });
-  })
-}
-
-function init () {
-  fetchData.then((data) => {
-    return render(data);
-  })
+function init (data) {
+  console.log(data)
 }
 
 module.exports = {
-  init: init;
+  init: init
 }

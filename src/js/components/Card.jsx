@@ -45,7 +45,7 @@ let Card = React.createClass({
         <NumberBar
           firstName={this.state.firstName}
           raisedString={this.state.raisedString} />
-        <Chart data={this.state.data} />
+        <Chart url='/api/records/' query={this.state.firstName} />
         <InfoFigure />
       </div>
     );
