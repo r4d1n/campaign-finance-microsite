@@ -21,6 +21,39 @@
   }
 }
 
-select {
 
+select {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: #ffffff;
+  border: 1px solid $base-black;
+  color: $base-black;
+  border-radius: 10px;
+  margin-right: $spacing-unit / 2;
+  line-height: $spacing-unit;
+  height: $spacing-unit;
+}
+
+// some hacks to make the select work across browsers
+@media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
+  select {
+    height:30px;
+    line-height:30px;
+    background:#f4f4f4;
+  }
+}
+select::-moz-focus-inner { /*Remove button padding in FF*/
+  border: 0;
+  padding: 0;
+}
+@-moz-document url-prefix() { /* targets Firefox only */
+  select {
+    padding: $spacing-unit / 2 0!important;
+  }
+}
+@media screen\0 { /* IE Hacks: targets IE 8, 9 and 10 */
+  select {
+    height: $spacing-unit;
+    line-height:$spacing-unit;
+  }
 }

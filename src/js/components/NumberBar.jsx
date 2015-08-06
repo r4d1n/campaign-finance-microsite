@@ -5,7 +5,11 @@ let NumberBar = React.createClass({
     return (
       <section>
         <div className='big-num-bar'>
-          <h3>{this.props.firstName} Has Raised: </h3>
+          <h3>
+            <select>
+              <option>{this.props.firstName}</option>
+            </select>
+            Has Raised: </h3>
           <hr/>
           <h1>${this.props.raisedString}</h1>
           <hr/>
