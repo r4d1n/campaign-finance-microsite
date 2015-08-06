@@ -28,7 +28,6 @@ controller.allRecords = function(req, res, next) {
 }
 
 controller.latestRecords = function(req, res, next) {
-  console.log(candidates)
   let limit = 5; // limits number of candidates, not timestamps
   if (req.query.limit) {
     limit = req.query.limit;
@@ -57,4 +56,5 @@ controller.latestRecords = function(req, res, next) {
     })
   })
 }
+
 module.exports = controller;

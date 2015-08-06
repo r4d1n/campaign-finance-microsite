@@ -36,8 +36,7 @@ let Card = React.createClass({
     .then((body) => {
       let candidates = body;
       candidates.forEach((element) => {
-        console.log(element)
-        element.firstName = util.firstName(element.name);
+        element.firstName = util.commonName(element);
         element.raisedString = util.formatDollarAmount(element.officialRaised)
       })
       this.setState({

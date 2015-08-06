@@ -1,15 +1,14 @@
 'use strict';
 
 let NameSelect = React.createClass({
-  onChange (e) {
+  change (e) {
     console.log(e.target.value);
   },
   render() {
-    console.log(this.props);
     let { candidates } = this.props;
     return (
           <h3>
-            <select onChange={this.onChange}>
+            <select onChange={this.change}>
             {candidates.map(cand => <option key={cand.fecId} value={cand.firstName}>{cand.firstName}</option>)}
             </select>
             Has Raised:

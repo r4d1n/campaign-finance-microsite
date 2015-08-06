@@ -69,7 +69,6 @@ function draw (data) {
 
 function init (data) {
   draw(data);
-  console.log('data in viz', data)
 }
 
 module.exports = {

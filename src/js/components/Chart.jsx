@@ -3,6 +3,7 @@
 let ajax = require('superagent');
 let viz = require('../viz');
 
+
 let Chart = React.createClass({
   getInitialState: function() {
     return { data: this.props.data };

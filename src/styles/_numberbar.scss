@@ -27,6 +27,7 @@ select {
   margin-right: $spacing-unit / 2;
   line-height: $spacing-unit;
   height: $spacing-unit;
+  text-transform: uppercase;
 }
 
 // some hacks to make the select work across browsers
