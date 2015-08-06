@@ -6,9 +6,23 @@
 @import 'share';
 @import 'bio';
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   font-family: $sans-font-family;
   background-color: $base-white;
   // padding-top: $spacing-unit / 2;
   font-size: 1em;
+}
+
+main {
+  height: 100%;
+}
+
+#card-container {
+  height: 100%;
+  padding-top: $spacing-unit;
 }
