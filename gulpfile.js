@@ -22,10 +22,11 @@ gulp.task('server', function () {
   });
 });
 
+gulp.task('fonts', function() {
+  return gulp.src('node_modules/font-awesome/fonts/*')
+    .pipe(gulp.dest('public/fonts'))
+})
 
-// CLI for webpack dev
-// http://webpack.github.io/docs/webpack-dev-server.html#cli
-// gulp.task('dev-webpack', shell.task([['webpack-dev-server --quiet --port ' + config.server.webpackServerPort]]));
 gulp.task('dev-webpack', shell.task([['webpack-dev-server --color --port ' + 8080]]));
 
 gulp.task('build', shell.task(['webpack']));

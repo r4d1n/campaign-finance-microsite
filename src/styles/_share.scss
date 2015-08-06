@@ -1,0 +1,10 @@
+.share-container {
+  width: 80%;
+  height: 150px;
+  margin: $spacing-unit / 2 auto;
+  position: relative;
+  // bottom: $spacing-unit;
+  // padding: $spacing-unit / 5 $spacing-unit / 4 $spacing-unit / 5 $spacing-unit / 4;
+  border: 1px solid $base-black;
+  background-color: $base-white;
+}

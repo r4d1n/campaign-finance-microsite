@@ -8,6 +8,7 @@ let util = require('../util');
 let NumberBar = require('./NumberBar.jsx')
 , InfoFigure = require('./InfoFigure.jsx')
 , Chart = require('./Chart.jsx')
+, Share = require('./Share.jsx')
 
 
 let Card = React.createClass({
@@ -51,7 +52,7 @@ let Card = React.createClass({
           firstName={this.state.firstName}
           raisedString={this.state.raisedString} />
         <Chart data={this.state.data} />
-        <InfoFigure />
+        <Share />
       </div>
     );
   }

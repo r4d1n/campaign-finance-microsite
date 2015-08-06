@@ -5,7 +5,6 @@
   position: relative;
   top: $spacing-unit;
   padding: $spacing-unit / 5 $spacing-unit / 4 $spacing-unit / 5 $spacing-unit / 4;
-  // border: 1px solid $base-theme-dark;
   background-color: $base-white;
   h1 {
     padding-bottom: $spacing-unit / 3;
@@ -20,4 +19,8 @@
     text-align: center;
     line-height:$spacing-unit;
   }
+}
+
+select {
+
 }
