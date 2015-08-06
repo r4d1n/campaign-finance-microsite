@@ -26,10 +26,11 @@
     "express": "^4.13.1",
     "express-handlebars": "^2.0.1",
     "font-awesome": "^4.4.0",
-    "lodash.takewhile": "^3.1.1",
+    "lodash": "^3.10.1",
     "mongoose": "^4.0.8",
     "node-env-file": "^0.1.7",
     "react": "^0.13.3",
+    "reflux": "^0.2.11",
     "request": "^2.59.0",
     "superagent": "^1.2.0"
   },
