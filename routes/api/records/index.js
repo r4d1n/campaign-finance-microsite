@@ -10,5 +10,6 @@ var router = express.Router();
 /* GET JSON */
 router.get('/', controller.allRecords); // needs query string
 router.get('/latest', controller.latestRecords);
+// router.get('/leaders', controller.leaders)
 
 module.exports = router;

@@ -15,24 +15,34 @@ let Card = React.createClass({
     return {data: []};
   },
   componentDidMount: function() {
-    ajax.get(this.props.url)
-    .end(function(err, res){
-      if (res.ok) {
-        console.log(res)
-        let oneCandidate = res.body[0]; // only the leader for now
-        let data = oneCandidate;
-        let firstName = util.firstName(data.name);
-        let raisedString = util.formatDollarAmount(data.officialRaised)
-        this.setState({
-          data: data,
-          firstName: firstName,
-          raisedString: raisedString
-        })
-        console.log(this.state.data)
-      } else if (err) {
-        console.error(err);
-      }
-    }.bind(this));
+    function getLeaders (url) {
+      return new Promise((resolve, reject) => {
+        ajax.get(url)
+        .end(function(err, res){
+          if (res.ok) {
+            resolve(res.body);
+          } else if (err) {
+            reject(err)
+            console.error(err);
+          }
+        }.bind(this));
+      })
+    }
+
+    getLeaders(this.props.url)
+    .then((body) => {
+      let data = body;
+      console.log('card', data)
+      let one = data[0]; // only the leader for now
+      let firstName = util.firstName(one.name);
+      let raisedString = util.formatDollarAmount(one.officialRaised)
+      this.setState({
+        data: data,
+        firstName: firstName,
+        raisedString: raisedString
+      })
+      console.log(this.state.data)
+    })
   },
   render: function () {
     return (
@@ -40,7 +50,7 @@ let Card = React.createClass({
         <NumberBar
           firstName={this.state.firstName}
           raisedString={this.state.raisedString} />
-        <Chart query={this.state.firstName} />
+        <Chart data={this.state.data} />
         <InfoFigure />
       </div>
     );

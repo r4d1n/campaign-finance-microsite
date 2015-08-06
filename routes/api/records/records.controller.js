@@ -52,4 +52,56 @@ controller.latestRecords = function(req, res, next) {
   })
 }
 
+// controller.leaders = function(req, res, next) {
+//   let limit = 5; // limits number of candidates, not timestamps
+//   if (req.query.limit) {
+//     limit = req.query.limit;
+//   }
+//   let sortObj;
+//   if (req.query.sortby) {
+//     sortObj = {};
+//     sortObj[req.query.sortby] = 1;
+//   }
+//
+//   Timestamp
+//   .find()
+//   .sort({requestedAt : -1})
+//   .limit(1)
+//   .exec()
+//   .then((timestamp) => {
+//     Record
+//     .find()
+//     .where('requestedAt')
+//     .equals(timestamp[0].requestedAt)
+//     .sort({ officialRaised : -1 })
+//     .limit(limit)
+//     .exec()
+//     .then((result) => {
+//       let leaders = {}
+//       // this can be refactored...
+//       return new Promise((resolve, reject) => {
+//         result.forEach((doc) => {
+//           if (!leaders[doc.name]) leaders[doc.name] = [];
+//           Record.find()
+//           .where('name')
+//           .equals(key)
+//           .exec()
+//           .then((result) => {
+//             console.log(result);
+//             leaders[key].push(result);
+//           })
+//         })
+//         resolve(leaders);
+//       })
+//     })
+//     .then((leaders) => {
+//       console.log(leaders)
+//       res.json(leaders);
+//     })
+//     .catch((err) => {
+//       res.status(500).json({status:'error', message: err});
+//     })
+//   })
+// }
+
 module.exports = controller;
