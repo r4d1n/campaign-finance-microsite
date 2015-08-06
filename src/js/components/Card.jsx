@@ -5,17 +5,19 @@ let ajax = require('superagent');
 let util = require('../util');
 
 // sub components
-let NumberBar = require('./NumberBar.jsx')
-, InfoFigure = require('./InfoFigure.jsx')
-, Chart = require('./Chart.jsx')
+let Chart = require('./Chart.jsx')
+, NameSelect = require('./NameSelect.jsx')
+, Amount = require('./Amount.jsx')
 , Share = require('./Share.jsx')
 
 
 let Card = React.createClass({
-  getInitialState: function() {
-    return {data: []};
+  getInitialState() {
+    return {
+      candidates: []
+    };
   },
-  componentDidMount: function() {
+  componentDidMount() {
     function getLeaders (url) {
       return new Promise((resolve, reject) => {
         ajax.get(url)
@@ -32,26 +34,28 @@ let Card = React.createClass({
 
     getLeaders(this.props.url)
     .then((body) => {
-      let data = body;
-      console.log('card', data)
-      let one = data[0]; // only the leader for now
-      let firstName = util.firstName(one.name);
-      let raisedString = util.formatDollarAmount(one.officialRaised)
-      this.setState({
-        data: data,
-        firstName: firstName,
-        raisedString: raisedString
+      let candidates = body;
+      candidates.forEach((element) => {
+        console.log(element)
+        element.firstName = util.firstName(element.name);
+        element.raisedString = util.formatDollarAmount(element.officialRaised)
       })
-      console.log(this.state.data)
+      this.setState({
+        candidates: candidates,
+      })
+      console.log('state', this.state)
     })
   },
   render: function () {
     return (
       <div>
-        <NumberBar
-          firstName={this.state.firstName}
-          raisedString={this.state.raisedString} />
-        <Chart data={this.state.data} />
+        <section>
+          <div className='big-num-bar'>
+            <NameSelect candidates={this.state.candidates}/>
+            <Amount raised={this.state.selected} />
+          </div>
+        </section>
+        <Chart data={this.state.candidates} />
         <Share />
       </div>
     );
