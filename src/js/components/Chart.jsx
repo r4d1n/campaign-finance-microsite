@@ -7,6 +7,7 @@ let viz = require('../viz');
 let Chart = React.createClass({
 
   handleClick(e) {
+    // update active candidate by tapping on a bar in the d3 chart
     let { candidates } = this.props;
     let selected = _.find(candidates, item => item.id === e.target.dataset.id )
     if (selected) {
