@@ -30,6 +30,18 @@ select {
   text-transform: uppercase;
 }
 
+option {
+  height: $spacing-unit;
+
+}
+option.gop {
+  background-color: $gop-theme-light;
+}
+
+option.dem {
+  background-color: $dem-theme-light;
+}
+
 // some hacks to make the select work across browsers
 @media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
   select {
