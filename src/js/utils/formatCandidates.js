@@ -25,15 +25,14 @@ function commonName (candidate) {
 function formatDollarAmount(amount) {
   let arr = _.takeWhile(String(amount).split(''), (n) => {
     return n !== '.';
-  })
-  let i = arr.length - 1;
-  while (i > 0) {
-    if ((i + 1) % 3 === 0) {
-      arr.splice(i, 0, ',')
+  });
+  return arr.reduce(function(previous, current, index) {
+    if (arr.slice(index).length % 3 === 0) {
+      return previous + ',' + current;
+    } else {
+      return previous + current;
     }
-    --i;
-  }
-  return arr.join('')
+  });
 }
 
 let formatCandidates = (candidates) => {

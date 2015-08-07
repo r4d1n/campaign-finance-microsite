@@ -29,39 +29,16 @@ function draw (data) {
   x.domain(data.map(function(d) { return d.name; }));
   y.domain([0, d3.max(data, function(d) { return d.officialRaised; })]);
 
-  // let xAxis = d3.svg.axis()
-  // .scale(x)
-  // .orient("bottom");
-  //
-  // let yAxis = d3.svg.axis()
-  // .scale(y)
-  // .orient("left")
-  // .ticks(1, "$");
-  //
-  // svg.append("g")
-  //     .attr("class", "x axis")
-  //     .attr("transform", "translate(0," + height + ")")
-  //     .call(xAxis);
-  //
-  // svg.append("g")
-  //     .attr("class", "y axis")
-  //     .call(yAxis)
-  //   .append("text")
-  //     .attr("transform", "rotate(-90)")
-  //     .attr("y", 6)
-  //     .attr("dy", ".71em")
-  //     .style("text-anchor", "end")
-  //     .text("Amount Raised");
 
   svg.selectAll(".bar")
   .data(data)
   .enter().append("rect")
-  .attr("class", "bar")
+  .attr("class", "bar inactive")
   .attr("x", function(d) { return x(d.name); })
   .attr("width", x.rangeBand())
   .attr("y", function(d) { return y(d.officialRaised); })
   .attr("height", function(d) { return height - y(d.officialRaised); })
-  .attr("fill", "#333")
+  // .attr("fill", "#333")
 
 }
 
