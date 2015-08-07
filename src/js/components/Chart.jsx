@@ -5,7 +5,6 @@ let viz = require('../viz');
 let Chart = React.createClass({
 
   componentDidMount() {
-
     viz.init(this.props.candidates);
   },
 

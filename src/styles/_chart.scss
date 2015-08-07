@@ -4,3 +4,11 @@
   margin: $spacing-unit auto;
   // border: 1px solid $base-black;
 }
+
+.bar.active {
+  fill: #E82070;
+}
+
+.bar.inactive {
+  fill: #999999;
+}

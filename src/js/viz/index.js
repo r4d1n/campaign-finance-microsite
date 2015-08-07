@@ -16,9 +16,9 @@ function draw (data) {
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // assign colors
-  data.forEach((el, index) => {
-    el.hex = colors[index];
-  })
+  // data.forEach((el, index) => {
+  //   el.hex = colors[index];
+  // })
 
   let x = d3.scale.ordinal()
   .rangeRoundBands([0, width], .1);
@@ -61,7 +61,7 @@ function draw (data) {
   .attr("width", x.rangeBand())
   .attr("y", function(d) { return y(d.officialRaised); })
   .attr("height", function(d) { return height - y(d.officialRaised); })
-  .attr("fill", function(d) { return d.hex })
+  .attr("fill", "#333")
 
 }
 
