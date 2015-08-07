@@ -18,16 +18,15 @@ module.exports = {
       { test: /\.css$/, loader: 'style!css' },
       { test: /\.scss$/, loader: 'style!css!autoprefixer!sass!' },
       { test: /\.jsx$/, loader: 'jsx-loader?insertPragma=React.DOM&harmony' },
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
     ]
   },
   plugins: [
     new webpack.ProvidePlugin({
       _: 'lodash',
-      Logger: 'js-logger',
       React: 'react',
-      // Reflux: 'reflux',
-      // Router: 'react-router',
+      Reflux: 'reflux',
+      Router: 'react-router'
     })
   ]
 };

@@ -1,15 +1,19 @@
 'use strict';
 
-let ajax = require('superagent');
 let viz = require('../viz');
 
-
 let Chart = React.createClass({
-  getInitialState: function() {
-    return { data: this.props.data };
+
+  componentDidMount() {
+
+    viz.init(this.props.candidates);
   },
+
+  componentDidUpdate() {
+    // viz.update(jaredblah)
+  },
+
   render: function () {
-    viz.init(this.props.data);
     return (
       <section>
         <div id='chart-container'></div>

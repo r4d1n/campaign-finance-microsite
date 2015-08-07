@@ -1,21 +1,6 @@
 'use strict';
 
-let takeWhile = require('lodash.takewhile');
-
-let commons = require('./common_names');
-
-
-function filterByName (name, arr) {
-  let regex = new RegExp(name);
-  let one = arr.filter((element) => {
-    return regex.exec(element);
-  })
-  if (!one) {
-    console.log('candidate not found')
-  } else {
-    return one;
-  }
-}
+let commons = require('../common_names');
 
 function firstName (name) {
   let arr = name.split(',').reverse();
@@ -38,7 +23,7 @@ function commonName (candidate) {
 }
 
 function formatDollarAmount(amount) {
-  let arr = takeWhile(String(amount).split(''), (n) => {
+  let arr = _.takeWhile(String(amount).split(''), (n) => {
     return n !== '.';
   })
   let i = arr.length - 1;
@@ -51,7 +36,16 @@ function formatDollarAmount(amount) {
   return arr.join('')
 }
 
-module.exports = {
-  commonName: commonName,
-  formatDollarAmount: formatDollarAmount
+let formatCandidates = (candidates) => {
+
+  candidates.forEach((element) => {
+    element.id = element.fecId;
+    element.firstName = commonName(element);
+    element.raisedString = formatDollarAmount(element.officialRaised)
+  })
+
+  return candidates
+
 }
+
+module.exports = formatCandidates;

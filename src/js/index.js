@@ -8,10 +8,17 @@ require('../styles/main.scss');
 
 
 // client side js modules
-let util = require('./util')
-let Card = require('./components/Card.jsx')
+let App = require('./components/App.jsx')
 
 // let viz = require('./viz')
 
-Card.init();
-// viz.init()
+let load = require('./utils/load')
+let formatCandidates = require('./utils/formatCandidates')
+
+load('api/records/latest')
+.then((body) => {
+  console.log(body);
+  let candidates = formatCandidates(body);
+  React.render(<App candidates={candidates} />,
+  document.getElementById('card-container'));
+})
