@@ -16,9 +16,12 @@ let NameSelect = React.createClass({
 
   render() {
     let { candidates, activeCandidate } = this.props;
+    let selectClass;
+    if (activeCandidate.party === 'R') selectClass = 'gop'
+    if (activeCandidate.party === 'D') selectClass = 'dem'
     return (
       <h3>
-        <select value={activeCandidate.id} ref='nameSelect' onChange={this.handleChange}>
+        <select value={activeCandidate.id} className={selectClass} ref='nameSelect' onChange={this.handleChange}>
           {candidates.map(cand => <option key={cand.fecId} value={cand.id}>{cand.firstName}</option>)}
         </select>
         Has Raised:

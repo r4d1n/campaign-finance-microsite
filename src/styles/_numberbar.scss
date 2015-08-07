@@ -22,7 +22,7 @@ select {
   font-size: inherit;
   background-color: #ffffff;
   border: 1px solid $base-black;
-  color: $base-black;
+  color: $base-white;
   border-radius: 10px;
   margin-right: $spacing-unit / 2;
   line-height: $spacing-unit;
@@ -30,16 +30,14 @@ select {
   text-transform: uppercase;
 }
 
-option {
-  height: $spacing-unit;
-
-}
-option.gop {
+select.gop {
   background-color: $gop-theme-light;
+  border-color: $gop-theme-light;
 }
 
-option.dem {
+select.dem {
   background-color: $dem-theme-light;
+  border-color: $dem-theme-light;
 }
 
 // some hacks to make the select work across browsers
@@ -47,7 +45,7 @@ option.dem {
   select {
     height:30px;
     line-height:30px;
-    background:#f4f4f4;
+    background:#ffffff;
   }
 }
 select::-moz-focus-inner { /*Remove button padding in FF*/
