@@ -3,7 +3,6 @@
 let d3 = require('d3');
 
 let setup = require('./setup');
-let highlight = require('./highlight');
 
 
 let { height, width, margin, colors } = setup;
@@ -34,7 +33,6 @@ function draw (data) {
   .attr("width", x.rangeBand())
   .attr("y", function(d) { return y(d.officialRaised); })
   .attr("height", function(d) { return height - y(d.officialRaised); })
-  // .attr("fill", "#333")
 
 }
 
@@ -45,5 +43,5 @@ function init (data) {
 
 module.exports = {
   init: init,
-  highlight: highlight
+  highlight: require('./highlight')
 }

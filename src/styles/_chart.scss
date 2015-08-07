@@ -7,8 +7,11 @@
 
 .bar.selected {
   fill: #E82070;
+  transition: fill .25s;
+
 }
 
 .bar.inactive {
-  fill: #999999;
+  fill: #999;
+  transition: fill .25s;
 }
