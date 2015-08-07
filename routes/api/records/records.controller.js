@@ -46,9 +46,6 @@ controller.latestRecords = function(req, res, next) {
     .limit(limit)
     .exec()
     .then((result) => {
-      result.forEach((el) => {
-        // candidates
-      })
       res.json(result);
     })
     .catch((err) => {
