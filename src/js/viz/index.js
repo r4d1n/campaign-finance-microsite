@@ -2,10 +2,7 @@
 
 let d3 = require('d3');
 
-let setup = require('./setup');
-
-
-let { height, width, margin, colors } = setup;
+let { height, width, margin, colors } = require('./setup');
 
 
 function draw (data) {
@@ -24,21 +21,21 @@ function draw (data) {
   x.domain(data.map(function(d) { return d.name; }));
   y.domain([0, d3.max(data, function(d) { return d.officialRaised; })]);
 
-
-  svg.selectAll(".bar")
+  let bars = svg.selectAll(".bar")
   .data(data)
   .enter().append("rect")
   .attr("class", "bar")
+  .attr("data-id", function(d) { return d.id })
   .attr("x", function(d) { return x(d.name); })
   .attr("width", x.rangeBand())
   .attr("height", 0 )
-  .attr("y", height)
+  .attr("y", height) // height here is the whole chart
   .transition()
-  .delay(function (d, i) { return i * 200; })
+  .delay(function (d, i) { return i * 250; })
   .attr("y", function(d) { return y(d.officialRaised); })
   .attr("height", function(d) { return height - y(d.officialRaised); })
-}
 
+}
 
 function init (data) {
   draw(data);

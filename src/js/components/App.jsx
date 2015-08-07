@@ -18,6 +18,7 @@ let App = React.createClass({
 
   mixins: [Reflux.connect(require('../stores/CardStore.jsx'), 'activeCandidate')],
 
+
   componentDidMount() {
     let { candidates } = this.props
     updateSelectedCandidate(candidates[0]);
@@ -29,7 +30,7 @@ let App = React.createClass({
       <div>
         <section>
           <div className='big-num-bar'>
-            <NameSelect {...this.props} />
+            <NameSelect {...this.props} activeCandidate={activeCandidate} />
             <Amount activeCandidate={activeCandidate} />
           </div>
         </section>

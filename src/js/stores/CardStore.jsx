@@ -7,7 +7,7 @@ let CardStore = Reflux.createStore({
   },
 
   getInitialState: function() {
-    this.candidate = null;
+    this.candidate = { id : 0 };
     return this.candidate;
   },
 

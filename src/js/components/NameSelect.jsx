@@ -1,4 +1,5 @@
 'use strict';
+
 let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
 
 let NameSelect = React.createClass({
@@ -6,20 +7,19 @@ let NameSelect = React.createClass({
   mixins: Reflux.connect(require('../stores/CardStore.jsx'), 'selected'),
 
   handleChange (e) {
-    // e.preventDefault();
     let { candidates } = this.props;
-    let candidate = _.find(candidates, item => item.id === e.target.value )
-    if (candidate) {
-      updateSelectedCandidate(candidate);
+    let selected = _.find(candidates, item => item.id === e.target.value )
+    if (selected) {
+      updateSelectedCandidate(selected);
     }
   },
 
   render() {
-    let { candidates } = this.props;
+    let { candidates, activeCandidate } = this.props;
     return (
       <h3>
-        <select onChange={this.handleChange}>
-        {candidates.map(cand => <option key={cand.fecId} value={cand.id}>{cand.firstName}</option>)}
+        <select value={activeCandidate.id} ref='nameSelect' onChange={this.handleChange}>
+          {candidates.map(cand => <option key={cand.fecId} value={cand.id}>{cand.firstName}</option>)}
         </select>
         Has Raised:
       </h3>

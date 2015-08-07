@@ -56,8 +56,8 @@
 
 	// let viz = require('./viz')
 
-	var load = __webpack_require__(196);
-	var formatCandidates = __webpack_require__(197);
+	var load = __webpack_require__(197);
+	var formatCandidates = __webpack_require__(198);
 
 	load('api/records/latest').then(function (body) {
 	  var candidates = formatCandidates(body);
@@ -20470,7 +20470,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(159)();
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 12.5px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px;\n  background-color: #ffffff; }\n  .big-num-bar h1 {\n    padding-bottom: 8.33333px;\n    font-size: 48px;\n    text-align: left; }\n  .big-num-bar h3 {\n    margin-bottom: 25px; }\n\nselect {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  border-radius: 10px;\n  margin-right: 12.5px;\n  line-height: 25px;\n  height: 25px;\n  text-transform: uppercase; }\n\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  /*safari and chrome*/\n  select {\n    height: 30px;\n    line-height: 30px;\n    background: #f4f4f4; } }\n\nselect::-moz-focus-inner {\n  /*Remove button padding in FF*/\n  border: 0;\n  padding: 0; }\n\n@-moz-document url-prefix() {\n  /* targets Firefox only */\n  select {\n    padding: 12.5px 0 !important; } }\n\n@media screen\\0 {\n  /* IE Hacks: targets IE 8, 9 and 10 */\n  select {\n    height: 25px;\n    line-height: 25px; } }\n\n#chart-container {\n  height: 250px;\n  width: 300px;\n  margin: 25px auto; }\n\n.bar.active {\n  fill: #E82070; }\n\n.bar.inactive {\n  fill: #999999; }\n\n.share-container {\n  position: relative;\n  width: 80%;\n  height: 150px;\n  margin: 12.5px auto;\n  position: relative;\n  bottom: 5px;\n  background-color: #ffffff; }\n\n.share-icons {\n  position: relative;\n  top: 25px;\n  width: 80%;\n  margin: 5px auto;\n  text-align: center; }\n  .share-icons i {\n    padding: 0 25px; }\n\n.share-text {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 0 auto; }\n  .share-text h3 {\n    font-size: 60px;\n    font-weight: bold;\n    text-align: center; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\nfigure {\n  width: 80%;\n  margin: 25px auto; }\n  figure img {\n    margin: 0 auto;\n    max-width: 500px;\n    width: 100%; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em; }\n\nmain {\n  height: 100%; }\n\n#card-container {\n  height: 100%;\n  padding-top: 25px; }\n\na {\n  color: #999; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 12.5px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px;\n  background-color: #ffffff; }\n  .big-num-bar h1 {\n    padding-bottom: 8.33333px;\n    font-size: 48px;\n    text-align: left; }\n  .big-num-bar h3 {\n    margin-bottom: 25px; }\n\nselect {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  border-radius: 10px;\n  margin-right: 12.5px;\n  line-height: 25px;\n  height: 25px;\n  text-transform: uppercase; }\n\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  /*safari and chrome*/\n  select {\n    height: 30px;\n    line-height: 30px;\n    background: #f4f4f4; } }\n\nselect::-moz-focus-inner {\n  /*Remove button padding in FF*/\n  border: 0;\n  padding: 0; }\n\n@-moz-document url-prefix() {\n  /* targets Firefox only */\n  select {\n    padding: 12.5px 0 !important; } }\n\n@media screen\\0 {\n  /* IE Hacks: targets IE 8, 9 and 10 */\n  select {\n    height: 25px;\n    line-height: 25px; } }\n\n#chart-container {\n  height: 250px;\n  width: 300px;\n  margin: 25px auto; }\n\n.bar.selected {\n  fill: #E82070;\n  -webkit-transition: fill 0.25s;\n          transition: fill 0.25s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.25s;\n          transition: fill 0.25s; }\n\n.share-container {\n  position: relative;\n  width: 80%;\n  height: 150px;\n  margin: 12.5px auto;\n  position: relative;\n  bottom: 5px;\n  background-color: #ffffff; }\n\n.share-icons {\n  position: relative;\n  top: 25px;\n  width: 80%;\n  margin: 5px auto;\n  text-align: center; }\n  .share-icons i {\n    padding: 0 25px; }\n\n.share-text {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 0 auto; }\n  .share-text h3 {\n    font-size: 60px;\n    font-weight: bold;\n    text-align: center; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\nfigure {\n  width: 80%;\n  margin: 25px auto; }\n  figure img {\n    margin: 0 auto;\n    max-width: 500px;\n    width: 100%; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em; }\n\nmain {\n  height: 100%; }\n\n#card-container {\n  height: 100%; }\n\na {\n  color: #999; }\n", ""]);
 
 /***/ },
 /* 159 */
@@ -20769,13 +20769,14 @@
 	// sub components
 	let Chart = __webpack_require__(190)
 	, NameSelect = __webpack_require__(182)
-	, Amount = __webpack_require__(194)
-	, Share = __webpack_require__(195)
+	, Amount = __webpack_require__(195)
+	, Share = __webpack_require__(196)
 
 
 	let App = React.createClass({displayName: "App",
 
 	  mixins: [Reflux.connect(__webpack_require__(186), 'activeCandidate')],
+
 
 	  componentDidMount:function() {
 	    let $__0=    this.props,candidates=$__0.candidates
@@ -20788,7 +20789,7 @@
 	      React.createElement("div", null, 
 	        React.createElement("section", null, 
 	          React.createElement("div", {className: "big-num-bar"}, 
-	            React.createElement(NameSelect, React.__spread({},  this.props)), 
+	            React.createElement(NameSelect, React.__spread({},  this.props, {activeCandidate: activeCandidate})), 
 	            React.createElement(Amount, {activeCandidate: activeCandidate})
 	          )
 	        ), 
@@ -22365,6 +22366,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React, Reflux, _) {/** @jsx React.DOM */'use strict';
+
 	let $__0=    __webpack_require__(185),updateSelectedCandidate=$__0.updateSelectedCandidate;
 
 	let NameSelect = React.createClass({displayName: "NameSelect",
@@ -22372,20 +22374,19 @@
 	  mixins: Reflux.connect(__webpack_require__(186), 'selected'),
 
 	  handleChange:function (e) {
-	    // e.preventDefault();
 	    let $__0=    this.props,candidates=$__0.candidates;
-	    let candidate = _.find(candidates, function(item)  {return item.id === e.target.value;} )
-	    if (candidate) {
-	      updateSelectedCandidate(candidate);
+	    let selected = _.find(candidates, function(item)  {return item.id === e.target.value;} )
+	    if (selected) {
+	      updateSelectedCandidate(selected);
 	    }
 	  },
 
 	  render:function() {
-	    let $__0=    this.props,candidates=$__0.candidates;
+	    let $__0=     this.props,candidates=$__0.candidates,activeCandidate=$__0.activeCandidate;
 	    return (
 	      React.createElement("h3", null, 
-	        React.createElement("select", {onChange: this.handleChange}, 
-	        candidates.map(function(cand)  {return React.createElement("option", {key: cand.fecId, value: cand.id}, cand.firstName);})
+	        React.createElement("select", {value: activeCandidate.id, ref: "nameSelect", onChange: this.handleChange}, 
+	          candidates.map(function(cand)  {return React.createElement("option", {key: cand.fecId, value: cand.id}, cand.firstName);})
 	        ), 
 	        "Has Raised:"
 	      )
@@ -34805,7 +34806,7 @@
 	  },
 
 	  getInitialState: function() {
-	    this.candidate = null;
+	    this.candidate = { id : 0 };
 	    return this.candidate;
 	  },
 
@@ -36152,24 +36153,34 @@
 /* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
+	/* WEBPACK VAR INJECTION */(function(React, _) {/** @jsx React.DOM */'use strict';
+
+	let $__0=    __webpack_require__(185),updateSelectedCandidate=$__0.updateSelectedCandidate;
 
 	let viz = __webpack_require__(191);
 
 	let Chart = React.createClass({displayName: "Chart",
+
+	  handleClick:function(e) {
+	    let $__0=    this.props,candidates=$__0.candidates;
+	    let selected = _.find(candidates, function(item)  {return item.id === e.target.dataset.id;} )
+	    if (selected) {
+	      updateSelectedCandidate(selected);
+	    }
+	  },
 
 	  componentDidMount:function() {
 	    viz.init(this.props.candidates);
 	  },
 
 	  componentDidUpdate:function() {
-	    // viz.update(jaredblah)
+	    viz.highlight(this.props.activeCandidate);
 	  },
 
 	  render: function () {
 	    return (
 	      React.createElement("section", null, 
-	        React.createElement("div", {id: "chart-container"})
+	        React.createElement("div", {onClick: this.handleClick, id: "chart-container"})
 	      )
 	    );
 	  }
@@ -36177,7 +36188,7 @@
 
 	module.exports = Chart;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(183)))
 
 /***/ },
 /* 191 */
@@ -36185,23 +36196,17 @@
 
 	'use strict';
 
-	var ajax = __webpack_require__(187);
 	var d3 = __webpack_require__(192);
 
-	var setup = __webpack_require__(193);
+	var _require = __webpack_require__(193);
 
-	var height = setup.height;
-	var width = setup.width;
-	var margin = setup.margin;
-	var colors = setup.colors;
+	var height = _require.height;
+	var width = _require.width;
+	var margin = _require.margin;
+	var colors = _require.colors;
 
 	function draw(data) {
 	  var svg = d3.select('#chart-container').append('svg').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-	  // assign colors
-	  // data.forEach((el, index) => {
-	  //   el.hex = colors[index];
-	  // })
 
 	  var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
 
@@ -36214,37 +36219,18 @@
 	    return d.officialRaised;
 	  })]);
 
-	  // let xAxis = d3.svg.axis()
-	  // .scale(x)
-	  // .orient("bottom");
-	  //
-	  // let yAxis = d3.svg.axis()
-	  // .scale(y)
-	  // .orient("left")
-	  // .ticks(1, "$");
-	  //
-	  // svg.append("g")
-	  //     .attr("class", "x axis")
-	  //     .attr("transform", "translate(0," + height + ")")
-	  //     .call(xAxis);
-	  //
-	  // svg.append("g")
-	  //     .attr("class", "y axis")
-	  //     .call(yAxis)
-	  //   .append("text")
-	  //     .attr("transform", "rotate(-90)")
-	  //     .attr("y", 6)
-	  //     .attr("dy", ".71em")
-	  //     .style("text-anchor", "end")
-	  //     .text("Amount Raised");
-
-	  svg.selectAll(".bar").data(data).enter().append("rect").attr("class", "bar").attr("x", function (d) {
+	  var bars = svg.selectAll(".bar").data(data).enter().append("rect").attr("class", "bar").attr("data-id", function (d) {
+	    return d.id;
+	  }).attr("x", function (d) {
 	    return x(d.name);
-	  }).attr("width", x.rangeBand()).attr("y", function (d) {
+	  }).attr("width", x.rangeBand()).attr("height", 0).attr("y", height) // height here is the whole chart
+	  .transition().delay(function (d, i) {
+	    return i * 250;
+	  }).attr("y", function (d) {
 	    return y(d.officialRaised);
 	  }).attr("height", function (d) {
 	    return height - y(d.officialRaised);
-	  }).attr("fill", "#333");
+	  });
 	}
 
 	function init(data) {
@@ -36252,7 +36238,8 @@
 	}
 
 	module.exports = {
-	  init: init
+	  init: init,
+	  highlight: __webpack_require__(194)
 	};
 
 /***/ },
@@ -45787,6 +45774,26 @@
 /* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var d3 = __webpack_require__(192);
+
+	var highlight = function highlight(activeCandidate) {
+	  var bars = d3.selectAll('.bar').classed('inactive', true).classed('selected', false);
+
+	  var active = d3.selectAll('.bar').filter(function (d, i) {
+	    return d.id === activeCandidate.id;
+	  });
+
+	  active.classed('inactive', false).classed('selected', true);
+	};
+
+	module.exports = highlight;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
 
 	let Amount = React.createClass({displayName: "Amount",
@@ -45808,7 +45815,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
@@ -45847,7 +45854,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45872,12 +45879,12 @@
 	module.exports = load;
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {'use strict';
 
-	var commons = __webpack_require__(198);
+	var commons = __webpack_require__(199);
 
 	function firstName(name) {
 	  var arr = name.split(',').reverse();
@@ -45903,14 +45910,13 @@
 	  var arr = _.takeWhile(String(amount).split(''), function (n) {
 	    return n !== '.';
 	  });
-	  var i = arr.length - 1;
-	  while (i > 0) {
-	    if ((i + 1) % 3 === 0) {
-	      arr.splice(i, 0, ',');
+	  return arr.reduce(function (previous, current, index) {
+	    if (arr.slice(index).length % 3 === 0) {
+	      return previous + ',' + current;
+	    } else {
+	      return previous + current;
 	    }
-	    --i;
-	  }
-	  return arr.join('');
+	  });
 	}
 
 	var formatCandidates = function formatCandidates(candidates) {
@@ -45928,7 +45934,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(183)))
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports) {
 
 	"use strict";
