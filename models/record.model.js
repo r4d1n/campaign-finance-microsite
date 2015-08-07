@@ -8,6 +8,7 @@ var RecordSchema = new Schema({
 	name: String,
 	party: String,
 	fecId: String,
+	totalReceipts: Number,
 	officialRaised: Number,
 	officialSpent: Number,
 	independentTotal: Number,
