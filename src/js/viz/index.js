@@ -31,9 +31,12 @@ function draw (data) {
   .attr("class", "bar")
   .attr("x", function(d) { return x(d.name); })
   .attr("width", x.rangeBand())
+  .attr("height", 0 )
+  .attr("y", height)
+  .transition()
+  .delay(function (d, i) { return i * 200; })
   .attr("y", function(d) { return y(d.officialRaised); })
   .attr("height", function(d) { return height - y(d.officialRaised); })
-
 }
 
 
