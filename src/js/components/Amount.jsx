@@ -4,7 +4,6 @@ let Amount = React.createClass({
   render() {
     let { activeCandidate } = this.props
       , raisedString = activeCandidate && activeCandidate.raisedString || '';
-    console.log(activeCandidate);
     return (
       <div>
         <hr/>

@@ -31,3 +31,17 @@
     text-align: center;
   }
 }
+
+.twitter-link, {
+  color: $twitter-blue;
+  &:hover {
+    color: darken($twitter-blue, 15);
+  }
+}
+
+.facebook-link, {
+  color: $facebook-blue;
+  &:hover {
+    color: darken($facebook-blue, 15);
+  }
+}

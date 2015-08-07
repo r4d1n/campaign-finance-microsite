@@ -9,7 +9,6 @@ let NameSelect = React.createClass({
     // e.preventDefault();
     let { candidates } = this.props;
     let candidate = _.find(candidates, item => item.id === e.target.value )
-    console.log(candidate);
     if (candidate) {
       updateSelectedCandidate(candidate);
     }

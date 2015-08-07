@@ -25,7 +25,6 @@ let App = React.createClass({
   render: function () {
     let { candidates } = this.props
       , { activeCandidate } = this.state
-    console.log('activeCandidate', activeCandidate)
     return (
       <div>
         <section>

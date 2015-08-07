@@ -5,9 +5,8 @@ let d3 = require('d3');
 
 let setup = require('./setup');
 
-let { height, width, margin } = setup;
+let { height, width, margin, colors } = setup;
 
-let colors = [ '#FF8E69','#BE67E8','#7ED1FF','#67E867','#FFE377']
 
 function draw (data) {
   let svg = d3.select('#chart-container').append('svg')
