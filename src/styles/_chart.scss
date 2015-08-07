@@ -6,12 +6,20 @@
 }
 
 .bar.selected {
-  fill: #E82070;
+  // fill: #E82070;
   transition: fill .25s;
-
 }
 
 .bar.inactive {
   fill: #999;
   transition: fill .25s;
+}
+
+
+.bar.selected.dem {
+  fill: $dem-theme-light;
+}
+
+.bar.selected.gop {
+  fill: $gop-theme-light;
 }
