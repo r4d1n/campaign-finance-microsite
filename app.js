@@ -38,10 +38,7 @@ if (process.env.NODE_ENV==='production') {
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   partialsDir: 'views/partials/',
-  extname: '.hbs',
-  helpers: {
-    repeat: require('handlebars-helper-repeat')
-  }
+  extname: '.hbs'
 }));
 app.set('view engine', '.hbs');
 
