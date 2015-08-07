@@ -1,9 +1,10 @@
 'use strict';
 
-let ajax = require('superagent');
 let d3 = require('d3');
 
 let setup = require('./setup');
+let highlight = require('./highlight');
+
 
 let { height, width, margin, colors } = setup;
 
@@ -14,11 +15,6 @@ function draw (data) {
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  // assign colors
-  // data.forEach((el, index) => {
-  //   el.hex = colors[index];
-  // })
 
   let x = d3.scale.ordinal()
   .rangeRoundBands([0, width], .1);
@@ -33,7 +29,7 @@ function draw (data) {
   svg.selectAll(".bar")
   .data(data)
   .enter().append("rect")
-  .attr("class", "bar inactive")
+  .attr("class", "bar")
   .attr("x", function(d) { return x(d.name); })
   .attr("width", x.rangeBand())
   .attr("y", function(d) { return y(d.officialRaised); })
@@ -48,5 +44,6 @@ function init (data) {
 }
 
 module.exports = {
-  init: init
+  init: init,
+  highlight: highlight
 }
