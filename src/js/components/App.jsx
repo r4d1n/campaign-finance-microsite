@@ -29,11 +29,12 @@ let App = React.createClass({
     })
     console.log('in app, active', active)
     updateSelectedCandidate(active[0]);
+    // updateSelectedCandidate(candidates[0]);
   },
 
   componentDidUpdate() {
     let { activeParty } = this.state
-    console.log('app', activeParty)
+    console.log('app did update', activeParty)
     let active = this.props.candidates.filter((el) => {
       return el.party === activeParty;
     })

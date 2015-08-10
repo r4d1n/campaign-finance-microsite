@@ -5,6 +5,7 @@ let { updateSelectedCandidate } = require('../actions/Actions.jsx');
 let viz = require('../viz');
 
 let Chart = React.createClass({
+  mixins: [Reflux.listenTo(require('../stores/PartyStore.jsx'), 'onUpdateSelectedParty')],
 
   handleClick(e) {
     // update active candidate by tapping on a bar in the d3 chart
@@ -15,16 +16,24 @@ let Chart = React.createClass({
     }
   },
 
+  onUpdateSelectedParty (party) {
+    console.log('store', party)
+    let { candidates, activeParty } = this.props;
+    viz.init(candidates, activeParty);
+  },
+
   componentDidMount() {
     let { candidates, activeParty } = this.props;
     viz.init(candidates, activeParty);
   },
 
   componentDidUpdate() {
+    // viz.init(this.props.candidates, this.props.activeParty);
     viz.highlight(this.props.activeCandidate);
   },
 
   render: function () {
+    console.log('chart render props', this.props)
     return (
       <section>
         <div key={this.props.activeParty}  onClick={this.handleClick} id='chart-container'></div>

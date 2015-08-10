@@ -31,29 +31,15 @@ h3.dem {
   color: $dem-theme-light;
 }
 
-
-select {
-  font-family: inherit;
-  font-size: inherit;
-  background-color: #ffffff;
-  border: 1px solid $base-black;
-  color: $base-white;
-  border-radius: 10px;
-  margin-right: $spacing-unit / 2;
-  line-height: $spacing-unit;
-  height: $spacing-unit;
-  text-transform: uppercase;
-}
-
-select.gop {
-  background-color: $gop-theme-light;
-  border-color: $gop-theme-light;
-}
-
-select.dem {
-  background-color: $dem-theme-light;
-  border-color: $dem-theme-light;
-}
+// select.gop {
+//   background-color: $gop-theme-light;
+//   border-color: $gop-theme-light;
+// }
+//
+// select.dem {
+//   background-color: $dem-theme-light;
+//   border-color: $dem-theme-light;
+// }
 
 // some hacks to make the select work across browsers
 @media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/

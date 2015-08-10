@@ -4,12 +4,12 @@ let CandidateStore = Reflux.createStore({
   listenables: [require('../actions/Actions.jsx')],
 
   init() {
-    this.listenTo(require('./PartyStore.jsx'));
+    // this.listenTo(require('./PartyStore.jsx'));
   },
 
   getInitialState () {
     this.candidate = { id : 0 };
-    return this.candidate
+    return this.candidate;
   },
 
   onUpdateSelectedCandidate (candidate) {

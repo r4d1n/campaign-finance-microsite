@@ -4,7 +4,6 @@ let d3 = require('d3');
 
 let highlight = function(activeCandidate) {
   if (activeCandidate) {
-
     let bars = d3.selectAll('.bar')
     .classed('inactive', true)
     .classed('selected', false)

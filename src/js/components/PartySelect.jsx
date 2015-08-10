@@ -6,10 +6,10 @@ let PartySelect = React.createClass({
 
   handleChange (e) {
     // toggle between D and R
-    let selected = e.target.name;
+    let selected = e.target.value;
     console.log('selected', selected)
     if (selected) {
-      // updateSelectedParty(selected);
+      updateSelectedParty(selected);
     }
   },
 
@@ -19,16 +19,11 @@ let PartySelect = React.createClass({
         <h3 className='party-instructions'>
           Choose Party
         </h3>
-        <form onChange={this.handleChange}>
-          <fieldset>
-            <input type='radio' name='R' />
-            <label htmlFor='R'>Republicans</label>
-          </fieldset>
-          <fieldset>
-            <input type='radio' name='D' />
-            <label htmlFor='D'>Democrats</label>
-          </fieldset>
-        </form>
+        <select onChange={this.handleChange}>
+          <option key='R' value='R'>Republicans</option>
+          <option key='D' value='D'>Democrats</option>
+          <option key='B' value='B'>Both</option>
+        </select>
       </div>
     );
   }
