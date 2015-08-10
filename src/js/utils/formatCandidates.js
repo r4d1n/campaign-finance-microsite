@@ -2,6 +2,8 @@
 
 let commons = require('../common_names');
 
+let formatDollarAmount = require('./formatDollarAmount');
+
 function firstName (name) {
   let arr = name.split(',').reverse();
   return arr[0].trim().split(' ')[0];
@@ -22,20 +24,8 @@ function commonName (candidate) {
   }
 }
 
-function formatDollarAmount(amount) {
-  let arr = _.takeWhile(String(amount).split(''), (n) => {
-    return n !== '.';
-  });
-  return arr.reduce(function(previous, current, index) {
-    if (arr.slice(index).length % 3 === 0) {
-      return previous + ',' + current;
-    } else {
-      return previous + current;
-    }
-  });
-}
 
-let formatCandidates = (candidates) => {
+function formatCandidates (candidates) {
   candidates.forEach((element) => {
     element.id = element.fecId;
     // element.firstName = commonName(element);

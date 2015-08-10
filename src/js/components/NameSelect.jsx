@@ -4,7 +4,7 @@ let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
 
 let NameSelect = React.createClass({
 
-  mixins: Reflux.connect(require('../stores/CardStore.jsx'), 'selected'),
+  mixins: Reflux.connect(require('../stores/CandidateStore.jsx'), 'selected'),
 
   handleChange (e) {
     let { candidates } = this.props;

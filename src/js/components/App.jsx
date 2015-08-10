@@ -5,27 +5,30 @@ let ajax = require('superagent');
 
 // flux
 let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
-let Store = require('../stores/CardStore.jsx')
+let Store = require('../stores/CandidateStore.jsx')
 
-// sub components
-let Chart = require('./Chart.jsx')
+// child components
+let BarChart = require('./BarChart.jsx')
 , NameSelect = require('./NameSelect.jsx')
 , Amount = require('./Amount.jsx')
 , Share = require('./Share.jsx')
+, Comparison = require('./Comparison.jsx')
+
 
 
 let App = React.createClass({
 
-  mixins: [Reflux.connect(require('../stores/CardStore.jsx'), 'activeCandidate')],
+  mixins: [Reflux.connect(require('../stores/CandidateStore.jsx'), 'activeCandidate')],
 
 
   componentDidMount() {
     let { candidates } = this.props
     updateSelectedCandidate(candidates[0]);
   },
+
   render: function () {
     let { candidates } = this.props
-      , { activeCandidate } = this.state
+    , { activeCandidate } = this.state
     return (
       <div>
         <section>
@@ -33,7 +36,8 @@ let App = React.createClass({
             <Amount activeCandidate={activeCandidate} />
           </div>
         </section>
-        <Chart {...this.props} activeCandidate={activeCandidate} />
+        <Comparison {...this.props} activeCandidate={activeCandidate} />
+        <BarChart {...this.props} activeCandidate={activeCandidate} />
         <Share />
       </div>
     );

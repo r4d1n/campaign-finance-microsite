@@ -4,7 +4,7 @@ let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
 
 let viz = require('../viz');
 
-let Chart = React.createClass({
+let BarChart = React.createClass({
 
   handleClick(e) {
     // update active candidate by tapping on a bar in the d3 chart
@@ -26,7 +26,7 @@ let Chart = React.createClass({
   render: function () {
     return (
       <section>
-        <div onClick={this.handleClick} id='chart-container'></div>
+        <div onClick={this.handleClick} id='bar-chart-container'></div>
         <div className='tap-to-change'>
           <h3>Tap Bars to Select Candidates</h3>
         </div>
@@ -35,4 +35,4 @@ let Chart = React.createClass({
   }
 });
 
-module.exports = Chart;
+module.exports = BarChart;

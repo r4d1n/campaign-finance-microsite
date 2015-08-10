@@ -20470,7 +20470,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(159)();
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 12.5px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px;\n  background-color: #ffffff; }\n  .big-num-bar h1 {\n    padding-bottom: 8.33333px;\n    font-size: 48px;\n    text-align: left; }\n  .big-num-bar h3 {\n    margin-bottom: 25px; }\n\nselect {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #ffffff;\n  border-radius: 10px;\n  margin-right: 12.5px;\n  line-height: 25px;\n  height: 25px;\n  text-transform: uppercase; }\n\nselect.gop {\n  background-color: #ff9898;\n  border-color: #ff9898; }\n\nselect.dem {\n  background-color: #7a9de2;\n  border-color: #7a9de2; }\n\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  /*safari and chrome*/\n  select {\n    height: 30px;\n    line-height: 30px;\n    background: #ffffff; } }\n\nselect::-moz-focus-inner {\n  /*Remove button padding in FF*/\n  border: 0;\n  padding: 0; }\n\n@-moz-document url-prefix() {\n  /* targets Firefox only */\n  select {\n    padding: 12.5px 0 !important; } }\n\n@media screen\\0 {\n  /* IE Hacks: targets IE 8, 9 and 10 */\n  select {\n    height: 25px;\n    line-height: 25px; } }\n\n#chart-container {\n  height: 250px;\n  width: 300px;\n  margin: 25px auto; }\n\n.bar.selected {\n  -webkit-transition: fill 0.25s;\n          transition: fill 0.25s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.25s;\n          transition: fill 0.25s; }\n\n.bar.selected.dem {\n  fill: #7a9de2; }\n\n.bar.selected.gop {\n  fill: #ff9898; }\n\n.share-container {\n  position: relative;\n  width: 80%;\n  height: 150px;\n  margin: 12.5px auto;\n  position: relative;\n  bottom: 5px;\n  background-color: #ffffff; }\n\n.share-icons {\n  position: relative;\n  top: 25px;\n  width: 80%;\n  margin: 5px auto;\n  text-align: center; }\n  .share-icons i {\n    padding: 0 25px; }\n\n.share-text {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 0 auto; }\n  .share-text h3 {\n    font-size: 48px;\n    font-weight: bold;\n    text-align: center; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\nfigure {\n  width: 80%;\n  margin: 25px auto; }\n  figure img {\n    margin: 0 auto;\n    max-width: 500px;\n    width: 100%; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em; }\n\nmain {\n  height: 100%; }\n\n#card-container {\n  height: 100%; }\n\na {\n  color: #999; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 12.5px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px;\n  background-color: #ffffff; }\n  .big-num-bar h1 {\n    padding-bottom: 8.33333px;\n    font-size: 48px;\n    text-align: left; }\n  .big-num-bar h3 {\n    margin-bottom: 25px; }\n\nselect {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #ffffff;\n  border-radius: 10px;\n  margin-right: 12.5px;\n  line-height: 25px;\n  height: 25px;\n  text-transform: uppercase; }\n\nselect.gop {\n  background-color: #ff9898;\n  border-color: #ff9898; }\n\nselect.dem {\n  background-color: #7a9de2;\n  border-color: #7a9de2; }\n\n@media screen and (-webkit-min-device-pixel-ratio: 0) {\n  /*safari and chrome*/\n  select {\n    height: 30px;\n    line-height: 30px;\n    background: #ffffff; } }\n\nselect::-moz-focus-inner {\n  /*Remove button padding in FF*/\n  border: 0;\n  padding: 0; }\n\n@-moz-document url-prefix() {\n  /* targets Firefox only */\n  select {\n    padding: 12.5px 0 !important; } }\n\n@media screen\\0 {\n  /* IE Hacks: targets IE 8, 9 and 10 */\n  select {\n    height: 25px;\n    line-height: 25px; } }\n\n#bar-chart-container {\n  height: 250px;\n  width: 300px;\n  margin: 25px auto; }\n\n.bar.selected {\n  -webkit-transition: fill 0.25s;\n          transition: fill 0.25s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.25s;\n          transition: fill 0.25s; }\n\n.bar.selected.dem {\n  fill: #7a9de2; }\n\n.bar.selected.gop {\n  fill: #ff9898; }\n\n.share-container {\n  position: relative;\n  width: 80%;\n  height: 150px;\n  margin: 12.5px auto;\n  position: relative;\n  bottom: 5px;\n  background-color: #ffffff; }\n\n.share-icons {\n  position: relative;\n  top: 25px;\n  width: 80%;\n  margin: 5px auto;\n  text-align: center; }\n  .share-icons i {\n    padding: 0 25px; }\n\n.share-text {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 0 auto; }\n  .share-text h3 {\n    font-size: 48px;\n    font-weight: bold;\n    text-align: center; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\nfigure {\n  width: 80%;\n  margin: 25px auto; }\n  figure img {\n    margin: 0 auto;\n    max-width: 500px;\n    width: 100%; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em; }\n\nmain {\n  height: 100%; }\n\n#card-container {\n  height: 100%; }\n\na {\n  color: #999; }\n", ""]);
 
 /***/ },
 /* 159 */
@@ -20767,7 +20767,7 @@
 	let Store = __webpack_require__(186)
 
 	// sub components
-	let Chart = __webpack_require__(190)
+	let BarChart = __webpack_require__(190)
 	, NameSelect = __webpack_require__(182)
 	, Amount = __webpack_require__(195)
 	, Share = __webpack_require__(196)
@@ -20793,7 +20793,7 @@
 	            React.createElement(Amount, {activeCandidate: activeCandidate})
 	          )
 	        ), 
-	        React.createElement(Chart, React.__spread({},  this.props, {activeCandidate: activeCandidate})), 
+	        React.createElement(BarChart, React.__spread({},  this.props, {activeCandidate: activeCandidate})), 
 	        React.createElement(Share, null)
 	      )
 	    );
@@ -34802,7 +34802,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(Reflux) {/** @jsx React.DOM */'use strict';
 
-	let CardStore = Reflux.createStore({
+	let CandidateStore = Reflux.createStore({
 	  listenables: [__webpack_require__(185)],
 
 	  init: function() {
@@ -34820,7 +34820,7 @@
 
 	});
 
-	module.exports = CardStore;
+	module.exports = CandidateStore;
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(162)))
 
@@ -36162,7 +36162,7 @@
 
 	let viz = __webpack_require__(191);
 
-	let Chart = React.createClass({displayName: "Chart",
+	let BarChart = React.createClass({displayName: "BarChart",
 
 	  handleClick:function(e) {
 	    // update active candidate by tapping on a bar in the d3 chart
@@ -36190,7 +36190,7 @@
 	  }
 	});
 
-	module.exports = Chart;
+	module.exports = BarChart;
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(183)))
 
@@ -36210,7 +36210,7 @@
 	var colors = _require.colors;
 
 	function draw(data) {
-	  var svg = d3.select('#chart-container').append('svg').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	  var svg = d3.select('#bar-chart-container').append('svg').attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	  var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
 
