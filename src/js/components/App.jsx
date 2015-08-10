@@ -30,7 +30,6 @@ let App = React.createClass({
       <div>
         <section>
           <div className='big-num-bar'>
-            <NameSelect {...this.props} activeCandidate={activeCandidate} />
             <Amount activeCandidate={activeCandidate} />
           </div>
         </section>

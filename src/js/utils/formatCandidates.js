@@ -9,7 +9,7 @@ function firstName (name) {
 
 function lastName (name) {
   let arr = name.split(',').reverse();
-  return arr[0].trim().split(' ')[1];
+  return arr[1].trim().split(' ');
 }
 
 function commonName (candidate) {
@@ -39,7 +39,8 @@ let formatCandidates = (candidates) => {
 
   candidates.forEach((element) => {
     element.id = element.fecId;
-    element.firstName = commonName(element);
+    // element.firstName = commonName(element);
+    element.familiarName = commonName(element) + ' ' + lastName(element.name);
     element.raisedString = formatDollarAmount(element.officialRaised)
   })
 
