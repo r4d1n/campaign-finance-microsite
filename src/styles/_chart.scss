@@ -2,11 +2,9 @@
   height: 250px;
   width: 300px;
   margin: $spacing-unit auto;
-  // border: 1px solid $base-black;
 }
 
 .bar.selected {
-  // fill: #E82070;
   transition: fill .25s;
 }
 
@@ -14,7 +12,6 @@
   fill: #999;
   transition: fill .25s;
 }
-
 
 .bar.selected.dem {
   fill: $dem-theme-light;
