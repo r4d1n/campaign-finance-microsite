@@ -5,28 +5,28 @@ let Share = React.createClass({
     return (
       <section>
         <div className='share-container'>
-          <div>
-            <div className='share-text'>
-              <h3>Share</h3>
-            </div>
-            <div className='share-icons'>
+          <ul className='share-icons'>
+            <li><h3 className='share-text'>Share:</h3></li>
+            <li>
               <a className='twitter-link' href={`https://twitter.com/share?
                   url=${window.encodeURI(window.location.href)}
                   &via=r4d1n`}
                   target="_blank">
-                  <i className='fa fa-twitter fa-3x'></i>
+                  <i className='fa fa-twitter fa-2x'></i>
                 </a>
+              </li>
+              <li>
                 <a className='facebook-link' href={`https://www.facebook.com/sharer/sharer.php?
-                  &u=${window.encodeURI(window.location.href)}`}
-                  target="_blank" title="Share on Facebook">
-                  <i className='fa fa-facebook fa-3x'></i>
-                </a>
-              </div>
+                    &u=${window.encodeURI(window.location.href)}`}
+                    target="_blank" title="Share on Facebook">
+                    <i className='fa fa-facebook fa-2x'></i>
+                  </a>
+                </li>
+              </ul>
             </div>
-          </div>
-        </section>
-      );
-    }
-  });
+          </section>
+        );
+      }
+    });
 
-  module.exports = Share;
+    module.exports = Share;

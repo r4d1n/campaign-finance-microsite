@@ -36,16 +36,13 @@ function formatDollarAmount(amount) {
 }
 
 let formatCandidates = (candidates) => {
-
   candidates.forEach((element) => {
     element.id = element.fecId;
     // element.firstName = commonName(element);
     element.familiarName = commonName(element) + ' ' + lastName(element.name);
     element.raisedString = formatDollarAmount(element.officialRaised)
   })
-
   return candidates
-
 }
 
 module.exports = formatCandidates;
