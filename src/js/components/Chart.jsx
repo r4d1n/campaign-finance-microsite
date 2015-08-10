@@ -27,6 +27,9 @@ let Chart = React.createClass({
     return (
       <section>
         <div onClick={this.handleClick} id='chart-container'></div>
+        <div className='tap-to-change'>
+          <h3>Tap Bars to Select Candidates</h3>
+        </div>
       </section>
     );
   }
