@@ -3,7 +3,6 @@
 let Share = React.createClass({
   render: function () {
     return (
-      <section>
         <div className='share-container'>
           <ul className='share-icons'>
             <li><h3 className='share-text'>Share:</h3></li>
@@ -24,7 +23,6 @@ let Share = React.createClass({
                 </li>
               </ul>
             </div>
-          </section>
         );
       }
     });

@@ -13,6 +13,7 @@ let App = require('./components/App.jsx')
 
 let load = require('./utils/load')
 let formatCandidates = require('./utils/formatCandidates')
+let topFiveByParty = require('./utils/topFiveByParty')
 
 load('api/records/latest')
 .then((body) => {

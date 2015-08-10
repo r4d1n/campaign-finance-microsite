@@ -1,0 +1,23 @@
+.party-select {
+  width: 80%;
+  margin: $spacing-unit / 2 auto;
+  form {
+    margin: $spacing-unit / 2 auto;
+    fieldset {
+      display: inline-block;
+      // margin: 0 $spacing-unit / 2;
+      width: 50%;
+      text-align: center;
+    }
+  }
+}
+
+input[type='radio'] {
+  margin: 0px 5px;
+}
+
+h3.party-instructions {
+  // padding: 5px;
+  margin: $spacing-unit / 2 auto;
+  text-align: center;
+}

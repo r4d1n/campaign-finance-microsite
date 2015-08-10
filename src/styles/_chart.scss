@@ -1,7 +1,7 @@
 #chart-container {
   height: 250px;
   width: 300px;
-  margin: $spacing-unit auto;
+  margin: $spacing-unit / 2 auto;
 }
 
 .bar.selected {
@@ -21,10 +21,11 @@
   fill: $gop-theme-light;
 }
 
-.tap-to-change {
+.tap-instruction {
   width: 80%;
-  margin: 0 auto;
+  margin: $spacing-unit / 2 auto;
   h3 {
+    padding: 5px;
     text-align: center;
   }
 }

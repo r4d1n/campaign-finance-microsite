@@ -9,7 +9,7 @@ let Store = require('../stores/CardStore.jsx')
 
 // sub components
 let Chart = require('./Chart.jsx')
-, NameSelect = require('./NameSelect.jsx')
+, PartySelect = require('./PartySelect.jsx')
 , Amount = require('./Amount.jsx')
 , Share = require('./Share.jsx')
 
@@ -34,6 +34,7 @@ let App = React.createClass({
           </div>
         </section>
         <Chart {...this.props} activeCandidate={activeCandidate} />
+        <PartySelect />
         <Share />
       </div>
     );
