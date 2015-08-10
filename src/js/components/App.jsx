@@ -4,8 +4,7 @@
 let ajax = require('superagent');
 
 // flux
-let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
-let Store = require('../stores/CardStore.jsx')
+let { updateSelectedCandidate, updateSelectedParty } = require('../actions/Actions.jsx');
 
 // sub components
 let Chart = require('./Chart.jsx')
@@ -13,19 +12,39 @@ let Chart = require('./Chart.jsx')
 , Amount = require('./Amount.jsx')
 , Share = require('./Share.jsx')
 
-
 let App = React.createClass({
 
-  mixins: [Reflux.connect(require('../stores/CardStore.jsx'), 'activeCandidate')],
-
+  mixins: [
+    Reflux.connect(require('../stores/CandidateStore.jsx'), 'activeCandidate'),
+    Reflux.connect(require('../stores/PartyStore.jsx'), 'activeParty')
+  ],
 
   componentDidMount() {
     let { candidates } = this.props
-    updateSelectedCandidate(candidates[0]);
+    let { activeParty } = this.state
+    console.log('app', activeParty)
+    // updateSelectedParty(activeParty);
+    let active = candidates.filter((el) => {
+      return el.party === activeParty;
+    })
+    console.log('in app, active', active)
+    updateSelectedCandidate(active[0]);
   },
+
+  componentDidUpdate() {
+    let { activeParty } = this.state
+    console.log('app', activeParty)
+    let active = this.props.candidates.filter((el) => {
+      return el.party === activeParty;
+    })
+    console.log(active)
+    // updateSelectedCandidate(active[0]);
+  },
+
   render: function () {
     let { candidates } = this.props
-      , { activeCandidate } = this.state
+    , { activeCandidate } = this.state
+
     return (
       <div>
         <section>
@@ -33,8 +52,8 @@ let App = React.createClass({
             <Amount activeCandidate={activeCandidate} />
           </div>
         </section>
-        <Chart {...this.props} activeCandidate={activeCandidate} />
-        <PartySelect />
+        <Chart {...this.props} {...this.state} />
+        <PartySelect {...this.props} {...this.state} />
         <Share />
       </div>
     );

@@ -17,7 +17,7 @@ let topFiveByParty = require('./utils/topFiveByParty')
 
 load('api/records/latest')
 .then((body) => {
-  let candidates = formatCandidates(body);
+  let candidates = topFiveByParty(formatCandidates(body));
   React.render(<App candidates={candidates} />,
   document.getElementById('card-container'));
 })

@@ -1,17 +1,23 @@
 'use strict';
 
 let Amount = React.createClass({
+
   render() {
     let { activeCandidate } = this.props
-      , raisedString = activeCandidate && activeCandidate.raisedString || '';
+    , raisedString = activeCandidate && activeCandidate.raisedString || ''
+    , familiarName = activeCandidate && activeCandidate.familiarName || '';
 
-      let headerClass;
-      if (activeCandidate.party === 'R') headerClass = 'gop'
-      if (activeCandidate.party === 'D') headerClass = 'dem'
+    let headerClass;
+    if (activeCandidate && activeCandidate.party === 'R') headerClass = 'gop'
+    if (activeCandidate && activeCandidate.party === 'D') headerClass = 'dem'
 
     return (
       <div>
-        <h3><span className={headerClass}>{activeCandidate.familiarName}</span><span> has raised:</span></h3>
+        <div>
+          <h3 className={headerClass}>{familiarName}</h3>
+          <br />
+          <h3> has raised:</h3>
+        </div>
         <hr/>
         <h1>{`$${raisedString}`}</h1>
         <hr/>

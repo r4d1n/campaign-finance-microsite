@@ -1,6 +1,6 @@
 'use strict';
 
-let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
+let { updateSelectedCandidate } = require('../actions/Actions.jsx');
 
 let viz = require('../viz');
 
@@ -16,7 +16,8 @@ let Chart = React.createClass({
   },
 
   componentDidMount() {
-    viz.init(this.props.candidates);
+    let { candidates, activeParty } = this.props;
+    viz.init(candidates, activeParty);
   },
 
   componentDidUpdate() {
@@ -26,7 +27,7 @@ let Chart = React.createClass({
   render: function () {
     return (
       <section>
-        <div onClick={this.handleClick} id='chart-container'></div>
+        <div key={this.props.activeParty}  onClick={this.handleClick} id='chart-container'></div>
         <div className='tap-instruction'>
           <h3>Tap Bars For Candidate Detail</h3>
         </div>

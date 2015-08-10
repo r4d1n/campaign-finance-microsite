@@ -1,7 +1,7 @@
 'use strict';
 
 /*
- * Reflux aciton
+ * Reflux action
  * https://github.com/spoike/refluxjs
  *
  * Each action is like an event channel for one specific event. Actions are called by components.
@@ -10,5 +10,6 @@
  */
 
 module.exports = Reflux.createActions([
-  'updateSelectedCandidate'
+  'updateSelectedCandidate',
+  'updateSelectedParty'
 ]);

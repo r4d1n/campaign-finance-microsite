@@ -2,7 +2,7 @@
 
 let d3 = require('d3');
 
-let { height, width, margin, colors } = require('./setup');
+let { height, width, margin } = require('./setup');
 
 
 function draw (data) {
@@ -37,8 +37,11 @@ function draw (data) {
 
 }
 
-function init (data) {
-  draw(data);
+function init (data, party) {
+  let candidates = data.filter((el) => {
+    return el.party === party;
+  })
+  draw(candidates);
 }
 
 module.exports = {

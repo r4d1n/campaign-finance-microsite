@@ -34802,7 +34802,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(Reflux) {/** @jsx React.DOM */'use strict';
 
-	let CardStore = Reflux.createStore({
+	let Store = Reflux.createStore({
 	  listenables: [__webpack_require__(185)],
 
 	  init: function() {
@@ -34820,7 +34820,7 @@
 
 	});
 
-	module.exports = CardStore;
+	module.exports = Store;
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(162)))
 

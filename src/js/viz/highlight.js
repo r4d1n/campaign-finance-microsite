@@ -3,20 +3,23 @@
 let d3 = require('d3');
 
 let highlight = function(activeCandidate) {
-  let bars = d3.selectAll('.bar')
-  .classed('inactive', true)
-  .classed('selected', false)
+  if (activeCandidate) {
 
-  let active = d3.selectAll('.bar')
-  .filter(function(d, i) { return d.id === activeCandidate.id })
+    let bars = d3.selectAll('.bar')
+    .classed('inactive', true)
+    .classed('selected', false)
 
-  let activePartyClass;
-  activeCandidate.party === 'R' ? activePartyClass = 'gop' : activePartyClass = 'dem';
+    let active = d3.selectAll('.bar')
+    .filter(function(d, i) { return d.id === activeCandidate.id })
 
-  active
-  .classed('inactive', false)
-  .classed('selected', true)
-  .classed(activePartyClass, true)
+    let activePartyClass;
+    activeCandidate.party === 'R' ? activePartyClass = 'gop' : activePartyClass = 'dem';
+
+    active
+    .classed('inactive', false)
+    .classed('selected', true)
+    .classed(activePartyClass, true)
+  }
 }
 
 module.exports = highlight;
