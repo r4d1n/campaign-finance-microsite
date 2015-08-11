@@ -29,8 +29,7 @@ load('api/records/latest')
   // React.render(<App candidates={candidates} />,
   // document.getElementById('card-container'));
   Router.run(routes, function (Handler) {
-    React.render(<Handler candidates={candidates} />,
-    document.getElementById('app-container'));
+    React.render(<Handler candidates={candidates} />, document.body);
   });
 
 })

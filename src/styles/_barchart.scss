@@ -5,12 +5,12 @@
 }
 
 .bar.selected {
-  transition: fill .25s;
+  transition: fill .5s;
 }
 
 .bar.inactive {
   fill: #999;
-  transition: fill .25s;
+  transition: fill .5s;
 }
 
 .bar.selected.dem {
