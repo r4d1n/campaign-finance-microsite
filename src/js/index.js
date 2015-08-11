@@ -17,7 +17,6 @@ let formatCandidates = require('./utils/formatCandidates')
 load('api/records/latest')
 .then((body) => {
   let candidates = formatCandidates(body);
-  // console.log(candidates)
   React.render(<App candidates={candidates} />,
   document.getElementById('card-container'));
 })

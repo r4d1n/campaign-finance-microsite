@@ -36,7 +36,6 @@ let App = React.createClass({
             <Amount activeCandidate={activeCandidate} />
           </div>
         </section>
-        <Comparison {...this.props} activeCandidate={activeCandidate} />
         <BarChart {...this.props} activeCandidate={activeCandidate} />
         <Share />
       </div>
