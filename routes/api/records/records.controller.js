@@ -7,6 +7,8 @@ let candidates = require('../../../lib/candidates')
 
 let controller = {};
 
+let priorYears = require('../../../lib/priorYears');
+
 // functions for answering JSON requests
 
 // get all projects within the relevant time frame
@@ -46,7 +48,11 @@ controller.latestRecords = function(req, res, next) {
     .limit(limit)
     .exec()
     .then((result) => {
-      res.json(result);
+      let response = {
+        current: result,
+        prior: priorYears
+      }
+      res.json(response);
     })
     .catch((err) => {
       res.status(500).json({status:'error', message: err});

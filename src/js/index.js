@@ -25,9 +25,8 @@ let routes = (
 
 load('api/records/latest')
 .then((body) => {
-  let candidates = formatCandidates(body);
-  // React.render(<App candidates={candidates} />,
-  // document.getElementById('card-container'));
+  let candidates = formatCandidates(body.current);
+  console.log(body)
   Router.run(routes, function (Handler) {
     React.render(<Handler candidates={candidates} />, document.body);
   });
