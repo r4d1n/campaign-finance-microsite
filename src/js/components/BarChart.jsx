@@ -23,6 +23,12 @@ let BarChart = React.createClass({
     viz.highlight(this.props.activeCandidate);
   },
 
+  componentWillReceiveProps(nextProps) {
+    console.log('will receive')
+    console.log(nextProps)
+    viz.highlight(nextProps.activeCandidate);
+  },
+
   render: function () {
     return (
       <section>

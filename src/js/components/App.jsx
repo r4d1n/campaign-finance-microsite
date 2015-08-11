@@ -24,13 +24,26 @@ let App = React.createClass({
 
   mixins: [
     Reflux.connect(require('../stores/CandidateStore.jsx'), 'activeCandidate'),
-    Reflux.connect(require('../stores/YearStore.jsx'), 'activeYear')
+    Reflux.connect(require('../stores/YearStore.jsx'), 'activeYear'),
+    Router.Navigation
   ],
-
 
   componentDidMount() {
     let { candidates } = this.props
     updateSelectedCandidate(candidates[0]);
+  },
+
+  componentWillUpdate(nextProps, nextState) {
+    if (this.state.activeYear != nextState.activeYear) {
+      if (nextState.activeYear == "2016") {
+        this.transitionTo('current');
+      } else {
+        let href = this.makeHref('prior', {year: nextState.activeYear});
+        console.log(href)
+        // this.transitionTo(`prior/${nextState.activeYear}`)
+        this.transitionTo(href)
+      }
+    }
   },
 
   render: function () {
@@ -38,7 +51,7 @@ let App = React.createClass({
     , { activeCandidate, activeYear } = this.state
     return (
       <div>
-        <RouteHandler {...this.props} activeCandidate={activeCandidate} />
+        <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
         <YearSelect activeYear={activeYear} />
         <Share />
       </div>

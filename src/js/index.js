@@ -7,11 +7,8 @@ let CurrentCampaign = require('./components/CurrentCampaign.jsx')
 // scss
 require('../styles/main.scss');
 
-
 // client side js modules
 let App = require('./components/App.jsx')
-
-// let viz = require('./viz')
 
 let load = require('./utils/load')
 let formatCandidates = require('./utils/formatCandidates')
@@ -27,11 +24,13 @@ let routes = (
   </Route>
 );
 
+
+// load data from server and render
 load('api/records/latest')
 .then((body) => {
   let candidates = formatCandidates(body.current);
-  console.log(body)
-  Router.run(routes, function (Handler) {
-    React.render(<Handler candidates={candidates} />, document.body);
+  let prior = body.prior;
+  Router.run(routes, Router.HistoryLocation, function (Handler) {
+    React.render(<Handler candidates={candidates} prior={prior}/>, document.body);
   });
 })

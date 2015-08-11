@@ -7,9 +7,6 @@ let formatDollarAmount = require('../utils/formatDollarAmount');
 let YearStore = Reflux.createStore({
   listenables: [require('../actions/Actions.jsx')],
 
-  init: function() {
-  },
-
   getInitialState: function() {
     this.year = 2016;
     return this.year;

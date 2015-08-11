@@ -36,22 +36,8 @@ function draw (data) {
   .attr("y", function(d) { return y(d.officialRaised); })
   .attr("height", function(d) { return height - y(d.officialRaised); })
 
-  // let labels = svg.selectAll(".bar-text")
-  // .data(data)
-  // .enter()
-  // .append("text")
-  // .attr("class", "bar-text")
-  // .attr("text-anchor", "middle")
-  // .attr("fill", "white")
-  // .attr("x", function(d,i) {
-  //     return 50;
-  // })
-  // // .attr("y", function(d,i) {
-  // //     return height-y(d)+yTextPadding;
-  // // })
-  // .text(function(d){
-  //      return d.name;
-  // });
+  // TODO: labels!!
+
 }
 
 module.exports = draw;

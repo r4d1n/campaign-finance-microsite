@@ -4,7 +4,7 @@ let { updateSelectedYear } = require('../actions/Actions.jsx');
 
 let YearSelect = React.createClass({
 
-  mixins: Reflux.connect(require('../stores/YearStore.jsx'), 'activeYear'),
+  mixins: [Reflux.connect(require('../stores/YearStore.jsx'), 'activeYear')],
 
   handleChange (e) {
     console.log(e.target.value)
@@ -17,7 +17,7 @@ let YearSelect = React.createClass({
 
   render() {
     let { candidates, activeCandidate, activeYear } = this.props;
-    let years = ["2016", "2012", "2008", "2004", "2000"]
+    let years = [2016, 2012, 2008, 2004, 2000]
 
     return (
       <div className='year-select-container'>
