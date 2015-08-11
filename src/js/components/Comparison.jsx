@@ -5,28 +5,24 @@ let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
 
 let Comparison = React.createClass({
 
-  componentDidMount() {
-    // this.setState({tablets: 0})
-  },
-
-  componentDidUpdate() {
-    // let { candidates } = this.props
-    // updateSelectedCandidate(candidates[0]);
-    console.log(this.props)
-
-  },
-
   render: function () {
+    let { activeCandidate } = this.props;
+
+    let partyClass; // = 'compare-link';
+    if (activeCandidate.party === 'R') partyClass += ' gop'
+    if (activeCandidate.party === 'D') partyClass += ' dem'
+
     return (
       <section>
         <div id='comparison-container'>
-          <h3>The Cost of (Roughly)</h3>
+          <h3>Which Could Buy</h3>
           <h1>{this.props.activeCandidate.tablets}</h1>
-          <h3>iPad Minis</h3>
+          <h3><a className='compare-link' href='http://amzn.com/B00GQDBS7O'>iPad Minis</a></h3>
         </div>
       </section>
     );
   }
+
 });
 
 module.exports = Comparison;

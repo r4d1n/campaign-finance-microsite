@@ -2,7 +2,7 @@
 
 function howManyTablets(amount) {
   console.log(amount)
-  return Math.floor(amount / 226.99);
+  return Math.floor(amount / 279.00);
 }
 
 module.exports = howManyTablets;

@@ -1,11 +1,25 @@
 #comparison-container {
+  color: #EC81FF;
   margin: $spacing-unit auto;
   text-align: center;
   h1 {
+    color: $base-black;
     padding: 15px 5px;
     font-size: 36px;
   }
   h3 {
     font-size: 24px;
   }
+}
+
+// .compare-link {
+//   text-decoration: none;
+// }
+
+#comparison-container .gop {
+  color: $gop-theme-light;
+}
+
+#comparison-container .dem {
+  color: $dem-theme-light;
 }
