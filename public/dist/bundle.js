@@ -61,7 +61,6 @@
 
 	load('api/records/latest').then(function (body) {
 	  var candidates = formatCandidates(body);
-	  // console.log(candidates)
 	  React.render(React.createElement(App, { candidates: candidates }), document.getElementById('card-container'));
 	});
 
@@ -20796,7 +20795,6 @@
 	            React.createElement(Amount, {activeCandidate: activeCandidate})
 	          )
 	        ), 
-	        React.createElement(Comparison, React.__spread({},  this.props, {activeCandidate: activeCandidate})), 
 	        React.createElement(BarChart, React.__spread({},  this.props, {activeCandidate: activeCandidate})), 
 	        React.createElement(Share, null)
 	      )
