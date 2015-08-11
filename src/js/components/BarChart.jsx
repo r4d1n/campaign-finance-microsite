@@ -1,12 +1,14 @@
 'use strict';
 
 let { updateSelectedCandidate } = require('../actions/Actions.jsx');
+let CandidateStore = require('../stores/CandidateStore.jsx');
+
 
 let viz = require('../viz');
 
 let BarChart = React.createClass({
 
-  handleClick(e) {
+  selectCandidate(e) {
     // update active candidate by tapping on a bar in the d3 chart
     let { candidates } = this.props;
     let selected = _.find(candidates, item => item.id === e.target.dataset.id )
@@ -17,6 +19,7 @@ let BarChart = React.createClass({
 
   componentDidMount() {
     viz.init(this.props.candidates);
+    viz.highlight(this.props.activeCandidate);
   },
 
   componentDidUpdate() {
@@ -24,19 +27,12 @@ let BarChart = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    console.log('will receive')
-    console.log(nextProps)
-    viz.highlight(nextProps.activeCandidate);
+
   },
 
   render: function () {
     return (
-      <section>
-          <div onClick={this.handleClick} id='bar-chart-target'></div>
-          <div className='tap-to-change'>
-            <h3>Tap Bars to Select Candidates</h3>
-          </div>
-      </section>
+      <div onClick={this.selectCandidate} id='bar-chart-target'></div>
     );
   }
 });

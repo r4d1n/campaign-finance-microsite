@@ -35,14 +35,13 @@ let App = React.createClass({
 
   componentWillUpdate(nextProps, nextState) {
     if (this.state.activeYear != nextState.activeYear) {
+      let href;
       if (nextState.activeYear == "2016") {
-        this.transitionTo('current');
+        href = '/current';
       } else {
-        let href = this.makeHref('prior', {year: nextState.activeYear});
-        console.log(href)
-        // this.transitionTo(`prior/${nextState.activeYear}`)
-        this.transitionTo(href)
+        href = this.makeHref('prior', {year: nextState.activeYear});
       }
+      this.transitionTo(href)
     }
   },
 

@@ -7,8 +7,6 @@ let YearSelect = React.createClass({
   mixins: [Reflux.connect(require('../stores/YearStore.jsx'), 'activeYear')],
 
   handleChange (e) {
-    console.log(e.target.value)
-    // this.setState({activeYear : e.target.value})
     let updateYear = e.target.value;
     if (updateYear) {
       updateSelectedYear(updateYear);
