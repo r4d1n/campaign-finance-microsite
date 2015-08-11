@@ -1,18 +1,42 @@
 {
   "2000" : {
-    "Bush" : "169074844",
-    "Gore" : "126119388"
+    "Bush" : {
+      "receipts" : "169074844",
+      "party" : "R"
+    },
+    "Gore" : {
+      "receipts" : "126119388",
+      "party" : "D"
+    }
   },
   "2004" : {
-    "Bush" : "351943832",
-    "Kerry" : "314616929"
+    "Bush" : {
+      "receipts" : "351943832",
+      "party" : "R"
+    },
+    "Kerry" : {
+      "receipts" : "314616929",
+      "party" : "D"
+    }
   },
   "2008" : {
-    "McCain" : "218624822",
-    "Obama" : "605130483"
+    "McCain" : {
+      "receipts" : "218624822",
+      "party" : "R"
+    },
+    "Obama" : {
+      "receipts" : "605130483",
+      "party" : "D"
+    }
   },
   "2012" : {
-    "Romney" : "339823848",
-    "Obama" : "555972681"
+    "Romney" : {
+      "receipts" : "339823848",
+      "party" : "R"
+    },
+    "Obama" : {
+      "receipts" : "555972681",
+      "party" : "D"
+    }
   }
 }
