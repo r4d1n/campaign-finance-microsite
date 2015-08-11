@@ -4,7 +4,7 @@
 let ajax = require('superagent');
 
 // flux
-let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
+let { updateSelectedCandidate } = require('../actions/Actions.jsx');
 let Store = require('../stores/CandidateStore.jsx')
 
 // router
@@ -13,7 +13,7 @@ let { Route, DefaultRoute, RouteHandler, Link } = Router;
 
 // child components
 let BarChart = require('./BarChart.jsx')
-, NameSelect = require('./NameSelect.jsx')
+, YearSelect = require('./YearSelect.jsx')
 , Amount = require('./Amount.jsx')
 , Share = require('./Share.jsx')
 , CurrentCampaign = require('./CurrentCampaign.jsx')
@@ -36,6 +36,7 @@ let App = React.createClass({
     return (
       <div>
         <RouteHandler {...this.props} activeCandidate={activeCandidate} />
+        <YearSelect />
         <Share />
       </div>
     );

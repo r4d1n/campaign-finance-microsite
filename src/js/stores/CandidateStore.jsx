@@ -4,7 +4,7 @@ let howManyTablets = require('../utils/howManyTablets');
 let formatDollarAmount = require('../utils/formatDollarAmount');
 
 let CandidateStore = Reflux.createStore({
-  listenables: [require('../actions/CardActions.jsx')],
+  listenables: [require('../actions/Actions.jsx')],
 
   init: function() {
   },

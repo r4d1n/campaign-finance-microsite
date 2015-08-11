@@ -1,6 +1,6 @@
 'use strict';
 
-let { Route, DefaultRoute, RouteHandler, Link } = Router;
+let { Route, DefaultRoute, NotFoundRoute } = Router;
 let CurrentCampaign = require('./components/CurrentCampaign.jsx')
 
 // scss
@@ -18,8 +18,11 @@ let formatCandidates = require('./utils/formatCandidates')
 
 // Routing
 let routes = (
-  <Route handler={App}>
+  <Route path="/" handler={App}>
     <DefaultRoute handler={CurrentCampaign} />
+    <NotFoundRoute handler={CurrentCampaign} />
+    <Route name="current" path="current" handler={CurrentCampaign} />
+    {  /* <Route name="prior" path="prior/:year" handler={PriorCampaign} /> */}
   </Route>
 );
 
@@ -30,5 +33,4 @@ load('api/records/latest')
   Router.run(routes, function (Handler) {
     React.render(<Handler candidates={candidates} />, document.body);
   });
-
 })

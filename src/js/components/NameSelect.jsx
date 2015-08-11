@@ -1,6 +1,6 @@
 'use strict';
 
-let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
+let { updateSelectedCandidate } = require('../actions/Actions.jsx');
 
 let NameSelect = React.createClass({
 
