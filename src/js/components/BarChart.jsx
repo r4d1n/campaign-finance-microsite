@@ -26,10 +26,10 @@ let BarChart = React.createClass({
   render: function () {
     return (
       <section>
-        <div onClick={this.handleClick} id='bar-chart-container'></div>
-        <div className='tap-to-change'>
-          <h3>Tap Bars to Select Candidates</h3>
-        </div>
+          <div onClick={this.handleClick} id='bar-chart-target'></div>
+          <div className='tap-to-change'>
+            <h3>Tap Bars to Select Candidates</h3>
+          </div>
       </section>
     );
   }

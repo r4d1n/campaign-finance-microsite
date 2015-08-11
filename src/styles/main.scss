@@ -23,6 +23,15 @@ main {
   height: 100%;
 }
 
+.general-container {
+  width: 80%;
+  margin: $spacing-unit auto;
+}
+
+section {
+  margin-bottom: $spacing-unit;
+}
+
 #card-container {
   height: 100%;
   // padding-top: $spacing-unit;

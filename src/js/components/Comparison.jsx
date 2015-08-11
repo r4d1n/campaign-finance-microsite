@@ -14,11 +14,11 @@ let Comparison = React.createClass({
 
     return (
       <section>
-        <div id='comparison-container'>
-          <h3>Which Could Buy</h3>
-          <h1>{this.props.activeCandidate.tablets}</h1>
-          <h3><a className='compare-link' href='http://amzn.com/B00GQDBS7O'>iPad Minis</a></h3>
-        </div>
+          <div id='comparison-container'>
+            <h3>Which Could Buy</h3>
+            <h1>{this.props.activeCandidate.tablets}</h1>
+            <h3><a className='compare-link' href='http://amzn.com/B00GQDBS7O'>iPad Minis</a></h3>
+          </div>
       </section>
     );
   }

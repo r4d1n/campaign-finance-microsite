@@ -6,7 +6,7 @@ let { height, width, margin, colors } = require('./setup');
 
 
 function draw (data) {
-  let svg = d3.select('#bar-chart-container').append('svg')
+  let svg = d3.select('#bar-chart-target').append('svg')
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
