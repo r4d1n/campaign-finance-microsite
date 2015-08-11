@@ -7,12 +7,16 @@ let ajax = require('superagent');
 let { updateSelectedCandidate } = require('../actions/CardActions.jsx');
 let Store = require('../stores/CandidateStore.jsx')
 
+// router
+let { Route, DefaultRoute, RouteHandler, Link } = Router;
+
+
 // child components
 let BarChart = require('./BarChart.jsx')
 , NameSelect = require('./NameSelect.jsx')
 , Amount = require('./Amount.jsx')
 , Share = require('./Share.jsx')
-, Comparison = require('./Comparison.jsx')
+, CurrentCampaign = require('./CurrentCampaign.jsx')
 
 
 
@@ -31,12 +35,7 @@ let App = React.createClass({
     , { activeCandidate } = this.state
     return (
       <div>
-        <section>
-          <div className='big-num-bar'>
-            <Amount activeCandidate={activeCandidate} />
-          </div>
-        </section>
-        <BarChart {...this.props} activeCandidate={activeCandidate} />
+        <CurrentCampaign {...this.props} activeCandidate={activeCandidate} />
         <Share />
       </div>
     );

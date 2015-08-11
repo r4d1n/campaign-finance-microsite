@@ -5,7 +5,6 @@ let Share = React.createClass({
     return (
       <div className='share-container'>
         <ul className='share-icons'>
-          <li><h3 className='share-text'>Share:</h3></li>
           <li>
             <a className='twitter-link' href={`https://twitter.com/share?
                 url=${window.encodeURI(window.location.href)}

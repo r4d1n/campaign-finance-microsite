@@ -6,16 +6,18 @@
   background-color: $base-white;
 }
 
-.share-icons {
+ul.share-icons {
+  text-align: center;
   margin: 0 auto;
   position: relative;
   height: 35px;
-  width: 80%;
+  width: 150px;
   margin: 0 auto;
   padding: $spacing-unit / 2;
   li {
     float: left;
-    padding: 0 $spacing-unit;
+    padding: 0 $spacing-unit / 2;
+    width: 25%;
   }
 }
 

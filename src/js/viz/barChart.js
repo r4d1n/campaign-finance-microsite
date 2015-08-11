@@ -23,7 +23,8 @@ function draw (data) {
 
   let bars = svg.selectAll(".bar")
   .data(data)
-  .enter().append("rect")
+  .enter()
+  .append("rect")
   .attr("class", "bar")
   .attr("data-id", function(d) { return d.id }) // for click events
   .attr("x", function(d) { return x(d.name); })
@@ -34,6 +35,23 @@ function draw (data) {
   .delay(function (d, i) { return i * 150; })
   .attr("y", function(d) { return y(d.officialRaised); })
   .attr("height", function(d) { return height - y(d.officialRaised); })
+
+  // let labels = svg.selectAll(".bar-text")
+  // .data(data)
+  // .enter()
+  // .append("text")
+  // .attr("class", "bar-text")
+  // .attr("text-anchor", "middle")
+  // .attr("fill", "white")
+  // .attr("x", function(d,i) {
+  //     return 50;
+  // })
+  // // .attr("y", function(d,i) {
+  // //     return height-y(d)+yTextPadding;
+  // // })
+  // .text(function(d){
+  //      return d.name;
+  // });
 }
 
 module.exports = draw;

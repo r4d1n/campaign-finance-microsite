@@ -30,6 +30,7 @@
     "mongoose": "^4.0.8",
     "node-env-file": "^0.1.7",
     "react": "^0.13.3",
+    "react-router": "^0.13.3",
     "reflux": "^0.2.11",
     "request": "^2.59.0",
     "superagent": "^1.2.0"
