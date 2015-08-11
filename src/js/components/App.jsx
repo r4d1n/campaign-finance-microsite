@@ -35,7 +35,7 @@ let App = React.createClass({
     , { activeCandidate } = this.state
     return (
       <div>
-        <CurrentCampaign {...this.props} activeCandidate={activeCandidate} />
+        <RouteHandler {...this.props} activeCandidate={activeCandidate} />
         <Share />
       </div>
     );

@@ -1,6 +1,7 @@
 'use strict';
 
-let React = require('react');
+let { Route, DefaultRoute, RouteHandler, Link } = Router;
+let CurrentCampaign = require('./components/CurrentCampaign.jsx')
 
 // scss
 require('../styles/main.scss');
@@ -14,9 +15,22 @@ let App = require('./components/App.jsx')
 let load = require('./utils/load')
 let formatCandidates = require('./utils/formatCandidates')
 
+
+// Routing
+let routes = (
+  <Route handler={App}>
+    <DefaultRoute handler={CurrentCampaign} />
+  </Route>
+);
+
 load('api/records/latest')
 .then((body) => {
   let candidates = formatCandidates(body);
-  React.render(<App candidates={candidates} />,
-  document.getElementById('card-container'));
+  // React.render(<App candidates={candidates} />,
+  // document.getElementById('card-container'));
+  Router.run(routes, function (Handler) {
+    React.render(<Handler candidates={candidates} />,
+    document.getElementById('app-container'));
+  });
+
 })
