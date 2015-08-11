@@ -10,5 +10,6 @@
  */
 
 module.exports = Reflux.createActions([
-  'updateSelectedCandidate'
+  'updateSelectedCandidate',
+  'updateSelectedYear'
 ]);

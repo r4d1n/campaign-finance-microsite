@@ -2,6 +2,7 @@
 
 let { Route, DefaultRoute, NotFoundRoute } = Router;
 let CurrentCampaign = require('./components/CurrentCampaign.jsx')
+, PriorCampaign = require('./components/PriorCampaign.jsx')
 
 // scss
 require('../styles/main.scss');
@@ -22,7 +23,7 @@ let routes = (
     <DefaultRoute handler={CurrentCampaign} />
     <NotFoundRoute handler={CurrentCampaign} />
     <Route name="current" path="current" handler={CurrentCampaign} />
-    {  /* <Route name="prior" path="prior/:year" handler={PriorCampaign} /> */}
+    <Route name="prior" path="prior/:year" handler={PriorCampaign} />
   </Route>
 );
 

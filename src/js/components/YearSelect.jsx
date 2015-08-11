@@ -1,34 +1,28 @@
 'use strict';
 
-// let { updateSelectedCandidate } = require('../actions/Actions.jsx');
+let { updateSelectedYear } = require('../actions/Actions.jsx');
 
 let YearSelect = React.createClass({
 
-  // mixins: Reflux.connect(require('../stores/CandidateStore.jsx'), 'selected'),
-
-  getInitialState () {
-    return {currentYear : "2016"}
-  },
+  mixins: Reflux.connect(require('../stores/YearStore.jsx'), 'activeYear'),
 
   handleChange (e) {
     console.log(e.target.value)
-    this.setState({currentYear : e.target.value})
-    // let { candidates } = this.props;
-    // let selected = _.find(candidates, item => item.id === e.target.value )
-    // if (selected) {
-    //   updateSelectedCandidate(selected);
-    // }
+    // this.setState({activeYear : e.target.value})
+    let updateYear = e.target.value;
+    if (updateYear) {
+      updateSelectedYear(updateYear);
+    }
   },
 
   render() {
-    let { candidates, activeCandidate } = this.props;
-    let years = [ "2000", "2004", "2008", "2012", "2016" ]
-    let currentYear = years[years.length - 1]
+    let { candidates, activeCandidate, activeYear } = this.props;
+    let years = ["2016", "2012", "2008", "2004", "2000"]
 
     return (
       <div className='year-select-container'>
         <h3 className='year-select-label'>Choose Campaign Year</h3>
-        <select className='year-select' value={this.state.currentYear} ref='yearSelect' onChange={this.handleChange}>
+        <select className='year-select' value={activeYear} ref='yearSelect' onChange={this.handleChange}>
           {years.map(year => <option key={year} value={year}>{year}</option>)}
         </select>
       </div>

@@ -10,14 +10,14 @@ let PriorCampaign = React.createClass({
   render: function () {
     let { candidates, activeCandidate } = this.props
     return (
-      // <div>
-      //   <section>
-      //     <div className='big-num-bar'>
-      //       <Amount activeCandidate={activeCandidate} />
-      //     </div>
-      //   </section>
-      //   <BarChart {...this.props} activeCandidate={activeCandidate} />
-      // </div>
+      <div>
+        <section>
+          <div className='big-num-bar'>
+
+          </div>
+        </section>
+
+      </div>
     );
   }
 

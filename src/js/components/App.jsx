@@ -22,7 +22,10 @@ let BarChart = require('./BarChart.jsx')
 
 let App = React.createClass({
 
-  mixins: [Reflux.connect(require('../stores/CandidateStore.jsx'), 'activeCandidate')],
+  mixins: [
+    Reflux.connect(require('../stores/CandidateStore.jsx'), 'activeCandidate'),
+    Reflux.connect(require('../stores/YearStore.jsx'), 'activeYear')
+  ],
 
 
   componentDidMount() {
@@ -32,11 +35,11 @@ let App = React.createClass({
 
   render: function () {
     let { candidates } = this.props
-    , { activeCandidate } = this.state
+    , { activeCandidate, activeYear } = this.state
     return (
       <div>
         <RouteHandler {...this.props} activeCandidate={activeCandidate} />
-        <YearSelect />
+        <YearSelect activeYear={activeYear} />
         <Share />
       </div>
     );
