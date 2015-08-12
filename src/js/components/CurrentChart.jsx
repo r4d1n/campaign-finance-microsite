@@ -6,7 +6,7 @@ let CandidateStore = require('../stores/CandidateStore.jsx');
 
 let viz = require('../viz');
 
-let BarChart = React.createClass({
+let CurrentChart = React.createClass({
 
   selectCandidate(e) {
     // update active candidate by tapping on a bar in the d3 chart
@@ -18,13 +18,8 @@ let BarChart = React.createClass({
   },
 
   componentDidMount() {
-    // console.log(this.state.path)
-    // if (/prior/.exec(window.location.pathname) {
-    //
-    // } else {
-      viz.initCurrent(this.props.candidates);
-      viz.highlight(this.props.activeCandidate);
-    // }
+    viz.initCurrent(this.props.candidates);
+    viz.highlight(this.props.activeCandidate);
   },
 
   componentDidUpdate() {
@@ -42,4 +37,4 @@ let BarChart = React.createClass({
   }
 });
 
-module.exports = BarChart;
+module.exports = CurrentChart;

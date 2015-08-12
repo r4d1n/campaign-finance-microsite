@@ -1,14 +1,16 @@
 'use strict';
 
 // child components
-let BarChart = require('./BarChart.jsx')
-, NameSelect = require('./NameSelect.jsx')
+let NameSelect = require('./NameSelect.jsx')
 , Amount = require('./Amount.jsx')
+, PriorChart = require('./PriorChart.jsx')
 
 let PriorCampaign = React.createClass({
 
-  render: function () {
-    let { candidates, activeCandidate } = this.props
+  componentWillUpdate() {
+  },
+
+  render () {
     return (
       <div>
         <section>
@@ -16,7 +18,7 @@ let PriorCampaign = React.createClass({
 
           </div>
         </section>
-
+        <PriorChart {...this.props} />
       </div>
     );
   }

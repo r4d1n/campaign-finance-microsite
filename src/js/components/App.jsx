@@ -12,8 +12,7 @@ let { Route, DefaultRoute, RouteHandler, Link } = Router;
 
 
 // child components
-let BarChart = require('./BarChart.jsx')
-, YearSelect = require('./YearSelect.jsx')
+let YearSelect = require('./YearSelect.jsx')
 , Amount = require('./Amount.jsx')
 , Share = require('./Share.jsx')
 , CurrentCampaign = require('./CurrentCampaign.jsx')
