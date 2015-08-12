@@ -1,5 +1,8 @@
 'use strict';
 
+
+let React = require('react')
+
 let { updateSelectedCandidate } = require('../actions/Actions.jsx');
 let CandidateStore = require('../stores/CandidateStore.jsx');
 
@@ -18,11 +21,12 @@ let CurrentChart = React.createClass({
   },
 
   componentDidMount() {
-    viz.initCurrent(this.props.candidates);
-    viz.highlight(this.props.activeCandidate);
+    // viz.initCurrent(this.props.candidates);
+    // viz.highlight(this.props.activeCandidate);
   },
 
   componentDidUpdate() {
+    viz.initCurrent(this.props.candidates);
     viz.highlight(this.props.activeCandidate);
   },
 

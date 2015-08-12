@@ -1,5 +1,8 @@
 'use strict';
 
+
+let React = require('react')
+
 let { updateSelectedCandidate } = require('../actions/Actions.jsx');
 let CandidateStore = require('../stores/CandidateStore.jsx');
 

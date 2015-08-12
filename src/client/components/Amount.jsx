@@ -1,5 +1,8 @@
 'use strict';
 
+let React = require('react')
+, Reflux = require('reflux')
+
 let Amount = React.createClass({
   render() {
     let { activeCandidate } = this.props

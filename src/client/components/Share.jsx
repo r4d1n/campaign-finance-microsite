@@ -1,5 +1,7 @@
 'use strict';
 
+let React = require('react')
+
 let Share = React.createClass({
   render: function () {
     return (

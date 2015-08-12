@@ -1,7 +1,9 @@
 'use strict';
 
+let Reflux = require('reflux');
+
 /*
- * Reflux aciton
+ * Reflux action
  * https://github.com/spoike/refluxjs
  *
  * Each action is like an event channel for one specific event. Actions are called by components.

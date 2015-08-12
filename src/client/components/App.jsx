@@ -8,6 +8,7 @@ let { updateSelectedCandidate } = require('../actions/Actions.jsx');
 let Store = require('../stores/CandidateStore.jsx')
 
 // router
+let Router = require('react-router');
 let { Route, DefaultRoute, RouteHandler, Link } = Router;
 
 

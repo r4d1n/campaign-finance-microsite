@@ -1,5 +1,8 @@
 'use strict';
 
+let Reflux = require('reflux');
+
+
 // this store is for keeping track of which election year should be shown
 
 let formatDollarAmount = require('../utils/formatDollarAmount');

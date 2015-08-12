@@ -1,5 +1,8 @@
 'use strict';
 
+let React = require('react')
+, Reflux = require('reflux')
+
 let { updateSelectedYear } = require('../actions/Actions.jsx');
 
 let YearSelect = React.createClass({

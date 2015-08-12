@@ -1,5 +1,7 @@
 'use strict';
 
+let Reflux = require('reflux');
+
 let howManyTablets = require('../utils/howManyTablets');
 let formatDollarAmount = require('../utils/formatDollarAmount');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-let React = require('react')
+let React = require('react');
 
 // react router and top level components
 let { Route, DefaultRoute, NotFoundRoute } = require('react-router');

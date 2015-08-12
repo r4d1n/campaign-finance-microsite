@@ -1,8 +1,9 @@
 'use strict';
 
+let React = require('react')
+
 // child components
 let CurrentChart = require('./CurrentChart.jsx')
-, NameSelect = require('./NameSelect.jsx')
 , Amount = require('./Amount.jsx')
 
 let CurrentCampaign = React.createClass({
