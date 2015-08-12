@@ -39,9 +39,9 @@ let App = React.createClass({
     return (
       <div>
         <nav className='nav-main'>
-          <ul>
-            <li><Link to="current" className='nav-link'>Current</Link></li>
-            <li><Link to="past" params={{year:activeYear}} className='nav-link'>Past</Link></li>
+          <ul role='tablist'>
+            <li><Link to="current" className='nav-link' role='tab'>Current</Link></li>
+            <li><Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link></li>
           </ul>
         </nav>
         <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
