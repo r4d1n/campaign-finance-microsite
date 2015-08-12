@@ -11,7 +11,6 @@ let PriorChart = React.createClass({
   renderChart() {
     let { prior, activeYear } = this.props;
     let candidates = prior[activeYear];
-    console.log(prior, activeYear, candidates)
     viz.initPrior(candidates);
   },
 

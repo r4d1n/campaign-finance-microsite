@@ -40,7 +40,7 @@ let App = React.createClass({
       } else {
         href = this.makeHref('prior', {year: nextState.activeYear});
       }
-      this.replaceWith(href)
+      this.transitionTo(href)
     }
   },
 
@@ -49,12 +49,17 @@ let App = React.createClass({
     , { activeCandidate, activeYear } = this.state
     return (
       <div>
-        <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
-        <YearSelect activeYear={activeYear} />
-        <Share />
-      </div>
-    );
-  }
-});
+        <nav className='nav-main'>
+          <ul>
+            <li><Link to="current" className='nav-link'>Current</Link></li>
+            <li><Link to="prior" params={{year:activeYear}} className='nav-link'>Past</Link></li>
+            </ul>
+          </nav>
+          <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
+          <Share />
+        </div>
+      );
+    }
+  });
 
-module.exports = App;
+  module.exports = App;

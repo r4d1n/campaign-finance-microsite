@@ -5,7 +5,7 @@
 @import 'barchart';
 @import 'yearselect';
 @import 'share';
-@import 'bio';
+@import 'nav';
 
 html {
   height: 100%;
@@ -37,6 +37,6 @@ section {
   // padding-top: $spacing-unit;
 }
 
-a {
-  color: #EC81FF;
-}
+// a {
+//   color: #EC81FF;
+// }

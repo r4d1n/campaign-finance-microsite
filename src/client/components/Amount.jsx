@@ -10,7 +10,7 @@ let Amount = React.createClass({
       if (activeCandidate.party === 'D') headerClass = 'dem'
 
     return (
-      <div>
+      <div className='amount'>
         <h3><span className={headerClass}>{activeCandidate.familiarName}</span><span> has raised:</span></h3>
         <hr/>
         <h1>{`$${raisedString}`}</h1>

@@ -48,7 +48,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/api/records', require('./src/server/routes/api/records'));
 // app.use('*', require('./routes/index')); // render views
 
-app.get('/', function (req, res) {
+app.get('*', function (req, res) {
   res.render('index');
 });
 

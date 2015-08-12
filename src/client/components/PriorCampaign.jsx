@@ -13,12 +13,12 @@ let PriorCampaign = React.createClass({
   render () {
     return (
       <div>
-        <section>
-          <div className='big-num-bar'>
+        <div className='big-num-bar'>
 
-          </div>
-        </section>
+        </div>
         <PriorChart {...this.props} />
+        <YearSelect activeYear={activeYear} />
+
       </div>
     );
   }

@@ -8,7 +8,7 @@ let App = require('./components/App.jsx')
 , PriorCampaign = require('./components/PriorCampaign.jsx')
 
 // scss
-require('../styles/main.scss');
+require('./styles/main.scss');
 
 
 // client side js utils
@@ -26,7 +26,7 @@ load('api/records/latest')
   let candidates = formatCandidates(body.current);
   let prior = body.prior;
   Router.run(routes, Router.HistoryLocation, function (Handler) {
-    React.render(<Handler candidates={candidates} prior={prior}/>,
-    document.getElementById('app-container'));
+    React.render(<Handler candidates={candidates} prior={prior}/>, document.body);
   });
+    // document.getElementById('app-container'));
 })

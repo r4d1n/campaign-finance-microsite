@@ -1,7 +1,7 @@
 .big-num-bar {
   text-transform: uppercase;
   width: 80%;
-  margin: $spacing-unit / 2 auto;
+  margin: $spacing-unit / 4 auto;
   position: relative;
   top: $spacing-unit;
   padding: $spacing-unit / 5 $spacing-unit / 4 $spacing-unit / 5 $spacing-unit / 4;
@@ -14,6 +14,10 @@
   h3 {
     margin-bottom: $spacing-unit;
   }
+}
+
+div.amount {
+  padding-top: $spacing-unit / 2;
 }
 
 .candidate-name {
