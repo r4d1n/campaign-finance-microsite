@@ -83,8 +83,7 @@ suite('Record Retrieval API', function() {
     .expect(200)
     .end(function (err, res) {
       if (err) return done(err);
-      assert(res.body.length > 0, "body length should be greater than zero");
-      assert.equal(+new Date(res.body[0].requestedAt), +new Date(timestamp2));
+      assert.equal(+new Date(res.body.current[0].requestedAt), +new Date(timestamp2));
       done();
     });
   })
