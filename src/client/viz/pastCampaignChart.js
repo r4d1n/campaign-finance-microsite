@@ -7,12 +7,6 @@ let { height, width, margin, colors } = require('./setup');
 
 function draw (data) {
 
-  // data.forEach((element) => {
-  //   element.receipts = Number(element.receipts);
-  // })
-
-  console.log(data)
-
   let svg = d3.select('#bar-chart-target').append('svg')
   .attr("id", "past-chart-svg")
   .attr("width", width + margin.left + margin.right)

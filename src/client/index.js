@@ -23,10 +23,8 @@ let routes = require('../shared/routes')
 // load data from server and render
 load('api/records/latest')
 .then((body) => {
-  console.log(body)
   let candidates = formatCandidates(body.current);
   let past = body.past;
-  console.log(past)
   Router.run(routes, Router.HistoryLocation, function (Handler) {
     React.render(<Handler candidates={candidates} past={past}/>, document.body);
   });

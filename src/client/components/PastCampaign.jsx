@@ -2,25 +2,29 @@
 
 // child components
 let NameSelect = require('./NameSelect.jsx')
-, Amount = require('./Amount.jsx')
+, PastAmount = require('./PastAmount.jsx')
 , PastChart = require('./PastChart.jsx')
 , YearSelect = require('./YearSelect.jsx')
 
 let PastCampaign = React.createClass({
 
-  componentWillUpdate() {
+  activateCampaignYear() {
+    let { past, activeYear } = this.props;
+    return past[activeYear];
+  },
+
+  componentDidMount() {
+    this.activateCampaignYear();
   },
 
   render () {
-    console.log(this.props)
     let {activeYear} = this.props;
+    let candidates = this.activateCampaignYear();
 
     return (
       <div>
-        <div className='big-num-bar'>
-
-        </div>
-        <PastChart {...this.props} />
+        <PastAmount {...this.props} candidates={candidates} />
+        <PastChart {...this.props} candidates={candidates} />
         <YearSelect activeYear={activeYear} />
 
       </div>
