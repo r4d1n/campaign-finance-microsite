@@ -43,18 +43,56 @@ module.exports = [{
     })
   ]
 },
+// {
+//   entry: './app.js',
+//   target: 'node',
+//   output: {
+//     path: path.join(__dirname),
+//     filename: 'server.js'
+//   },
+//   externals: nodeModules,
+//   module: {
+//     noParse: /\.md$/,
+//     exprContextRegExp: /$^/,
+//     exprContextCritical: false,
+//     loaders: [
+//       { test: /\.json$/, loader: 'json' },
+//       { test: /\.jsx$/, loader: 'jsx-loader?insertPragma=React.DOM&harmony' },
+//       {
+//         test: /\.js$/,
+//         include: [
+//           path.resolve(__dirname, "lib"),
+//           path.resolve(__dirname, "src")
+//         ],
+//         exclude: [
+//           /node_modules/,
+//           path.resolve(__dirname, "src/viz")
+//         ],
+//         loader: 'babel-loader'
+//       }
+//     ]
+//   },
+//   plugins: [
+//     new webpack.ProvidePlugin({
+//       _: 'lodash',
+//       React: 'react',
+//       Reflux: 'reflux',
+//       Router: 'react-router'
+//     })
+//   ]
+// },
 {
-  entry: './app.js',
-  target: 'node',
+  // The configuration for the server-side rendering
+  name: "server-side rendering",
+  entry: "./app.js",
+  target: "node",
   output: {
     path: path.join(__dirname),
-    filename: 'server.js'
+    filename: "server.js",
+    libraryTarget: "commonjs2"
   },
   externals: nodeModules,
   module: {
-    noParse: /\.md$/,
-    exprContextRegExp: /$^/,
-    exprContextCritical: false,
     loaders: [
       { test: /\.json$/, loader: 'json' },
       { test: /\.jsx$/, loader: 'jsx-loader?insertPragma=React.DOM&harmony' },
