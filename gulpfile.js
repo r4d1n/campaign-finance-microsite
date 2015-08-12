@@ -25,10 +25,6 @@ gulp.task('server', function () {
   });
 });
 
-gulp.task('fonts', function() {
-  return gulp.src('node_modules/font-awesome/fonts/*')
-    .pipe(gulp.dest('public/fonts'))
-})
 
 gulp.task('dev-webpack', shell.task([['webpack-dev-server --color --port ' + 8080]]));
 

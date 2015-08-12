@@ -1,6 +1,6 @@
 'use strict';
 
-let Timestamp = require('../../models/timestamp.model');
+let Timestamp = require('../models/timestamp.model');
 
 function saveTimestamp () {
   return new Promise((resolve, reject) => {

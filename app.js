@@ -23,7 +23,7 @@ var mongoose = require('mongoose');
 if (process.env.NODE_ENV==='development') {
   mongoose.connect('mongodb://localhost/' + config.DEV_DB);
   console.log(process.env.NODE_ENV)
-  // require('./lib/sunlightRequest').init()
+  // require('./src/server/sunlightRequest').init()
 }
 
 if (process.env.NODE_ENV==='test') {
@@ -45,7 +45,7 @@ app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/public'));
 
 // routes
-app.use('/api/records', require('./routes/api/records'));
+app.use('/api/records', require('./src/server/routes/api/records'));
 // app.use('*', require('./routes/index')); // render views
 
 app.get('/', function (req, res) {

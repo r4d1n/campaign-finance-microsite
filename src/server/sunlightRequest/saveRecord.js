@@ -1,7 +1,7 @@
 'use strict';
 
 let request = require('request');
-let Record = require('../../models/record.model');
+let Record = require('../models/record.model');
 
 //receive data object and resolve w/ resulting Mongo doc
 

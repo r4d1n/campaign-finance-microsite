@@ -5,13 +5,13 @@ process.env.NODE_ENV = 'test'
 let assert = require('chai').assert;
 let ajax = require('supertest');
 
-let Record = require('../models/record.model.js');
-let Timestamp = require('../models/timestamp.model.js');
+let Record = require('../src/server/models/record.model.js');
+let Timestamp = require('../src/server/models/timestamp.model.js');
 
-let links = require('../lib/sunlightRequest/links');
-let sunlightRequest = require('../lib/sunlightRequest');
-let saveRecord = require('../lib/sunlightRequest/saveRecord');
-let saveTimestamp = require('../lib/sunlightRequest/saveTimestamp');
+let links = require('../src/server/sunlightRequest/links');
+let sunlightRequest = require('../src/server/sunlightRequest');
+let saveRecord = require('../src/server/sunlightRequest/saveRecord');
+let saveTimestamp = require('../src/server/sunlightRequest/saveTimestamp');
 
 let sample = require('./sample');
 

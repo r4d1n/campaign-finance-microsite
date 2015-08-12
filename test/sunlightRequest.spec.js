@@ -4,8 +4,8 @@ process.env.NODE_ENV = 'test';
 
 let request = require('request');
 
-let Record = require('../models/record.model.js');
-let Timestamp = require('../models/timestamp.model.js');
+let Record = require('../src/server/models/record.model.js');
+let Timestamp = require('../src/server/models/timestamp.model.js');
 
 let chai = require('chai');
 let sinon = require('sinon');
@@ -19,11 +19,11 @@ let assert = chai.assert;
 let app  = require('../app.js');
 let port = 3333;
 
-let sunlightRequest = require('../lib/sunlightRequest');
-let saveRecord = require('../lib/sunlightRequest/saveRecord');
-let getData = require('../lib/sunlightRequest/getData');
-let saveTimestamp = require('../lib/sunlightRequest/saveTimestamp');
-let links = require('../lib/sunlightRequest/links');
+let sunlightRequest = require('../src/server/sunlightRequest');
+let saveRecord = require('../src/server/sunlightRequest/saveRecord');
+let getData = require('../src/server/sunlightRequest/getData');
+let saveTimestamp = require('../src/server/sunlightRequest/saveTimestamp');
+let links = require('../src/server/sunlightRequest/links');
 let attrs = ['name', 'party', 'fecId', 'officialRaised',
 'officialSpent', 'independentTotal', 'independentFor',
 'independentAgainst', 'cashOnHand', 'cashDate', 'requestedAt'];

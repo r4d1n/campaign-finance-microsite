@@ -3,11 +3,11 @@
 let Record = require('../../../models/record.model');
 let Timestamp = require('../../../models/timestamp.model');
 
-let candidates = require('../../../lib/candidates')
+let candidates = require('../../../candidates')
 
 let controller = {};
 
-let priorYears = require('../../../lib/priorYears');
+let priorYears = require('../../../priorYears');
 
 // functions for answering JSON requests
 

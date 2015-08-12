@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   cache: true,
   entry: {
-    index: './src/js/index.js'
+    index: './src/client/index.js'
   },
   output: {
     path: path.join(__dirname, 'public/dist'),

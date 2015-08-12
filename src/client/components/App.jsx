@@ -40,7 +40,7 @@ let App = React.createClass({
       } else {
         href = this.makeHref('prior', {year: nextState.activeYear});
       }
-      this.transitionTo(href)
+      this.replaceWith(href)
     }
   },
 

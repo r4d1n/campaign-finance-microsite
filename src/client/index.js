@@ -18,14 +18,6 @@ let formatCandidates = require('./utils/formatCandidates')
 
 // Routing
 let routes = require('../shared/routes')
-(
-  <Route path="/" handler={App}>
-    <DefaultRoute handler={CurrentCampaign} />
-    <NotFoundRoute handler={CurrentCampaign} />
-    <Route name="current" path="current" handler={CurrentCampaign} />
-    <Route name="prior" path="prior/:year" handler={PriorCampaign} />
-  </Route>
-);
 
 
 // load data from server and render
