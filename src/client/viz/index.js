@@ -5,12 +5,12 @@ function initCurrent (data) {
   require('./currentCampaignChart')(data);
 }
 
-function initPrior (data) {
-  require('./priorCampaignChart')(data);
+function initPast (data) {
+  require('./pastCampaignChart')(data);
 }
 
 module.exports = {
   initCurrent: initCurrent,
-  initPrior: initPrior,
+  initPast: initPast,
   highlight: require('./highlight')
 }

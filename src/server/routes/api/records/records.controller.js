@@ -7,7 +7,7 @@ let candidates = require('../../../candidates')
 
 let controller = {};
 
-let priorYears = require('../../../priorYears');
+let pastYears = require('../../../pastYears');
 
 // functions for answering JSON requests
 
@@ -50,7 +50,7 @@ controller.latestRecords = function(req, res, next) {
     .then((result) => {
       let response = {
         current: result,
-        prior: priorYears
+        past: pastYears
       }
       res.json(response);
     })

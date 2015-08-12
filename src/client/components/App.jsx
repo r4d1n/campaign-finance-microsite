@@ -15,7 +15,6 @@ let { Route, DefaultRoute, RouteHandler, Link } = Router;
 let YearSelect = require('./YearSelect.jsx')
 , Amount = require('./Amount.jsx')
 , Share = require('./Share.jsx')
-, CurrentCampaign = require('./CurrentCampaign.jsx')
 
 
 
@@ -38,7 +37,7 @@ let App = React.createClass({
       if (nextState.activeYear == "2016") {
         href = '/current';
       } else {
-        href = this.makeHref('prior', {year: nextState.activeYear});
+        href = this.makeHref('past', {year: nextState.activeYear});
       }
       this.transitionTo(href)
     }
@@ -52,7 +51,7 @@ let App = React.createClass({
         <nav className='nav-main'>
           <ul>
             <li><Link to="current" className='nav-link'>Current</Link></li>
-            <li><Link to="prior" params={{year:activeYear}} className='nav-link'>Past</Link></li>
+            <li><Link to="past" params={{year:activeYear}} className='nav-link'>Past</Link></li>
             </ul>
           </nav>
           <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />

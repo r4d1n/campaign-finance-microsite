@@ -6,7 +6,7 @@ let React = require('react')
 let { Route, DefaultRoute, NotFoundRoute } = require('react-router');
 let App = require('../client/components/App.jsx')
 , CurrentCampaign = require('../client/components/CurrentCampaign.jsx')
-, PriorCampaign = require('../client/components/PriorCampaign.jsx')
+, PastCampaign = require('../client/components/PastCampaign.jsx')
 
 
 /* export react routes for BOTH client and server use */
@@ -16,6 +16,6 @@ module.exports = [
     <DefaultRoute handler={CurrentCampaign} />
     <NotFoundRoute handler={CurrentCampaign} />
     <Route name="current" path="current" handler={CurrentCampaign} />
-    <Route name="prior" path="prior/:year" handler={PriorCampaign} />
+    <Route name="past" path="past/:year" handler={PastCampaign} />
   </Route>
 ]

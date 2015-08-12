@@ -6,12 +6,12 @@ let CandidateStore = require('../stores/CandidateStore.jsx');
 
 let viz = require('../viz');
 
-let PriorChart = React.createClass({
+let PastChart = React.createClass({
 
   renderChart() {
-    let { prior, activeYear } = this.props;
-    let candidates = prior[activeYear];
-    viz.initPrior(candidates);
+    let { past, activeYear } = this.props;
+    let candidates = past[activeYear];
+    viz.initPast(candidates);
   },
 
   componentDidMount() {
@@ -21,7 +21,7 @@ let PriorChart = React.createClass({
   componentDidUpdate() {
     // this.forceUpdate()
     let target = document.getElementById('bar-chart-target');
-    let svg = document.getElementById('prior-chart-svg');
+    let svg = document.getElementById('past-chart-svg');
     target.removeChild(svg);
     this.renderChart();
   },
@@ -33,4 +33,4 @@ let PriorChart = React.createClass({
   }
 });
 
-module.exports = PriorChart;
+module.exports = PastChart;

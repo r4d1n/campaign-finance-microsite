@@ -5,7 +5,7 @@
 let { Route, DefaultRoute, NotFoundRoute } = Router;
 let App = require('./components/App.jsx')
 , CurrentCampaign = require('./components/CurrentCampaign.jsx')
-, PriorCampaign = require('./components/PriorCampaign.jsx')
+, PastCampaign = require('./components/PastCampaign.jsx')
 
 // scss
 require('./styles/main.scss');
@@ -24,9 +24,9 @@ let routes = require('../shared/routes')
 load('api/records/latest')
 .then((body) => {
   let candidates = formatCandidates(body.current);
-  let prior = body.prior;
+  let past = body.past;
   Router.run(routes, Router.HistoryLocation, function (Handler) {
-    React.render(<Handler candidates={candidates} prior={prior}/>, document.body);
+    React.render(<Handler candidates={candidates} past={past}/>, document.body);
   });
     // document.getElementById('app-container'));
 })

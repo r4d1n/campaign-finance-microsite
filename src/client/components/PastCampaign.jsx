@@ -3,9 +3,9 @@
 // child components
 let NameSelect = require('./NameSelect.jsx')
 , Amount = require('./Amount.jsx')
-, PriorChart = require('./PriorChart.jsx')
+, PastChart = require('./PastChart.jsx')
 
-let PriorCampaign = React.createClass({
+let PastCampaign = React.createClass({
 
   componentWillUpdate() {
   },
@@ -16,7 +16,7 @@ let PriorCampaign = React.createClass({
         <div className='big-num-bar'>
 
         </div>
-        <PriorChart {...this.props} />
+        <PastChart {...this.props} />
         <YearSelect activeYear={activeYear} />
 
       </div>
@@ -25,4 +25,4 @@ let PriorCampaign = React.createClass({
 
 });
 
-module.exports = PriorCampaign;
+module.exports = PastCampaign;

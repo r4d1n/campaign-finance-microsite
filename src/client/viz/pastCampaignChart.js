@@ -14,7 +14,7 @@ function draw (data) {
   console.log(data)
 
   let svg = d3.select('#bar-chart-target').append('svg')
-  .attr("id", "prior-chart-svg")
+  .attr("id", "past-chart-svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
