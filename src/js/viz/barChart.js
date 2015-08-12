@@ -19,7 +19,7 @@ function draw (data) {
   .range([height, 0]);
 
   x.domain(data.map(function(d) { return d.name; }));
-  y.domain([0, d3.max(data, function(d) { return d.officialRaised; })]);
+  y.domain([0, d3.max(data, function(d) { return d.totalReceipts; })]);
 
   let bars = svg.selectAll(".bar")
   .data(data)
@@ -33,8 +33,8 @@ function draw (data) {
   .attr("y", height) // height here is the whole chart
   .transition()
   .delay(function (d, i) { return i * 150; })
-  .attr("y", function(d) { return y(d.officialRaised); })
-  .attr("height", function(d) { return height - y(d.officialRaised); })
+  .attr("y", function(d) { return y(d.totalReceipts); })
+  .attr("height", function(d) { return height - y(d.totalReceipts); })
 
   // TODO: labels!!
 

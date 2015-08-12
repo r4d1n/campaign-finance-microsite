@@ -1,11 +1,11 @@
 'use strict';
 
 
-function init (data) {
+function initCurrent (data) {
   require('./barChart')(data);
 }
 
 module.exports = {
-  init: init,
+  initCurrent: initCurrent,
   highlight: require('./highlight')
 }

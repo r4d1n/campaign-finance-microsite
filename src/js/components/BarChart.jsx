@@ -18,8 +18,13 @@ let BarChart = React.createClass({
   },
 
   componentDidMount() {
-    viz.init(this.props.candidates);
-    viz.highlight(this.props.activeCandidate);
+    // console.log(this.state.path)
+    // if (/prior/.exec(window.location.pathname) {
+    //
+    // } else {
+      viz.initCurrent(this.props.candidates);
+      viz.highlight(this.props.activeCandidate);
+    // }
   },
 
   componentDidUpdate() {
