@@ -21,15 +21,15 @@ div.amount {
 }
 
 .candidate-name {
-  font-size: 24px;
+  font-size: 36px;
 }
 
-span.gop {
+h1.gop {
   @extend .candidate-name;
   color: $gop-theme-light;
 }
 
-span.dem {
+h1.dem {
   @extend .candidate-name;
   color: $dem-theme-light;
 }
