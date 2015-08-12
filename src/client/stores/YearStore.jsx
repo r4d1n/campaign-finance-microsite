@@ -8,7 +8,7 @@ let YearStore = Reflux.createStore({
   listenables: [require('../actions/Actions.jsx')],
 
   getInitialState: function() {
-    this.year = 2016;
+    this.year = 2012;
     return this.year;
   },
 

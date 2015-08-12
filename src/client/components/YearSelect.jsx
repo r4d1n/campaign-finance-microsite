@@ -15,7 +15,7 @@ let YearSelect = React.createClass({
 
   render() {
     let { candidates, activeCandidate, activeYear } = this.props;
-    let years = [2016, 2012, 2008, 2004, 2000]
+    let years = [2012, 2008, 2004, 2000]
 
     return (
       <div className='year-select-container'>
