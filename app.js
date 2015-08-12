@@ -1,6 +1,6 @@
 'use strict';
 
-require('babel/register');
+// require('babel/register');
 
 var config = require('./config');
 
@@ -8,6 +8,12 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
+
+
+// react, router, and routes for server side Render
+var React = require('react');
+var Router = require('react-router');
+var routes = require('./src/shared/routes');
 
 var app = express();
 
@@ -48,8 +54,17 @@ app.use(express.static(__dirname + '/public'));
 app.use('/api/records', require('./routes/api/records'));
 // app.use('*', require('./routes/index')); // render views
 
-app.get('/', function (req, res) {
-  res.render('index');
+app.get('*', function (req, res) {
+  // React Routing
+
+
+  // res.render('index');
+  Router.run(routes, req.path, function (Handler, state) {
+    var element = React.createElement(Handler);
+    var html = React.renderToString(element);
+    res.render('main', { content: html });
+  });
+
 });
 
 

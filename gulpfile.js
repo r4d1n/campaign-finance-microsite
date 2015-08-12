@@ -5,7 +5,10 @@ config = require('./config');
 gulp.task('server', function () {
   var nodemon = require('gulp-nodemon');
   nodemon({
-    "script": "app.js",
+    "script": "server.js",
+    execMap: {
+      js: "node --harmony --use_strict"
+    },
     "ext": "js jsx json es6",
     "env": { "NODE_ENV": "development" },
     "ignore": [
@@ -33,4 +36,4 @@ gulp.task('build', shell.task(['webpack']));
 
 gulp.task('test', shell.task(['node_modules/.bin/mocha -u tdd -R spec --compilers js:mocha-traceur']));
 
-gulp.task('default', ['server', 'dev-webpack']);
+gulp.task('default', ['dev-webpack', 'server']);

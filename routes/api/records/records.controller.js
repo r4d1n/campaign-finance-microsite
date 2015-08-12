@@ -20,7 +20,7 @@ controller.allRecords = function(req, res, next) {
   Record
   .find(opts)
   .sort({ requestedAt : 1 })
-  .exec((err,doc) => {
+  .exec(function (err,doc) {
     if (err) {
       res.status(500).json({status:'error', message: err});
     } else {
@@ -39,7 +39,7 @@ controller.latestRecords = function(req, res, next) {
   .sort({requestedAt : -1})
   .limit(1)
   .exec()
-  .then((timestamp) => {
+  .then(function (timestamp) {
     return Record
     .find()
     .where('requestedAt')
@@ -47,14 +47,14 @@ controller.latestRecords = function(req, res, next) {
     .sort({ officialRaised : -1 })
     .limit(limit)
     .exec()
-    .then((result) => {
+    .then(function (result) {
       let response = {
         current: result,
         prior: priorYears
       }
       res.json(response);
     })
-    .catch((err) => {
+    .catch(function (err) {
       res.status(500).json({status:'error', message: err});
     })
   })
