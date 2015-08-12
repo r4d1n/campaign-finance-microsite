@@ -7,6 +7,9 @@ gulp.task('server', function () {
   nodemon({
     "script": "app.js",
     "ext": "js jsx json es6",
+    execMap: {
+      js: "node --harmony --use_strict"
+    },
     "env": { "NODE_ENV": "development" },
     "ignore": [
     "node_modules/**",
