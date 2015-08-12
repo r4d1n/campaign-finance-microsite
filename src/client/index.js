@@ -17,7 +17,6 @@ let formatCandidates = require('./utils/formatCandidates')
 let formatDollarAmount = require('./utils/formatDollarAmount')
 
 
-
 // Routing
 let routes = require('../shared/routes')
 
@@ -28,6 +27,9 @@ load('api/records/latest')
   let candidates = formatCandidates(body.current);
   let past = body.past;
   for (let year in past) {
+    past[year].sort((a,b) => {
+      return b.receipts - a.receipts;
+    })
     for (let i = 0; i < past[year].length; i++) {
       past[year][i].raisedString = formatDollarAmount(past[year][i].receipts);
     }
@@ -36,5 +38,5 @@ load('api/records/latest')
   Router.run(routes, Router.HistoryLocation, function (Handler) {
     React.render(<Handler candidates={candidates} past={past}/>, document.body);
   });
-    // document.getElementById('app-container'));
+  // document.getElementById('app-container'));
 })

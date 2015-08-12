@@ -19,7 +19,7 @@ let YearSelect = React.createClass({
 
     return (
       <div className='year-select-container'>
-        <h3 className='year-select-label'>Choose Campaign Year</h3>
+        <h3 className='year-select-label'>In </h3>
         <select className='year-select' value={activeYear} ref='yearSelect' onChange={this.handleChange}>
           {years.map(year => <option key={year} value={year}>{year}</option>)}
         </select>

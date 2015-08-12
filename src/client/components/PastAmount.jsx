@@ -3,24 +3,21 @@
 let PastAmount = React.createClass({
 
   render() {
-    let { activeYear, candidates } = this.props
+    let { activeYear, candidates, difference } = this.props
+    console.log(difference, this.props)
 
-
-    let headerClass;
+    let winnerClass = candidates[0].party === 'R' ? 'gop' : 'dem';
+    let loserClass = candidates[1].party === 'R' ? 'lost gop' : 'lost dem';
 
     return (
       <div className='big-num-bar'>
         <div className='amount'>
-          <h2>{`In ${activeYear}`}</h2>
           <hr/>
-          <h3>
-            <span className={headerClass}>{candidates[0].name}</span>
-            <span>{` raised $${candidates[0].raisedString}`}</span>
-          </h3>
-          <h3>
-            <span className={headerClass}>{candidates[1].name}</span>
-            <span>{` raised $${candidates[1].raisedString}`}</span>
-          </h3>
+          <h1 className={winnerClass}>{candidates[0].name}</h1>
+          <h3>raised</h3>
+          <h1>{`$${difference}`}</h1>
+          <h3>More Than </h3>
+          <h3 className={loserClass}>{candidates[1].name}</h3>
           <hr/>
         </div>
       </div>

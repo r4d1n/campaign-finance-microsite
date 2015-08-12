@@ -7,12 +7,12 @@
   padding: $spacing-unit / 5 $spacing-unit / 4 $spacing-unit / 5 $spacing-unit / 4;
   background-color: $base-white;
   h1 {
-    padding-bottom: $spacing-unit / 3;
+    padding: $spacing-unit / 3 0;
     font-size: 48px;
     text-align: left;
   }
   h3 {
-    margin-bottom: $spacing-unit;
+    // margin-bottom: $spacing-unit;
   }
 }
 
@@ -32,4 +32,18 @@ h1.gop {
 h1.dem {
   @extend .candidate-name;
   color: $dem-theme-light;
+}
+
+h3.lost {
+  font-size: 24px;
+  padding-top: $spacing-unit / 3;
+}
+
+.lost.dem {
+  color: $dem-theme-light;
+}
+
+.lost.gop {
+  font-size: 24px;
+  color: $gop-theme-light;
 }
