@@ -14,6 +14,8 @@ require('./styles/main.scss');
 // client side js utils
 let load = require('./utils/load')
 let formatCandidates = require('./utils/formatCandidates')
+let formatDollarAmount = require('./utils/formatDollarAmount')
+
 
 
 // Routing
@@ -25,6 +27,12 @@ load('api/records/latest')
 .then((body) => {
   let candidates = formatCandidates(body.current);
   let past = body.past;
+  for (let year in past) {
+    for (let i = 0; i < past[year].length; i++) {
+      past[year][i].raisedString = formatDollarAmount(past[year][i].receipts);
+    }
+  }
+  console.log(past)
   Router.run(routes, Router.HistoryLocation, function (Handler) {
     React.render(<Handler candidates={candidates} past={past}/>, document.body);
   });

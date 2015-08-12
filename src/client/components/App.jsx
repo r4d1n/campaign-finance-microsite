@@ -10,11 +10,8 @@ let Store = require('../stores/CandidateStore.jsx')
 // router
 let { Route, DefaultRoute, RouteHandler, Link } = Router;
 
-
 // child components
 let Share = require('./Share.jsx')
-
-
 
 let App = React.createClass({
 
@@ -45,13 +42,13 @@ let App = React.createClass({
           <ul>
             <li><Link to="current" className='nav-link'>Current</Link></li>
             <li><Link to="past" params={{year:activeYear}} className='nav-link'>Past</Link></li>
-            </ul>
-          </nav>
-          <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
-          <Share />
-        </div>
-      );
-    }
-  });
+          </ul>
+        </nav>
+        <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
+        <Share />
+      </div>
+    );
+  }
+});
 
-  module.exports = App;
+module.exports = App;
