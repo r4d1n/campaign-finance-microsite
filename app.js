@@ -42,11 +42,16 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
+app.use(express.static(__dirname + '/public'));
+
 // routes
 app.use('/api/records', require('./routes/api/records'));
-app.use('*', require('./routes/index')); // render views
+// app.use('*', require('./routes/index')); // render views
 
-app.use(express.static(__dirname + '/public'));
+app.get('/', function (req, res) {
+  res.render('index');
+});
+
 
 app.locals.development = !!(process.env.NODE_ENV==='development');
 
