@@ -4,7 +4,6 @@ let PastAmount = React.createClass({
 
   render() {
     let { activeYear, candidates, difference } = this.props
-    console.log(difference, this.props)
 
     let winnerClass = candidates[0].party === 'R' ? 'gop' : 'dem';
     let loserClass = candidates[1].party === 'R' ? 'lost gop' : 'lost dem';

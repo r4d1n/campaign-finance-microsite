@@ -1,0 +1,17 @@
+.campaign-appear {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.campaign-appear.campaign-appear-active {
+  opacity: 1;
+}
+
+.campaign-leave {
+  opacity: 1;
+}
+
+.campaign-leave.campaign-leave-active {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}

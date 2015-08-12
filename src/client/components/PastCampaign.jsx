@@ -2,6 +2,9 @@
 
 let formatDollarAmount = require('../utils/formatDollarAmount')
 
+let React = require('react/addons');
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 // child components
 let NameSelect = require('./NameSelect.jsx')
 , PastAmount = require('./PastAmount.jsx')
@@ -25,12 +28,13 @@ let PastCampaign = React.createClass({
     let difference = formatDollarAmount(candidates[0].receipts - candidates[1].receipts)
 
     return (
-      <div>
-        <YearSelect activeYear={activeYear} />
-        <PastAmount {...this.props} difference={difference} candidates={candidates} />
-        <PastChart {...this.props} candidates={candidates} />
-
-      </div>
+      <ReactCSSTransitionGroup transitionName="campaign" transitionAppear={true}>
+        <div>
+          <YearSelect activeYear={activeYear} />
+          <PastAmount {...this.props} difference={difference} candidates={candidates} />
+          <PastChart {...this.props} candidates={candidates} />
+        </div>
+      </ReactCSSTransitionGroup>
     );
   }
 

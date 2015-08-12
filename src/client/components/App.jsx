@@ -44,7 +44,7 @@ let App = React.createClass({
             <li><Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link></li>
           </ul>
         </nav>
-        <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
+          <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
         <Share />
       </div>
     );
