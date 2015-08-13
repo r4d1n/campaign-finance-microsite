@@ -2,11 +2,8 @@
 
 let targetEl = document.getElementById('bar-chart-target');
 
-console.log(targetEl);
 let containerHeight = targetEl.offsetHeight;
 let containerWidth = targetEl.offsetWidth;
-
-console.log(containerWidth, containerHeight)
 
 let margin = { top: 20, right: 10, bottom: 20, left: 10};
 let height = containerHeight - margin.top - margin.bottom;

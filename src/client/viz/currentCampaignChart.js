@@ -29,7 +29,7 @@ function draw (data) {
   let bars = svg.selectAll("g")
   .append("rect")
   .attr("class", "bar")
-  .attr("data-id", function(d) { return d.id }) // for click events
+  .attr("id", function(d) { return 'svg-bar-' + d.id }) // for click events
   .attr("x", function(d) { return x(d.name); })
   .attr("width", x.rangeBand())
   .attr("height", 0 )
