@@ -3,28 +3,28 @@ rect {
 }
 
 #bar-chart-target {
-  height: 250px;
-  width: 300px;
+  width: 80%;
+  height: 400px;
   margin: $spacing-unit / 2 auto;
 }
 
-// @media (max-width: 600) {
-//   #bar-chart-target {
-//     height: 250px;
-//     width: 300px;
-//     margin: $spacing-unit / 2 auto;
-//   }
-// }
+@media screen and (max-width: 600px) {
+  #bar-chart-target {
+    height: 250px;
+    width: 300px;
+    margin: $spacing-unit / 2 auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #bar-chart-target {
+    height: 300px;
+    width: 400;
+    margin: $spacing-unit / 2 auto;
+  }
+}
 //
-// @media (max-width: 800) {
-//   #bar-chart-target {
-//     height: 300px;
-//     width: 400;
-//     margin: $spacing-unit / 2 auto;
-//   }
-// }
-//
-// @media (max-width: 1000) {
+// @media screen and (max-width: 1500px) {
 //   #bar-chart-target {
 //     height: 500;
 //     width: 600;
