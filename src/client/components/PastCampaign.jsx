@@ -29,9 +29,9 @@ let PastCampaign = React.createClass({
     return (
       <ReactCSSTransitionGroup transitionName="campaign" transitionAppear={true}>
         <div>
-          <YearSelect activeYear={activeYear} />
           <PastAmount {...this.props} difference={difference} candidates={candidates} />
           <PastChart {...this.props} candidates={candidates} />
+          <YearSelect activeYear={activeYear} />
         </div>
       </ReactCSSTransitionGroup>
     );

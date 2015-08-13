@@ -1,14 +1,11 @@
 'use strict';
 
-// external deps
-let ajax = require('superagent');
-
 // flux
 let { updateSelectedCandidate } = require('../actions/Actions.jsx');
 let Store = require('../stores/CandidateStore.jsx')
 
 // router
-let { Route, DefaultRoute, RouteHandler, Link } = Router;
+let { Route, RouteHandler, Link } = Router;
 
 // child components
 let Share = require('./Share.jsx')
@@ -55,7 +52,7 @@ let App = React.createClass({
     let { candidates } = this.props
     , { activeCandidate, activeYear } = this.state
 
-    // highlight nav tab 
+    // highlight nav tab
     let currentTabClass = 'nav-tab';
     let pastTabClass = 'nav-tab';
     if (/past/.exec(window.location.pathname)) {

@@ -13,16 +13,26 @@ let YearSelect = React.createClass({
     }
   },
 
+  activateClass () {
+
+  },
+
   render() {
     let { candidates, activeCandidate, activeYear } = this.props;
-    let years = [2012, 2008, 2004, 2000]
+    let years = [2012, 2008, 2004, 2000].reverse();
+    let buttons = years.map((year) => {
+      console.log(year)
+      let buttonStatus = year == activeYear ? 'year active' : 'year'
+      return (
+        <button key={year} className={buttonStatus} onClick={this.handleChange} value={year}>{year}</button>
+      )
+    })
 
     return (
       <div className='year-select-container'>
-        <h3 className='year-select-label'>In </h3>
-        <select className='year-select' value={activeYear} ref='yearSelect' onChange={this.handleChange}>
-          {years.map(year => <option key={year} value={year}>{year}</option>)}
-        </select>
+        <ul className='year-select' ref='yearSelect'>
+          {buttons}
+        </ul>
       </div>
     );
   }

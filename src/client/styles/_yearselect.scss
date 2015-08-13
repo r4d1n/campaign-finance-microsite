@@ -1,24 +1,27 @@
-
-select.year-select {
+button.year {
   font-family: inherit;
   font-size: inherit;
   background-color: #ffffff;
   border: 1px solid $base-black;
   color: $base-black;
-  width: 150px;
+  width: 75px;
   border-radius: 10px;
-  margin-right: $spacing-unit / 2;
+  margin: $spacing-unit / 4;
   line-height: $spacing-unit;
   height: $spacing-unit * 2;
   text-transform: uppercase;
-  padding-left: $spacing-unit;
+}
+
+button.year.active {
+  color: #999;
+  background-color: #666;
+  border-color: #666;
 }
 
 .year-select-container {
   text-align: center;
-  width: 300px;
+  width: 100%;
   margin: 0 auto;
-  height: $spacing-unit * 2;
   font-size: 24px;
 }
 
