@@ -3,6 +3,8 @@
 let commons = require('../common_names');
 
 let formatDollarAmount = require('./formatDollarAmount');
+let formatMillionString = require('./formatMillionString');
+
 
 function firstName (name) {
   let arr = name.split(',').reverse();
@@ -30,6 +32,7 @@ function formatCandidates (candidates) {
     element.id = element.fecId;
     element.familiarName = commonName(element) + ' ' + lastName(element.name);
     element.raisedString = formatDollarAmount(element.totalReceipts)
+    element.million = formatMillionString(element.raisedString)
     element.initials = element.familiarName.split(' ').map((word) => {
       return word.slice(0,1)
     }).join('')
