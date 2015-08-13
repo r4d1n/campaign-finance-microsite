@@ -33,6 +33,12 @@ let App = React.createClass({
     }
   },
 
+  clickTab(e) {
+    if (e.target.children[0] && e.target.children[0].tagName === 'A') {
+      e.target.children[0].click();
+    }
+  },
+
   componentDidMount() {
     let { candidates } = this.props
     updateSelectedCandidate(candidates[0]);
@@ -49,6 +55,7 @@ let App = React.createClass({
     let { candidates } = this.props
     , { activeCandidate, activeYear } = this.state
 
+    // highlight nav tab 
     let currentTabClass = 'nav-tab';
     let pastTabClass = 'nav-tab';
     if (/past/.exec(window.location.pathname)) {
@@ -61,8 +68,12 @@ let App = React.createClass({
       <div>
         <nav className='nav-main'>
           <ul role='tablist'>
-            <li id='left-tab' className={currentTabClass}><Link to="current" className='nav-link' role='tab'>Upcoming</Link></li>
-            <li id='right-tab' className={pastTabClass}><Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link></li>
+            <li id='left-tab' className={currentTabClass} onClick={this.clickTab}>
+              <Link to="current" className='nav-link' role='tab'>Upcoming</Link>
+            </li>
+            <li id='right-tab' className={pastTabClass} onClick={this.clickTab}>
+              <Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link>
+            </li>
           </ul>
         </nav>
         <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />

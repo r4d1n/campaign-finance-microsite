@@ -31,7 +31,6 @@ function draw (data) {
 
   let bars = svg.selectAll("g")
   .append("rect")
-  .attr("class", "bar selected")
   .attr("x", function(d) { return x(d.name); })
   .attr("width", x.rangeBand())
   .attr("height", 0)
