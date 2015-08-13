@@ -26,12 +26,12 @@ div.amount {
 
 h1.gop {
   @extend .candidate-name;
-  color: $gop-theme-light;
+  color: $gop-theme-main;
 }
 
 h1.dem {
   @extend .candidate-name;
-  color: $dem-theme-light;
+  color: $dem-theme-main;
 }
 
 h3.lost {
@@ -40,12 +40,12 @@ h3.lost {
 }
 
 .lost.dem {
-  color: $dem-theme-light;
+  color: $dem-theme-main;
 }
 
 .lost.gop {
   font-size: 24px;
-  color: $gop-theme-light;
+  color: $gop-theme-main;
 }
 
 .past-difference {

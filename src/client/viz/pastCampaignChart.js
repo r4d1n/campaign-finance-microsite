@@ -37,7 +37,7 @@ function draw (data) {
   .attr("height", 0)
   .attr("y", height) // height here is the whole chart
   .transition()
-  .delay(function (d, i) { return i * 300; })
+  .delay(function (d, i) { return i * 350; })
   .attr("y", function(d) { return y(d.receipts); })
   .attr("height", function(d) { return height - y(d.receipts); })
   .attr("class", function(d) {
@@ -48,12 +48,12 @@ function draw (data) {
   .append("text")
   .attr("text-anchor", "middle")
   .attr('class', 'bar-label-white')
-  .attr("y", height - 25)
+  .attr("y", height - 30)
   .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2 } )
   .attr("dy", ".75em")
   .attr('opacity', 0)
   .transition()
-  .delay(function (d, i) { return i * 350; })
+  .delay(function (d, i) { return i * 400; })
   .attr('opacity', 1)
   .text(function(d) { return d.name.split(' ')[1]; }) // last name
 
@@ -66,7 +66,7 @@ function draw (data) {
   .attr("y", height) // height here is the whole chart
   .attr('opacity', 0)
   .transition()
-  .delay(function (d, i) { return i * 300; })
+  .delay(function (d, i) { return i * 350; })
   .attr("y", function(d,i) { return y(d.receipts) - 30 } )
   .attr('opacity', 1)
   .text(function(d) { return d.million; })

@@ -18,11 +18,11 @@ rect {
 }
 
 .bar.selected.dem {
-  fill: $dem-theme-light;
+  fill: $dem-theme-main;
 }
 
 .bar.selected.gop {
-  fill: $gop-theme-light;
+  fill: $gop-theme-main;
 }
 
 .tap-to-change {
@@ -30,6 +30,7 @@ rect {
   margin: 0 auto;
   h3 {
     text-align: center;
+    font-size: 30px;
   }
 }
 
