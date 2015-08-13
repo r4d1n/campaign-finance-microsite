@@ -61,7 +61,7 @@ let App = React.createClass({
       <div>
         <nav className='nav-main'>
           <ul role='tablist'>
-            <li id='left-tab' className={currentTabClass}><Link to="current" className='nav-link' role='tab'>Current</Link></li>
+            <li id='left-tab' className={currentTabClass}><Link to="current" className='nav-link' role='tab'>Upcoming</Link></li>
             <li id='right-tab' className={pastTabClass}><Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link></li>
           </ul>
         </nav>
