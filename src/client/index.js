@@ -15,6 +15,7 @@ require('./styles/main.scss');
 let load = require('./utils/load')
 let formatCandidates = require('./utils/formatCandidates')
 let formatDollarAmount = require('./utils/formatDollarAmount')
+let formatMillionString = require('./utils/formatMillionString');
 
 
 // Routing
@@ -32,6 +33,7 @@ load('api/records/latest')
     })
     for (let i = 0; i < past[year].length; i++) {
       past[year][i].raisedString = formatDollarAmount(past[year][i].receipts);
+      past[year][i].million = formatMillionString(past[year][i].raisedString);
       past[year][i].initials = past[year][i].name.split(' ').map((word) => {
         return word.slice(0,1)
       }).join('')

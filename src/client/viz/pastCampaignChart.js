@@ -44,20 +44,20 @@ function draw (data) {
     return d.party === "R" ? 'gop bar selected' : 'dem bar selected';
   })
 
-  let initials = svg.selectAll("g")
+  let names = svg.selectAll("g")
   .append("text")
   .attr("text-anchor", "middle")
   .attr('class', 'bar-label')
-  .attr("y", function(d,i) { return y(d.receipts) + 15 } )
+  .attr("y", height - 20)
   .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2 } )
   .attr("dy", ".75em")
   .attr('opacity', 0)
   .transition()
-  .delay(function (d, i) { return i * 300; })
+  .delay(function (d, i) { return i * 350; })
   .attr('opacity', 1)
-  .text(function(d) { return d.initials; })
+  .text(function(d) { return d.name.split(' ')[1]; }) // last name
 
-  let dollars = svg.selectAll("g")
+  let million = svg.selectAll("g")
   .append("text")
   .attr("text-anchor", "middle")
   .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2 } )
@@ -66,9 +66,9 @@ function draw (data) {
   .attr('opacity', 0)
   .transition()
   .delay(function (d, i) { return i * 300; })
-  .attr("y", function(d,i) { return y(d.receipts) - 15 } )
+  .attr("y", function(d,i) { return y(d.receipts) - 30 } )
   .attr('opacity', 1)
-  .text(function(d) { return '$' + d.raisedString; })
+  .text(function(d) { return d.million; })
 }
 
 module.exports = draw;

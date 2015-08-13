@@ -35,14 +35,13 @@ function draw (data) {
   .attr("height", 0 )
   .attr("y", height) // height here is the whole chart
   .transition()
-  .delay(function (d, i) { return i * 150; })
+  .delay(function (d, i) { return i * 200; })
   .attr("y", function(d) { return y(d.totalReceipts); })
   .attr("height", function(d) { return height - y(d.totalReceipts); })
 
   let initials = svg.selectAll("g")
   .append("text")
   .attr("text-anchor", "middle")
-  // .attr('class', 'bar-label')
   .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2} )
   .attr("dy", ".75em")
   .attr('opacity', 0)
