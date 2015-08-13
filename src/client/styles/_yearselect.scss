@@ -20,7 +20,7 @@ button.year.active {
 
 .year-select-container {
   text-align: center;
-  width: 100%;
+  width: 80%;
   margin: 0 auto;
   font-size: 24px;
 }
@@ -30,3 +30,9 @@ button.year.active {
   width: auto;
   padding-right: $spacing-unit;
 }
+
+// @media screen and (max-width: 600px) {
+//   .year-select-container.ul {
+//     width: 300px;
+//   }
+// }
