@@ -44,11 +44,30 @@ h3.lost {
 }
 
 .lost.gop {
-  font-size: 24px;
   color: $gop-theme-main;
 }
 
 .past-difference {
   padding: $spacing-unit / 2 0;
   font-size: 24px;
+}
+
+.past-year {
+  padding: $spacing-unit / 2 0;
+  font-size: 18px;
+}
+
+@media screen and (min-width: 1000px) {
+  h3.lost {
+    font-size: 36px;
+  }
+  .candidate-name {
+    font-size: 48px;
+  }
+  .past-year {
+    font-size: 30px;
+  }
+  .past-difference {
+    font-size: 36px;
+  }
 }

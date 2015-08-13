@@ -4,7 +4,7 @@ button.year {
   background-color: #ffffff;
   border: 1px solid $base-black;
   color: $base-black;
-  width: 75px;
+  width: 100px;
   border-radius: 10px;
   margin: $spacing-unit / 4;
   line-height: $spacing-unit;
@@ -23,6 +23,10 @@ button.year.active {
   width: 80%;
   margin: 0 auto;
   font-size: 24px;
+}
+
+.year-select-container.ul {
+  width: 100%;
 }
 
 .year-select-label {
