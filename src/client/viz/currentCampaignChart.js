@@ -39,9 +39,10 @@ function draw (data) {
   .attr("y", function(d) { return y(d.totalReceipts); })
   .attr("height", function(d) { return height - y(d.totalReceipts); })
 
-  let initials = svg.selectAll("g")
+  let millions = svg.selectAll("g")
   .append("text")
   .attr("text-anchor", "middle")
+  .attr('class', 'bar-label-black')
   .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2} )
   .attr("dy", ".75em")
   .attr('opacity', 0)

@@ -33,6 +33,12 @@ rect {
   }
 }
 
-.bar-label {
+.bar-label-white {
   fill: $base-white;
+  font-size: 24px;
+}
+
+.bar-label-black {
+  fill: $base-black;
+  font-size: 24px;
 }

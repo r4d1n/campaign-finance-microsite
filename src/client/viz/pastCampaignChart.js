@@ -47,8 +47,8 @@ function draw (data) {
   let names = svg.selectAll("g")
   .append("text")
   .attr("text-anchor", "middle")
-  .attr('class', 'bar-label')
-  .attr("y", height - 20)
+  .attr('class', 'bar-label-white')
+  .attr("y", height - 25)
   .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2 } )
   .attr("dy", ".75em")
   .attr('opacity', 0)
@@ -60,6 +60,7 @@ function draw (data) {
   let million = svg.selectAll("g")
   .append("text")
   .attr("text-anchor", "middle")
+  .attr('class', 'bar-label-black')
   .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2 } )
   .attr("dy", ".75em")
   .attr("y", height) // height here is the whole chart
