@@ -10,14 +10,14 @@ let Share = React.createClass({
                 url=${window.encodeURI(window.location.href)}
                 &via=r4d1n`}
                 target="_blank">
-                <i className='fa fa-twitter fa-2x'></i>
+                <i className='fa fa-twitter fa-3x'></i>
               </a>
             </li>
             <li>
               <a className='facebook-link' href={`https://www.facebook.com/sharer/sharer.php?
                   &u=${window.encodeURI(window.location.href)}`}
                   target="_blank" title="Share on Facebook">
-                  <i className='fa fa-facebook fa-2x'></i>
+                  <i className='fa fa-facebook fa-3x'></i>
                 </a>
               </li>
             </ul>
