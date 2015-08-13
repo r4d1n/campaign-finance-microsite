@@ -8,6 +8,30 @@ rect {
   margin: $spacing-unit / 2 auto;
 }
 
+// @media (max-width: 600) {
+//   #bar-chart-target {
+//     height: 250px;
+//     width: 300px;
+//     margin: $spacing-unit / 2 auto;
+//   }
+// }
+//
+// @media (max-width: 800) {
+//   #bar-chart-target {
+//     height: 300px;
+//     width: 400;
+//     margin: $spacing-unit / 2 auto;
+//   }
+// }
+//
+// @media (max-width: 1000) {
+//   #bar-chart-target {
+//     height: 500;
+//     width: 600;
+//     margin: $spacing-unit / 2 auto;
+//   }
+// }
+
 .bar.selected {
   transition: fill .5s;
 }
@@ -30,16 +54,16 @@ rect {
   margin: 0 auto;
   h3 {
     text-align: center;
-    font-size: 30px;
+    font-size: 1.25em;
   }
 }
 
 .bar-label-white {
   fill: $base-white;
-  font-size: 24px;
+  font-size: 1.25em;
 }
 
 .bar-label-black {
   fill: $base-black;
-  font-size: 24px;
+  font-size: 1.25em;
 }

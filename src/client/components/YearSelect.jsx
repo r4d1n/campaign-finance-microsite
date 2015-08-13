@@ -21,7 +21,6 @@ let YearSelect = React.createClass({
     let { candidates, activeCandidate, activeYear } = this.props;
     let years = [2012, 2008, 2004, 2000].reverse();
     let buttons = years.map((year) => {
-      console.log(year)
       let buttonStatus = year == activeYear ? 'year active' : 'year'
       return (
         <button key={year} className={buttonStatus} onClick={this.handleChange} value={year}>{year}</button>
