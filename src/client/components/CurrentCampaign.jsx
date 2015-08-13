@@ -5,7 +5,6 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 // child components
 let CurrentChart = require('./CurrentChart.jsx')
-, NameSelect = require('./NameSelect.jsx')
 , CurrentAmount = require('./CurrentAmount.jsx')
 
 

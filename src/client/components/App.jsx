@@ -21,6 +21,18 @@ let App = React.createClass({
     Router.Navigation
   ],
 
+  highlightTab() {
+    let currentTabClass = 'nav-tab';
+    let pastTabClass = 'nav-tab';
+    if (/past/.exec(window.location.pathname)) {
+      currentTabClass -= ' active'
+      pastTabClass += ' active'
+    } else {
+      pastTabClass -= ' active'
+      currentTabClass += ' active'
+    }
+  },
+
   componentDidMount() {
     let { candidates } = this.props
     updateSelectedCandidate(candidates[0]);
@@ -29,22 +41,31 @@ let App = React.createClass({
   componentWillUpdate(nextProps, nextState) {
     if (this.state.activeYear != nextState.activeYear) {
       let href = this.makeHref('past', {year: nextState.activeYear});
-      this.replaceWith(href)
+      this.replaceWith(href);
     }
   },
 
   render: function () {
     let { candidates } = this.props
     , { activeCandidate, activeYear } = this.state
+
+    let currentTabClass = 'nav-tab';
+    let pastTabClass = 'nav-tab';
+    if (/past/.exec(window.location.pathname)) {
+      pastTabClass += ' active'
+    } else {
+      currentTabClass += ' active'
+    }
+
     return (
       <div>
         <nav className='nav-main'>
           <ul role='tablist'>
-            <li><Link to="current" className='nav-link' role='tab'>Current</Link></li>
-            <li><Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link></li>
+            <li id='left-tab' className={currentTabClass}><Link to="current" className='nav-link' role='tab'>Current</Link></li>
+            <li id='right-tab' className={pastTabClass}><Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link></li>
           </ul>
         </nav>
-          <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
+        <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
         <Share />
       </div>
     );

@@ -6,8 +6,7 @@ let React = require('react/addons');
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 // child components
-let NameSelect = require('./NameSelect.jsx')
-, PastAmount = require('./PastAmount.jsx')
+let PastAmount = require('./PastAmount.jsx')
 , PastChart = require('./PastChart.jsx')
 , YearSelect = require('./YearSelect.jsx')
 
