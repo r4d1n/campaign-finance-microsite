@@ -32,9 +32,12 @@ load('api/records/latest')
     })
     for (let i = 0; i < past[year].length; i++) {
       past[year][i].raisedString = formatDollarAmount(past[year][i].receipts);
+      past[year][i].initials = past[year][i].name.split(' ').map((word) => {
+        return word.slice(0,1)
+      }).join('')
     }
   }
-  console.log(past)
+  console.log(past, candidates)
   Router.run(routes, Router.HistoryLocation, function (Handler) {
     React.render(<Handler candidates={candidates} past={past}/>, document.body);
   });

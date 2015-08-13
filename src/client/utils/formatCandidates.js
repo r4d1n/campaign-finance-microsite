@@ -30,6 +30,9 @@ function formatCandidates (candidates) {
     element.id = element.fecId;
     element.familiarName = commonName(element) + ' ' + lastName(element.name);
     element.raisedString = formatDollarAmount(element.totalReceipts)
+    element.initials = element.familiarName.split(' ').map((word) => {
+      return word.slice(0,1)
+    }).join('')
   })
   return candidates
 }

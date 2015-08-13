@@ -21,9 +21,12 @@ function draw (data) {
   x.domain(data.map(function(d) { return d.name; }));
   y.domain([0, d3.max(data, function(d) { return d.totalReceipts; })]);
 
-  let bars = svg.selectAll(".bar")
+  let group = svg.selectAll("g")
   .data(data)
   .enter()
+  .append("g")
+
+  let bars = svg.selectAll("g")
   .append("rect")
   .attr("class", "bar")
   .attr("data-id", function(d) { return d.id }) // for click events
@@ -36,7 +39,14 @@ function draw (data) {
   .attr("y", function(d) { return y(d.totalReceipts); })
   .attr("height", function(d) { return height - y(d.totalReceipts); })
 
-  // TODO: labels!!
+  let initials = svg.selectAll("g")
+  .append("text")
+  .attr("text-anchor", "middle")
+  .attr('class', 'bar-label')
+  .attr("y", function(d,i) { return y(d.totalReceipts) + 10 } )
+  .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2} )
+  .attr("dy", ".75em")
+  .text(function(d) { return d.initials; })
 
 }
 
