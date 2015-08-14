@@ -11,7 +11,10 @@ let CurrentChart = React.createClass({
   selectCandidate(e) {
     // update active candidate by tapping on a bar in the d3 chart
     let { candidates } = this.props;
-    let selected = _.find(candidates, item => new RegExp(item.id).exec(e.target.id) )
+    let targetId = e.target.id;
+    console.log(e.target.parentNode.firstChild)
+    if (!targetId) targetId = e.target.parentNode.firstChild.id;
+    let selected = _.find(candidates, item => new RegExp(item.id).exec(targetId) )
     if (selected) {
       updateSelectedCandidate(selected);
     }
