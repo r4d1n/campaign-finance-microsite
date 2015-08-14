@@ -1,6 +1,13 @@
 'use strict';
 
 let CurrentAmount = React.createClass({
+
+  componentDidUpdate() {
+    let { activeCandidate } = this.props;
+    console.log(activeCandidate)
+    document.querySelector(".big-num-bar").style.backgroundImage = `url(${activeCandidate.image})`;
+  },
+
   render() {
     let { activeCandidate } = this.props
     , raisedString = activeCandidate && activeCandidate.raisedString || '';

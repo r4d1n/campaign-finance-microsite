@@ -1,0 +1,44 @@
+#picture-div {
+  width: 80%;
+  margin: $spacing-unit auto 0 auto;
+  height: 200px;
+  overflow: hidden;
+  h1 {
+    font-size: 3em;
+  }
+  h3 {
+    font-size: 2em;
+  }
+}
+
+#picture-div img {
+  display: block;
+  margin: auto;
+  margin-top: -150px;
+  z-index: 1;
+  width: 500px;
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  #picture-div img {
+    margin-left: -70px;
+  }
+}
+
+.picture-amount-container {
+  z-index: 2;
+  color: #fff;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 150px;
+}
+
+.picture-amount-header {
+  text-align: center;
+  text-transform: uppercase;
+  padding: $spacing-unit / 2;
+}

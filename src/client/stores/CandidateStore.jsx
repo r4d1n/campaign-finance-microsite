@@ -12,7 +12,7 @@ let CandidateStore = Reflux.createStore({
   getInitialState: function() {
     this.candidate = {
       id : 0,
-      tablets: 0
+      familiarName: 'G W'
      };
     return this.candidate;
   },

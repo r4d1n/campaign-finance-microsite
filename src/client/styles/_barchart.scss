@@ -22,7 +22,7 @@ rect {
   #bar-chart-target {
     height: 300px;
     width: 400;
-    margin: $spacing-unit / 2 auto;
+    margin: 0 auto $spacing-unit / 2 auto;
   }
 }
 
@@ -48,7 +48,7 @@ rect {
   width: 80%;
   height: $spacing-unit;
   margin: 0 auto;
-  padding: $spacing-unit 0 $spacing-unit / 2 0;
+  padding: $spacing-unit 0 0 0;
   h3 {
     text-align: center;
     font-size: 1.25em;

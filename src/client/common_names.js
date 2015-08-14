@@ -9,7 +9,7 @@ module.exports = [
     "last" : "Clinton",
     "common" : "Hillary",
     "fecId" : "P00003392",
-    "image" : "https://en.wikipedia.org/wiki/File:Hillary_Clinton_official_Secretary_of_State_portrait_crop.jpg"
+    "image" : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Hillary_Clinton_official_Secretary_of_State_portrait_crop.jpg/440px-Hillary_Clinton_official_Secretary_of_State_portrait_crop.jpg"
   },
   {
     "last" : "O'Malley",
@@ -39,7 +39,7 @@ module.exports = [
     "last" : "Carson",
     "common" : "Ben",
     "fecId" : "P60005915",
-    "image" : "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Ben_Carson_at_CPAC_2015.jpg/440px-Ben_Carson_at_CPAC_2015.jpg"
+    "image" : "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Ben_Carson%2C_MD.jpg/340px-Ben_Carson%2C_MD.jpg"
   },
   {
     "last" : "Christie",

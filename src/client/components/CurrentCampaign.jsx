@@ -6,18 +6,21 @@ let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 // child components
 let CurrentChart = require('./CurrentChart.jsx')
 , CurrentAmount = require('./CurrentAmount.jsx')
+, Picture = require('./Picture.jsx')
 
 
 let CurrentCampaign = React.createClass({
 
   render: function () {
     let { candidates, activeCandidate } = this.props
+
     return (
       <ReactCSSTransitionGroup transitionName="campaign" transitionAppear={true}>
         <div>
-          <CurrentAmount activeCandidate={activeCandidate} />
+          {/*<CurrentAmount activeCandidate={activeCandidate} />*/}
+          <Picture {...this.props} />
           <div className='tap-to-change'>
-            <h3>Tap to Reveal Top Fundraisers</h3>
+            <h3>Top Five Fundraisers</h3>
           </div>
           <CurrentChart {...this.props} activeCandidate={activeCandidate} />
         </div>

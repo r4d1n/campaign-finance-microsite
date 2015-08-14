@@ -4,6 +4,7 @@
 @import 'amount';
 @import 'barchart';
 @import 'yearselect';
+@import 'picture';
 @import 'share';
 @import 'nav';
 @import 'transition';
@@ -23,6 +24,13 @@ body {
 
 main {
   height: 100%;
+}
+
+.primary-header {
+  font-size: 48px;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .general-container {
