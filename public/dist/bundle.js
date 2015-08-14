@@ -40043,8 +40043,11 @@
 	    // update active candidate by tapping on a bar in the d3 chart
 	    var candidates = this.props.candidates;
 
+	    var targetId = e.target.id;
+	    console.log(e.target.parentNode.firstChild);
+	    if (!targetId) targetId = e.target.parentNode.firstChild.id;
 	    var selected = _.find(candidates, function (item) {
-	      return new RegExp(item.id).exec(e.target.id);
+	      return new RegExp(item.id).exec(targetId);
 	    });
 	    if (selected) {
 	      updateSelectedCandidate(selected);
@@ -40145,6 +40148,15 @@
 	  }).attr('opacity', 1).attr("y", function (d, i) {
 	    return y(d.totalReceipts) - 30;
 	  });
+
+	  var initials = svg.selectAll("g").append("text").attr("text-anchor", "middle").attr('class', 'bar-label-white').attr("x", function (d, i) {
+	    return x(d.name) + x.rangeBand() / 2;
+	  }).attr("dy", ".75em").attr('opacity', 0).text(function (d) {
+	    return d.initials;
+	  }).attr("y", height - 30) // height here is the whole chart
+	  .transition().delay(function (d, i) {
+	    return i * 200;
+	  }).attr('opacity', 1);
 	}
 
 	module.exports = draw;
@@ -49669,7 +49681,7 @@
 	var containerHeight = targetEl.offsetHeight;
 	var containerWidth = targetEl.offsetWidth;
 
-	var margin = { top: 0, right: 10, bottom: 10, left: 10 };
+	var margin = { top: 0, right: 10, bottom: 20, left: 10 };
 	var height = containerHeight - margin.top - margin.bottom;
 	var width = containerWidth - margin.left - margin.right;
 
@@ -49731,7 +49743,7 @@
 	  }).attr("dy", ".75em").attr('opacity', 0).transition().delay(function (d, i) {
 	    return i * 400;
 	  }).attr('opacity', 1).text(function (d) {
-	    return d.name.split(' ')[1];
+	    return d.name.toUpperCase().split(' ')[1];
 	  }); // last name
 
 	  var million = svg.selectAll("g").append("text").attr("text-anchor", "middle").attr('class', 'bar-label-black').attr("x", function (d, i) {
@@ -49832,15 +49844,53 @@
 /* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
+	/* WEBPACK VAR INJECTION */(function(_) {/** @jsx React.DOM */'use strict';
+
+	var React = __webpack_require__(226);
+	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+	var _require = __webpack_require__(217);
+
+	var updateSelectedCandidate = _require.updateSelectedCandidate;
+
+	var CandidateStore = __webpack_require__(218);
 
 	var Picture = React.createClass({
 	  displayName: 'Picture',
 
+	  beforeCandidate: function beforeCandidate(e) {
+	    // update active candidate by tapping on a bar in the d3 chart
+	    var _props = this.props;
+	    var candidates = _props.candidates;
+	    var activeCandidate = _props.activeCandidate;
+
+	    var i = candidates.indexOf(_.find(candidates, function (item) {
+	      return new RegExp(item.id).exec(activeCandidate.id);
+	    }));
+	    var m = i - 1;
+	    if (m < 0) m = candidates.length - 1;
+	    updateSelectedCandidate(candidates[m]);
+	  },
+
+	  afterCandidate: function afterCandidate(e) {
+	    // update active candidate by tapping on a bar in the d3 chart
+	    var _props2 = this.props;
+	    var candidates = _props2.candidates;
+	    var activeCandidate = _props2.activeCandidate;
+
+	    var i = candidates.indexOf(_.find(candidates, function (item) {
+	      return new RegExp(item.id).exec(activeCandidate.id);
+	    }));
+	    var m = i + 1;
+	    if (m >= candidates.length) m = 0;
+	    console.log('after', i, m);
+	    updateSelectedCandidate(candidates[m]);
+	  },
+
 	  componentDidUpdate: function componentDidUpdate() {
 	    var activeCandidate = this.props.activeCandidate;
 
-	    // console.log(activeCandidate)
+	    console.log(activeCandidate.id);
 	    // document.getElementById("picture-div").style.backgroundImage = `url(${activeCandidate.image})`;
 	  },
 
@@ -49852,29 +49902,43 @@
 	    var lastName = activeCandidate.familiarName.split(' ')[1];
 
 	    return React.createElement(
-	      'div',
-	      { id: 'picture-div' },
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'picture-div', transitionAppear: true },
 	      React.createElement(
 	        'div',
-	        { className: 'picture-name-container' },
+	        { id: 'picture-div' },
 	        React.createElement(
-	          'h1',
-	          { className: 'picture-name-header' },
-	          activeCandidate.familiarName.split(' ')[0]
+	          'div',
+	          { key: activeCandidate.id + '_div', className: 'picture-name-container' },
+	          React.createElement(
+	            'div',
+	            { onClick: this.beforeCandidate, className: 'left-icon' },
+	            React.createElement('i', { className: 'fa fa-chevron-left fa-3x' })
+	          ),
+	          React.createElement(
+	            'h1',
+	            { key: activeCandidate.id + '_0', className: 'picture-name-header' },
+	            activeCandidate.familiarName.split(' ')[0]
+	          ),
+	          React.createElement(
+	            'h1',
+	            { key: activeCandidate.id + '_1', className: 'picture-name-header' },
+	            activeCandidate.familiarName.split(' ')[1]
+	          ),
+	          React.createElement(
+	            'div',
+	            { onClick: this.afterCandidate, className: 'right-icon' },
+	            React.createElement('i', { className: 'fa fa-chevron-right fa-3x' })
+	          )
 	        ),
-	        React.createElement(
-	          'h1',
-	          { className: 'picture-name-header' },
-	          activeCandidate.familiarName.split(' ')[1]
-	        )
-	      ),
-	      React.createElement('img', { src: activeCandidate.image })
+	        React.createElement('img', { key: activeCandidate.id + '_img', src: activeCandidate.image })
+	      )
 	    );
 	  }
 	});
 
 	module.exports = Picture;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)))
 
 /***/ },
 /* 253 */
@@ -50120,7 +50184,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(259)();
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding-top: 8.33333px; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 36px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 48px; }\n  .past-difference {\n    font-size: 36px; } }\n\nrect {\n  fill: #999;\n  cursor: pointer; }\n\n#bar-chart-target {\n  width: 80%;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px;\n    margin: 12.5px auto; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 0 auto 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 0 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  width: 125px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #999;\n  background-color: #666;\n  border-color: #666; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n#picture-div {\n  width: 80%;\n  margin: 25px auto 0 auto;\n  height: 200px;\n  overflow: hidden; }\n  #picture-div h1 {\n    font-size: 3em; }\n  #picture-div h3 {\n    font-size: 2em; }\n\n#picture-div img {\n  display: block;\n  margin: auto;\n  margin-top: -150px;\n  z-index: 1;\n  width: 500px;\n  height: auto; }\n\n@media (max-width: 600px) {\n  #picture-div img {\n    margin-left: -70px; } }\n\n.picture-name-container {\n  z-index: 2;\n  color: #fff;\n  position: absolute;\n  margin-left: auto;\n  margin-right: auto;\n  left: 0;\n  right: 0;\n  top: 150px; }\n\n.picture-name-header {\n  text-align: center;\n  text-transform: uppercase;\n  padding: 12.5px; }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  padding: 25px 0; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 150px;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    float: left;\n    padding: 0 12.5px;\n    width: 25%; }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 20px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #666;\n  color: #fff;\n  cursor: pointer; }\n\nli.nav-tab.active {\n  background-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.primary-header {\n  font-size: 48px;\n  width: 100%;\n  text-align: center;\n  text-transform: uppercase; }\n\n.general-container {\n  width: 80%;\n  margin: 25px auto; }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding-top: 8.33333px; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 36px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 48px; }\n  .past-difference {\n    font-size: 36px; } }\n\nrect {\n  fill: #999;\n  cursor: pointer; }\n\n#bar-chart-target {\n  width: 80%;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative;\n  padding-bottom: 25px; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 0 auto 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 0 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  width: 125px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #999;\n  background-color: #666;\n  border-color: #666; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n#picture-div {\n  position: relative;\n  width: 80%;\n  margin: 25px auto 0 auto;\n  height: 200px;\n  color: #fff;\n  overflow: hidden; }\n  #picture-div h1 {\n    font-size: 3em; }\n  #picture-div h3 {\n    font-size: 2em; }\n\n#picture-div img {\n  display: block;\n  margin: auto;\n  margin-top: -275px;\n  z-index: 1;\n  width: 100%;\n  height: auto; }\n\n.picture-name-container {\n  z-index: 2;\n  position: absolute;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n  left: 0;\n  right: 0;\n  top: 15%; }\n\n.picture-name-header {\n  text-align: center;\n  text-transform: uppercase;\n  padding: 12.5px; }\n\n.arrow-icon, .left-icon, .right-icon {\n  position: absolute;\n  top: 20%;\n  width: 50px;\n  height: 50px;\n  padding: 25px; }\n\n.left-icon {\n  right: 80%; }\n\n.right-icon {\n  left: 80%; }\n\n@media (max-width: 445px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -70px; }\n  .arrow-icon, .left-icon, .right-icon {\n    bottom: 75px; }\n  .right-icon {\n    right: 0px;\n    padding-right: 0px; }\n  .left-icon {\n    left: 0px;\n    padding-left: 0px; } }\n\n@media (min-width: 550) and (max-width: 799) {\n  #picture-div img {\n    margin-top: -200px; } }\n\n@media (max-width: 800) {\n  #picture-div img {\n    margin-top: -100px; } }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  padding: 25px 0; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 150px;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    float: left;\n    padding: 0 12.5px;\n    width: 25%; }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 20px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #666;\n  color: #fff;\n  cursor: pointer; }\n\nli.nav-tab.active {\n  background-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.picture-div-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\n.picture-div-appear.picture-div-appear-active {\n  opacity: 1; }\n\n.picture-div-leave {\n  opacity: 1; }\n\n.picture-div-leave.picture-div-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.primary-header {\n  font-size: 48px;\n  width: 80%;\n  margin: 0 auto;\n  text-align: center;\n  text-transform: uppercase; }\n\n@media (max-width: 445px) {\n  .primary-header {\n    font-size: 24px; } }\n\n.general-container {\n  width: 80%;\n  margin: 25px auto; }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
 
 /***/ },
 /* 259 */
@@ -51775,7 +51839,7 @@
 /* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(_) {'use strict';
+	'use strict';
 
 	var commons = __webpack_require__(266);
 
@@ -51811,15 +51875,12 @@
 	    element.initials = element.familiarName.split(' ').map(function (word) {
 	      return word.slice(0, 1);
 	    }).join('');
-	    element.image = _.result(_.find(commons, function (cand) {
-	      return cand.fecId === element.fecId;
-	    }), 'image');
+	    element.image = "/images/" + lastName(element.name.toLowerCase()) + ".jpg";
 	  });
 	  return candidates;
 	}
 
 	module.exports = formatCandidates;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)))
 
 /***/ },
 /* 266 */
