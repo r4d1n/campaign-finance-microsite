@@ -22,7 +22,6 @@
   height: auto;
 }
 
-
 .picture-name-container {
   z-index: 2;
   position: absolute;
@@ -42,21 +41,26 @@
 
 .arrow-icon {
   position: absolute;
-  top: 20%;
-  width: $spacing-unit * 2;
-  height: $spacing-unit * 2;
-  padding: $spacing-unit;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 100px;
+  height: 100px;
+  opacity: .7;
   cursor: pointer; // for ios clicks
 }
 
 .left-icon {
   @extend .arrow-icon;
-  right: 80%;
+  left: 0px;
+  text-align: left;
 }
 
 .right-icon {
   @extend .arrow-icon;
-  left: 80%;
+  right: 0px;
+  text-align: right;
 }
 
 
@@ -68,7 +72,7 @@
     margin-top: -70px;
   }
   .arrow-icon {
-    bottom: 75px;
+    // bottom: 50%;
   }
   .right-icon {
     right: 0px;

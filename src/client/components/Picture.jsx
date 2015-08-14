@@ -45,10 +45,10 @@ let Picture = React.createClass({
       <ReactCSSTransitionGroup transitionName="picture-div" transitionAppear={true}>
         <div id='picture-div'>
           <div key={activeCandidate.id + '_div'} className='picture-name-container'>
-            <div onClick={this.beforeCandidate} className='left-icon'><i className='fa fa-chevron-left fa-3x'></i></div>
+            <div onClick={this.beforeCandidate} className='left-icon'><i className='fa fa-angle-left fa-5x'></i></div>
             <h1 key={activeCandidate.id + '_0'} className='picture-name-header'>{activeCandidate.familiarName.split(' ')[0]}</h1>
             <h1 key={activeCandidate.id + '_1'}className='picture-name-header'>{activeCandidate.familiarName.split(' ')[1]}</h1>
-            <div onClick={this.afterCandidate} className='right-icon'><i className='fa fa-chevron-right fa-3x'></i></div>
+            <div onClick={this.afterCandidate} className='right-icon'><i className='fa fa-angle-right fa-5x'></i></div>
           </div>
           <img key={activeCandidate.id + '_img'} src={activeCandidate.image} />
         </div>
