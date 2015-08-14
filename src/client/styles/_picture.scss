@@ -50,7 +50,7 @@
   margin-bottom: auto;
   width: 100px;
   height: 100px;
-  opacity: .7;
+  opacity: .5;
   cursor: pointer; // for ios clicks
   padding: 0 10px;
 }
@@ -84,12 +84,10 @@
   }
   .right-icon {
     right: 0px;
-    padding-right: 5px;
   }
 
   .left-icon {
     left: 0px;
-    padding-left: 5px;
   }
 }
 
