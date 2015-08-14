@@ -17,7 +17,7 @@ let CurrentCampaign = React.createClass({
         <div>
           <CurrentAmount activeCandidate={activeCandidate} />
           <div className='tap-to-change'>
-            <h3>Tap Bars to Reveal Leading Fundraisers</h3>
+            <h3>Tap to Reveal Top Fundraisers</h3>
           </div>
           <CurrentChart {...this.props} activeCandidate={activeCandidate} />
         </div>
