@@ -84,7 +84,6 @@
 	      }).join('');
 	    }
 	  }
-	  console.log(past, candidates);
 	  Router.run(routes, Router.HistoryLocation, function (Handler) {
 	    React.render(React.createElement(Handler, { candidates: candidates, past: past }), document.body);
 	  });
@@ -23585,87 +23584,111 @@
 	/* WEBPACK VAR INJECTION */(function(Router, React, Reflux) {/** @jsx React.DOM */'use strict';
 
 	// flux
-	let $__0=    __webpack_require__(217),updateSelectedCandidate=$__0.updateSelectedCandidate;
-	let Store = __webpack_require__(218)
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _require = __webpack_require__(217);
+
+	var updateSelectedCandidate = _require.updateSelectedCandidate;
+
+	var Store = __webpack_require__(218);
 
 	// router
-	let $__1=      Router,Route=$__1.Route,RouteHandler=$__1.RouteHandler,Link=$__1.Link;
+	var _Router = Router;
+	var Route = _Router.Route;
+	var RouteHandler = _Router.RouteHandler;
+	var Link = _Router.Link;
 
 	// child components
-	let Share = __webpack_require__(223)
+	var Share = __webpack_require__(223);
 
-	let App = React.createClass({displayName: "App",
+	var App = React.createClass({
+	  displayName: 'App',
 
-	  mixins: [
-	    Reflux.connect(__webpack_require__(218), 'activeCandidate'),
-	    Reflux.connect(__webpack_require__(224), 'activeYear'),
-	    Router.Navigation
-	  ],
+	  mixins: [Reflux.connect(__webpack_require__(218), 'activeCandidate'), Reflux.connect(__webpack_require__(224), 'activeYear'), Router.Navigation],
 
-	  highlightTab:function() {
-	    let currentTabClass = 'nav-tab';
-	    let pastTabClass = 'nav-tab';
+	  highlightTab: function highlightTab() {
+	    var currentTabClass = 'nav-tab';
+	    var pastTabClass = 'nav-tab';
 	    if (/past/.exec(window.location.pathname)) {
-	      currentTabClass -= ' active'
-	      pastTabClass += ' active'
+	      currentTabClass -= ' active';
+	      pastTabClass += ' active';
 	    } else {
-	      pastTabClass -= ' active'
-	      currentTabClass += ' active'
+	      pastTabClass -= ' active';
+	      currentTabClass += ' active';
 	    }
 	  },
 
-	  clickTab:function(e) {
+	  clickTab: function clickTab(e) {
 	    if (e.target.children[0] && e.target.children[0].tagName === 'A') {
 	      e.target.children[0].click();
 	    }
 	  },
 
-	  componentDidMount:function() {
-	    let $__0=    this.props,candidates=$__0.candidates
+	  componentDidMount: function componentDidMount() {
+	    var candidates = this.props.candidates;
+
 	    updateSelectedCandidate(candidates[0]);
 	  },
 
-	  componentWillUpdate:function(nextProps, nextState) {
+	  componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
 	    if (this.state.activeYear != nextState.activeYear) {
-	      let href = this.makeHref('past', {year: nextState.activeYear});
+	      var href = this.makeHref('past', { year: nextState.activeYear });
 	      this.replaceWith(href);
 	    }
 	  },
 
-	  render: function () {
-	    let $__0=    this.props,candidates=$__0.candidates
-	    , $__1=     this.state,activeCandidate=$__1.activeCandidate,activeYear=$__1.activeYear
+	  render: function render() {
+	    var candidates = this.props.candidates;
+	    var _state = this.state;
+	    var activeCandidate = _state.activeCandidate;
+	    var activeYear = _state.activeYear;
 
 	    // highlight nav tab
-	    let currentTabClass = 'nav-tab';
-	    let pastTabClass = 'nav-tab';
+	    var currentTabClass = 'nav-tab';
+	    var pastTabClass = 'nav-tab';
 	    if (/past/.exec(window.location.pathname)) {
-	      pastTabClass += ' active'
+	      pastTabClass += ' active';
 	    } else {
-	      currentTabClass += ' active'
+	      currentTabClass += ' active';
 	    }
 
-	    return (
-	      React.createElement("div", null, 
-	        React.createElement("nav", {className: "nav-main"}, 
-	          React.createElement("ul", {role: "tablist"}, 
-	            React.createElement("li", {id: "left-tab", className: currentTabClass, onClick: this.clickTab}, 
-	              React.createElement(Link, {to: "current", className: "nav-link", role: "tab"}, "Upcoming")
-	            ), 
-	            React.createElement("li", {id: "right-tab", className: pastTabClass, onClick: this.clickTab}, 
-	              React.createElement(Link, {to: "past", params: {year:activeYear}, className: "nav-link", role: "tab"}, "Past")
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'nav',
+	        { className: 'nav-main' },
+	        React.createElement(
+	          'ul',
+	          { role: 'tablist' },
+	          React.createElement(
+	            'li',
+	            { id: 'left-tab', className: currentTabClass, onClick: this.clickTab },
+	            React.createElement(
+	              Link,
+	              { to: 'current', className: 'nav-link', role: 'tab' },
+	              'Upcoming'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            { id: 'right-tab', className: pastTabClass, onClick: this.clickTab },
+	            React.createElement(
+	              Link,
+	              { to: 'past', params: { year: activeYear }, className: 'nav-link', role: 'tab' },
+	              'Past'
 	            )
 	          )
-	        ), 
-	        React.createElement(RouteHandler, React.__spread({},  this.props, {activeCandidate: activeCandidate, activeYear: activeYear})), 
-	        React.createElement(Share, null)
-	      )
+	        )
+	      ),
+	      React.createElement(RouteHandler, _extends({}, this.props, { activeCandidate: activeCandidate, activeYear: activeYear })),
+	      React.createElement(Share, null)
 	    );
 	  }
 	});
 
 	module.exports = App;
-
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5), __webpack_require__(197)))
 
 /***/ },
@@ -25303,11 +25326,7 @@
 	 * Thus the flow is: User interaction -> component calls action -> store reacts and triggers -> components update
 	 */
 
-	module.exports = Reflux.createActions([
-	  'updateSelectedCandidate',
-	  'updateSelectedYear'
-	]);
-
+	module.exports = Reflux.createActions(['updateSelectedCandidate', 'updateSelectedYear']);
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(197)))
 
 /***/ },
@@ -25316,33 +25335,31 @@
 
 	/* WEBPACK VAR INJECTION */(function(Reflux) {/** @jsx React.DOM */'use strict';
 
-	let howManyTablets = __webpack_require__(219);
-	let formatDollarAmount = __webpack_require__(220);
+	var howManyTablets = __webpack_require__(219);
+	var formatDollarAmount = __webpack_require__(220);
 
-	let CandidateStore = Reflux.createStore({
+	var CandidateStore = Reflux.createStore({
 	  listenables: [__webpack_require__(217)],
 
-	  init: function() {
-	  },
+	  init: function init() {},
 
-	  getInitialState: function() {
+	  getInitialState: function getInitialState() {
 	    this.candidate = {
-	      id : 0,
+	      id: 0,
 	      tablets: 0
-	     };
+	    };
 	    return this.candidate;
 	  },
 
-	  onUpdateSelectedCandidate:function (model) {
+	  onUpdateSelectedCandidate: function onUpdateSelectedCandidate(model) {
 	    this.candidate = model;
 	    this.candidate.tablets = formatDollarAmount(howManyTablets(this.candidate.officialRaised));
 	    this.trigger(this.candidate);
-	  },
+	  }
 
 	});
 
 	module.exports = CandidateStore;
-
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(197)))
 
 /***/ },
@@ -37757,34 +37774,42 @@
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
 
-	let Share = React.createClass({displayName: "Share",
-	  render: function () {
-	    return (
-	      React.createElement("div", {className: "share-container"}, 
-	        React.createElement("ul", {className: "share-icons"}, 
-	          React.createElement("li", null, 
-	            React.createElement("a", {className: "twitter-link", href: ("https://twitter.com/share?\n                url=" + 
-	window.encodeURI(window.location.href) + "\n                &via=r4d1n"
-	), 
-	                target: "_blank"}, 
-	                React.createElement("i", {className: "fa fa-twitter fa-3x"})
-	              )
-	            ), 
-	            React.createElement("li", null, 
-	              React.createElement("a", {className: "facebook-link", href: ("https://www.facebook.com/sharer/sharer.php?\n                  &u=" + 
-	window.encodeURI(window.location.href)), 
-	                  target: "_blank", title: "Share on Facebook"}, 
-	                  React.createElement("i", {className: "fa fa-facebook fa-3x"})
-	                )
-	              )
-	            )
+	var Share = React.createClass({
+	  displayName: 'Share',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'share-container' },
+	      React.createElement(
+	        'ul',
+	        { className: 'share-icons' },
+	        React.createElement(
+	          'li',
+	          null,
+	          React.createElement(
+	            'a',
+	            { className: 'twitter-link', href: 'https://twitter.com/share?\n                url=' + window.encodeURI(window.location.href) + '\n                &via=r4d1n',
+	              target: '_blank' },
+	            React.createElement('i', { className: 'fa fa-twitter fa-3x' })
 	          )
-	        );
-	      }
-	    });
+	        ),
+	        React.createElement(
+	          'li',
+	          null,
+	          React.createElement(
+	            'a',
+	            { className: 'facebook-link', href: 'https://www.facebook.com/sharer/sharer.php?\n                  &u=' + window.encodeURI(window.location.href),
+	              target: '_blank', title: 'Share on Facebook' },
+	            React.createElement('i', { className: 'fa fa-facebook fa-3x' })
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
 
-	    module.exports = Share;
-
+	module.exports = Share;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
@@ -37795,25 +37820,24 @@
 
 	// this store is for keeping track of which election year should be shown
 
-	let formatDollarAmount = __webpack_require__(220);
+	var formatDollarAmount = __webpack_require__(220);
 
-	let YearStore = Reflux.createStore({
+	var YearStore = Reflux.createStore({
 	  listenables: [__webpack_require__(217)],
 
-	  getInitialState: function() {
+	  getInitialState: function getInitialState() {
 	    this.year = 2012;
 	    return this.year;
 	  },
 
-	  onUpdateSelectedYear:function (value) {
+	  onUpdateSelectedYear: function onUpdateSelectedYear(value) {
 	    this.activeYear = value;
 	    this.trigger(this.activeYear);
-	  },
+	  }
 
 	});
 
 	module.exports = YearStore;
-
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(197)))
 
 /***/ },
@@ -37822,27 +37846,40 @@
 
 	/** @jsx React.DOM */'use strict';
 
-	let React = __webpack_require__(226);
-	let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var React = __webpack_require__(226);
+	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 	// child components
-	let CurrentChart = __webpack_require__(244)
-	, CurrentAmount = __webpack_require__(251)
+	var CurrentChart = __webpack_require__(244),
+	    CurrentAmount = __webpack_require__(251);
 
+	var CurrentCampaign = React.createClass({
+	  displayName: 'CurrentCampaign',
 
-	let CurrentCampaign = React.createClass({displayName: "CurrentCampaign",
+	  render: function render() {
+	    var _props = this.props;
+	    var candidates = _props.candidates;
+	    var activeCandidate = _props.activeCandidate;
 
-	  render: function () {
-	    let $__0=     this.props,candidates=$__0.candidates,activeCandidate=$__0.activeCandidate
-	    return (
-	      React.createElement(ReactCSSTransitionGroup, {transitionName: "campaign", transitionAppear: true}, 
-	        React.createElement("div", null, 
-	          React.createElement(CurrentAmount, {activeCandidate: activeCandidate}), 
-	          React.createElement(CurrentChart, React.__spread({},  this.props, {activeCandidate: activeCandidate})), 
-	          React.createElement("div", {className: "tap-to-change"}, 
-	            React.createElement("h3", null, "Tap Bars to Reveal Leading Fundraisers")
+	    return React.createElement(
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'campaign', transitionAppear: true },
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(CurrentAmount, { activeCandidate: activeCandidate }),
+	        React.createElement(
+	          'div',
+	          { className: 'tap-to-change' },
+	          React.createElement(
+	            'h3',
+	            null,
+	            'Tap to Reveal Top Fundraisers'
 	          )
-	        )
+	        ),
+	        React.createElement(CurrentChart, _extends({}, this.props, { activeCandidate: activeCandidate }))
 	      )
 	    );
 	  }
@@ -37850,7 +37887,6 @@
 	});
 
 	module.exports = CurrentCampaign;
-
 
 /***/ },
 /* 226 */
@@ -39979,45 +40015,46 @@
 
 	/* WEBPACK VAR INJECTION */(function(React, _) {/** @jsx React.DOM */'use strict';
 
-	let $__0=    __webpack_require__(217),updateSelectedCandidate=$__0.updateSelectedCandidate;
-	let CandidateStore = __webpack_require__(218);
+	var _require = __webpack_require__(217);
 
+	var updateSelectedCandidate = _require.updateSelectedCandidate;
 
-	let viz = __webpack_require__(245);
+	var CandidateStore = __webpack_require__(218);
 
-	let CurrentChart = React.createClass({displayName: "CurrentChart",
+	var viz = __webpack_require__(245);
 
-	  selectCandidate:function(e) {
+	var CurrentChart = React.createClass({
+	  displayName: 'CurrentChart',
+
+	  selectCandidate: function selectCandidate(e) {
 	    // update active candidate by tapping on a bar in the d3 chart
-	    let $__0=    this.props,candidates=$__0.candidates;
-	    let selected = _.find(candidates, function(item)  {return item.id === e.target.dataset.id;} )
+	    var candidates = this.props.candidates;
+
+	    var selected = _.find(candidates, function (item) {
+	      return new RegExp(item.id).exec(e.target.id);
+	    });
 	    if (selected) {
 	      updateSelectedCandidate(selected);
 	    }
 	  },
 
-	  componentDidMount:function() {
+	  componentDidMount: function componentDidMount() {
 	    viz.initCurrent(this.props.candidates);
 	    viz.highlight(this.props.activeCandidate);
 	  },
 
-	  componentDidUpdate:function() {
+	  componentDidUpdate: function componentDidUpdate() {
 	    viz.highlight(this.props.activeCandidate);
 	  },
 
-	  componentWillReceiveProps:function(nextProps) {
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {},
 
-	  },
-
-	  render: function () {
-	    return (
-	      React.createElement("div", {onClick: this.selectCandidate, id: "bar-chart-target"})
-	    );
+	  render: function render() {
+	    return React.createElement('div', { onClick: this.selectCandidate, id: 'bar-chart-target' });
 	  }
 	});
 
 	module.exports = CurrentChart;
-
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(221)))
 
 /***/ },
@@ -40071,8 +40108,8 @@
 
 	  var group = svg.selectAll("g").data(data).enter().append("g");
 
-	  var bars = svg.selectAll("g").append("rect").attr("class", "bar").attr("data-id", function (d) {
-	    return d.id;
+	  var bars = svg.selectAll("g").append("rect").attr("class", "bar").attr("id", function (d) {
+	    return 'svg-bar-' + d.id;
 	  }) // for click events
 	  .attr("x", function (d) {
 	    return x(d.name);
@@ -49616,11 +49653,8 @@
 
 	var targetEl = document.getElementById('bar-chart-target');
 
-	console.log(targetEl);
 	var containerHeight = targetEl.offsetHeight;
 	var containerWidth = targetEl.offsetWidth;
-
-	console.log(containerWidth, containerHeight);
 
 	var margin = { top: 20, right: 10, bottom: 20, left: 10 };
 	var height = containerHeight - margin.top - margin.bottom;
@@ -49732,31 +49766,46 @@
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
 
-	let CurrentAmount = React.createClass({displayName: "CurrentAmount",
-	  render:function() {
-	    let $__0=    this.props,activeCandidate=$__0.activeCandidate
-	    , raisedString = activeCandidate && activeCandidate.raisedString || '';
+	var CurrentAmount = React.createClass({
+	  displayName: 'CurrentAmount',
 
-	    let headerClass;
-	    if (activeCandidate.party === 'R') headerClass += ' gop'
-	    if (activeCandidate.party === 'D') headerClass += ' dem'
+	  render: function render() {
+	    var activeCandidate = this.props.activeCandidate;
+	    var raisedString = activeCandidate && activeCandidate.raisedString || '';
 
-	    return (
-	      React.createElement("div", {className: "big-num-bar"}, 
-	        React.createElement("div", {className: "amount"}, 
-	          React.createElement("h1", {className: headerClass}, activeCandidate.familiarName), 
-	            React.createElement("h3", null, " has raised:"), 
-	          React.createElement("hr", null), 
-	          React.createElement("h1", null, ("$" + raisedString)), 
-	          React.createElement("hr", null)
-	        )
+	    var headerClass = undefined;
+	    if (activeCandidate.party === 'R') headerClass += ' gop';
+	    if (activeCandidate.party === 'D') headerClass += ' dem';
+
+	    return React.createElement(
+	      'div',
+	      { className: 'big-num-bar' },
+	      React.createElement(
+	        'div',
+	        { className: 'amount' },
+	        React.createElement(
+	          'h1',
+	          { className: headerClass },
+	          activeCandidate.familiarName
+	        ),
+	        React.createElement(
+	          'h3',
+	          null,
+	          ' has raised:'
+	        ),
+	        React.createElement('hr', null),
+	        React.createElement(
+	          'h1',
+	          null,
+	          '$' + raisedString
+	        ),
+	        React.createElement('hr', null)
 	      )
 	    );
 	  }
 	});
 
 	module.exports = CurrentAmount;
-
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
@@ -49765,39 +49814,48 @@
 
 	/** @jsx React.DOM */'use strict';
 
-	let formatDollarAmount = __webpack_require__(220)
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	let React = __webpack_require__(226);
-	let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+	var formatDollarAmount = __webpack_require__(220);
+
+	var React = __webpack_require__(226);
+	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 	// child components
-	let PastAmount = __webpack_require__(253)
-	, PastChart = __webpack_require__(254)
-	, YearSelect = __webpack_require__(255)
+	var PastAmount = __webpack_require__(253),
+	    PastChart = __webpack_require__(254),
+	    YearSelect = __webpack_require__(255);
 
-	let PastCampaign = React.createClass({displayName: "PastCampaign",
+	var PastCampaign = React.createClass({
+	  displayName: 'PastCampaign',
 
-	  activateCampaignYear:function() {
-	    let $__0=     this.props,past=$__0.past,activeYear=$__0.activeYear;
+	  activateCampaignYear: function activateCampaignYear() {
+	    var _props = this.props;
+	    var past = _props.past;
+	    var activeYear = _props.activeYear;
+
 	    return past[activeYear];
 	  },
 
-	  componentDidMount:function() {
+	  componentDidMount: function componentDidMount() {
 	    this.activateCampaignYear();
 	  },
 
-	  render:function () {
-	    let $__0=  this.props,activeYear=$__0.activeYear;
-	    let candidates = this.activateCampaignYear();
-	    let difference = formatDollarAmount(candidates[0].receipts - candidates[1].receipts)
+	  render: function render() {
+	    var activeYear = this.props.activeYear;
 
-	    return (
-	      React.createElement(ReactCSSTransitionGroup, {transitionName: "campaign", transitionAppear: true}, 
-	        React.createElement("div", null, 
-	          React.createElement(PastAmount, React.__spread({},  this.props, {difference: difference, candidates: candidates})), 
-	          React.createElement(PastChart, React.__spread({},  this.props, {candidates: candidates})), 
-	          React.createElement(YearSelect, {activeYear: activeYear})
-	        )
+	    var candidates = this.activateCampaignYear();
+	    var difference = formatDollarAmount(candidates[0].receipts - candidates[1].receipts);
+
+	    return React.createElement(
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'campaign', transitionAppear: true },
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(PastAmount, _extends({}, this.props, { difference: difference, candidates: candidates })),
+	        React.createElement(PastChart, _extends({}, this.props, { candidates: candidates })),
+	        React.createElement(YearSelect, { activeYear: activeYear })
 	      )
 	    );
 	  }
@@ -49806,40 +49864,68 @@
 
 	module.exports = PastCampaign;
 
-
 /***/ },
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
 
-	let PastAmount = React.createClass({displayName: "PastAmount",
+	var PastAmount = React.createClass({
+	  displayName: 'PastAmount',
 
-	  render:function() {
-	    let $__0=      this.props,activeYear=$__0.activeYear,candidates=$__0.candidates,difference=$__0.difference
+	  render: function render() {
+	    var _props = this.props;
+	    var activeYear = _props.activeYear;
+	    var candidates = _props.candidates;
+	    var difference = _props.difference;
 
-	    let winnerClass = candidates[0].party === 'R' ? 'gop' : 'dem';
-	    let loserClass = candidates[1].party === 'R' ? 'lost gop' : 'lost dem';
+	    var winnerClass = candidates[0].party === 'R' ? 'gop' : 'dem';
+	    var loserClass = candidates[1].party === 'R' ? 'lost gop' : 'lost dem';
 
-	    return (
-	      React.createElement("div", {className: "big-num-bar"}, 
-	        React.createElement("div", {className: "amount"}, 
-	          React.createElement("h3", {className: "past-year"}, ("In " + activeYear)), 
-	          React.createElement("hr", null), 
-	          React.createElement("h1", {className: winnerClass}, candidates[0].name), 
-	          React.createElement("h3", null, "raised"), 
-	          React.createElement("h3", {className: "past-difference"}, ("$" + difference)), 
-	          React.createElement("h3", null, "More Than "), 
-	          React.createElement("h3", {className: loserClass}, candidates[1].name), 
-	          React.createElement("hr", null)
-	        )
+	    return React.createElement(
+	      'div',
+	      { className: 'big-num-bar' },
+	      React.createElement(
+	        'div',
+	        { className: 'amount' },
+	        React.createElement(
+	          'h3',
+	          { className: 'past-year' },
+	          'In ' + activeYear
+	        ),
+	        React.createElement('hr', null),
+	        React.createElement(
+	          'h1',
+	          { className: winnerClass },
+	          candidates[0].name
+	        ),
+	        React.createElement(
+	          'h3',
+	          null,
+	          'raised'
+	        ),
+	        React.createElement(
+	          'h3',
+	          { className: 'past-difference' },
+	          '$' + difference
+	        ),
+	        React.createElement(
+	          'h3',
+	          null,
+	          'More Than '
+	        ),
+	        React.createElement(
+	          'h3',
+	          { className: loserClass },
+	          candidates[1].name
+	        ),
+	        React.createElement('hr', null)
 	      )
 	    );
 	  }
 	});
 
 	module.exports = PastAmount;
-
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
@@ -49848,41 +49934,44 @@
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
 
-	let $__0=    __webpack_require__(217),updateSelectedCandidate=$__0.updateSelectedCandidate;
-	let CandidateStore = __webpack_require__(218);
+	var _require = __webpack_require__(217);
 
+	var updateSelectedCandidate = _require.updateSelectedCandidate;
 
-	let viz = __webpack_require__(245);
+	var CandidateStore = __webpack_require__(218);
 
-	let PastChart = React.createClass({displayName: "PastChart",
+	var viz = __webpack_require__(245);
 
-	  renderChart:function() {
-	    let $__0=     this.props,past=$__0.past,activeYear=$__0.activeYear;
-	    let candidates = past[activeYear];
+	var PastChart = React.createClass({
+	  displayName: 'PastChart',
+
+	  renderChart: function renderChart() {
+	    var _props = this.props;
+	    var past = _props.past;
+	    var activeYear = _props.activeYear;
+
+	    var candidates = past[activeYear];
 	    viz.initPast(candidates);
 	  },
 
-	  componentDidMount:function() {
+	  componentDidMount: function componentDidMount() {
 	    this.renderChart();
 	  },
 
-	  componentDidUpdate:function() {
+	  componentDidUpdate: function componentDidUpdate() {
 	    // this.forceUpdate()
-	    let target = document.getElementById('bar-chart-target');
-	    let svg = document.getElementById('past-chart-svg');
+	    var target = document.getElementById('bar-chart-target');
+	    var svg = document.getElementById('past-chart-svg');
 	    target.removeChild(svg);
 	    this.renderChart();
 	  },
 
-	  render: function () {
-	    return (
-	      React.createElement("div", {id: "bar-chart-target"})
-	    );
+	  render: function render() {
+	    return React.createElement('div', { id: 'bar-chart-target' });
 	  }
 	});
 
 	module.exports = PastChart;
-
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
@@ -49891,45 +49980,55 @@
 
 	/* WEBPACK VAR INJECTION */(function(React, Reflux) {/** @jsx React.DOM */'use strict';
 
-	let $__0=    __webpack_require__(217),updateSelectedYear=$__0.updateSelectedYear;
+	var _require = __webpack_require__(217);
 
-	let YearSelect = React.createClass({displayName: "YearSelect",
+	var updateSelectedYear = _require.updateSelectedYear;
+
+	var YearSelect = React.createClass({
+	  displayName: 'YearSelect',
 
 	  mixins: [Reflux.connect(__webpack_require__(224), 'activeYear')],
 
-	  handleChange:function (e) {
-	    let updateYear = e.target.value;
+	  handleChange: function handleChange(e) {
+	    var updateYear = e.target.value;
 	    if (updateYear) {
 	      updateSelectedYear(updateYear);
 	    }
 	  },
 
-	  activateClass:function () {
+	  activateClass: function activateClass() {},
 
-	  },
+	  render: function render() {
+	    var _this = this;
 
-	  render:function() {
-	    let $__0=      this.props,candidates=$__0.candidates,activeCandidate=$__0.activeCandidate,activeYear=$__0.activeYear;
-	    let years = [2012, 2008, 2004, 2000].reverse();
-	    let buttons = years.map(function(year)  {
-	      let buttonStatus = year == activeYear ? 'year active' : 'year'
-	      return (
-	        React.createElement("button", {key: year, className: buttonStatus, onClick: this.handleChange, value: year}, year)
-	      )
-	    }.bind(this))
+	    var _props = this.props;
+	    var candidates = _props.candidates;
+	    var activeCandidate = _props.activeCandidate;
+	    var activeYear = _props.activeYear;
 
-	    return (
-	      React.createElement("div", {className: "year-select-container"}, 
-	        React.createElement("ul", {className: "year-select", ref: "yearSelect"}, 
-	          buttons
-	        )
+	    var years = [2012, 2008, 2004, 2000].reverse();
+	    var buttons = years.map(function (year) {
+	      var buttonStatus = year == activeYear ? 'year active' : 'year';
+	      return React.createElement(
+	        'button',
+	        { key: year, className: buttonStatus, onClick: _this.handleChange, value: year },
+	        year
+	      );
+	    });
+
+	    return React.createElement(
+	      'div',
+	      { className: 'year-select-container' },
+	      React.createElement(
+	        'ul',
+	        { className: 'year-select', ref: 'yearSelect' },
+	        buttons
 	      )
 	    );
 	  }
 	});
 
 	module.exports = YearSelect;
-
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(197)))
 
 /***/ },
@@ -49963,7 +50062,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(258)();
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px;\n  background-color: #ffffff; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding-top: 8.33333px; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 18px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 30px; }\n  .past-difference {\n    font-size: 36px; } }\n\nrect {\n  fill: #999; }\n\n#bar-chart-target {\n  width: 80%;\n  height: 400px;\n  margin: 12.5px auto; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px;\n    margin: 12.5px auto; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  width: 80%;\n  margin: 0 auto; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  width: 100px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #999;\n  background-color: #666;\n  border-color: #666; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  padding: 25px 0; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 150px;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    float: left;\n    padding: 0 12.5px;\n    width: 25%; }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 20px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #666;\n  color: #fff; }\n\nli.nav-tab.active {\n  background-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.general-container {\n  width: 80%;\n  margin: 25px auto; }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px;\n  background-color: #ffffff; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding-top: 8.33333px; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 18px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 30px; }\n  .past-difference {\n    font-size: 36px; } }\n\nrect {\n  fill: #999; }\n\n#bar-chart-target {\n  width: 80%;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px;\n    margin: 12.5px auto; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 12.5px 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  width: 100px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #999;\n  background-color: #666;\n  border-color: #666; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  padding: 25px 0; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 150px;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    float: left;\n    padding: 0 12.5px;\n    width: 25%; }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 20px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #666;\n  color: #fff; }\n\nli.nav-tab.active {\n  background-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.general-container {\n  width: 80%;\n  margin: 25px auto; }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n", ""]);
 
 /***/ },
 /* 258 */
