@@ -24,14 +24,7 @@ let Picture = React.createClass({
     let i = candidates.indexOf(_.find(candidates, item => new RegExp(item.id).exec(activeCandidate.id)))
     let m = i + 1;
     if (m >= candidates.length) m = 0;
-    console.log('after', i , m )
     updateSelectedCandidate(candidates[m]);
-  },
-
-  componentDidUpdate() {
-    let { activeCandidate } = this.props;
-    console.log(activeCandidate.id)
-    // document.getElementById("picture-div").style.backgroundImage = `url(${activeCandidate.image})`;
   },
 
   render() {

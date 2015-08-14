@@ -1,6 +1,7 @@
 #picture-div {
   position: relative;
-  width: 80%;
+  width: $container-width;
+  max-width: $container-max-width;
   margin: $spacing-unit auto 0 auto;
   height: 200px;
   color: #fff;
@@ -49,6 +50,7 @@
   height: 100px;
   opacity: .7;
   cursor: pointer; // for ios clicks
+  padding: 0 10px;
 }
 
 .left-icon {
@@ -76,20 +78,30 @@
   }
   .right-icon {
     right: 0px;
-    padding-right: 0px;
+    padding-right: 5px;
   }
 
   .left-icon {
     left: 0px;
-    padding-left: 0px;
+    padding-left: 5px;
   }
 }
 
-@media (min-width: 500) and (max-width: 800) {
+@media (min-width: 451px) and (max-width: 600px) {
+  #picture-div {
+    width: 100%
+  }
   #picture-div img {
     margin-top: -100px;
   }
 }
+
+@media (min-width: 601px) and (max-width: 800px) {
+  #picture-div img {
+    margin-top: -100px;
+  }
+}
+
 
 // @media (max-width: 800) {
 //   #picture-div img {
@@ -97,8 +109,8 @@
 //   }
 // }
 
-@media (min-width: 1200px) {
-  #picture-div img {
-    margin-top: -400px;
-  }
-}
+// @media (min-width: 1200px) {
+//   #picture-div img {
+//     margin-top: -400px;
+//   }
+// }

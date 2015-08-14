@@ -1,6 +1,7 @@
 .big-num-bar {
   text-transform: uppercase;
-  width: 80%;
+  width: $container-width;
+  max-width: $container-max-width;
   margin: $spacing-unit / 4 auto;
   position: relative;
   top: $spacing-unit;

@@ -28,7 +28,8 @@ main {
 
 .primary-header {
   font-size: 48px;
-  width: 80%;
+  width: $container-width;
+  max-width: $container-max-width;
   margin: 0 auto;
   text-align: center;
   text-transform: uppercase;
@@ -40,10 +41,10 @@ main {
   }
 }
 
-.general-container {
-  width: 80%;
-  margin: $spacing-unit auto;
-}
+// .general-container {
+//   width: $container-width;
+//   margin: $spacing-unit auto;
+// }
 
 section {
   margin-bottom: $spacing-unit;

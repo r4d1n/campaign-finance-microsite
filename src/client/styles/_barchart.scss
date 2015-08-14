@@ -4,7 +4,8 @@ rect {
 }
 
 #bar-chart-target {
-  width: 80%;
+  width: $container-width;
+  max-width: $container-max-width;
   height: 400px;
   margin: $spacing-unit / 2 auto;
   position: relative;
@@ -45,7 +46,8 @@ rect {
 
 .tap-to-change {
   position: relative;
-  width: 80%;
+  width: $container-width;
+  max-width: $container-max-width;
   height: $spacing-unit;
   margin: 0 auto;
   padding: $spacing-unit 0 0 0;
