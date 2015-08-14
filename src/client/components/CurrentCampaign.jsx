@@ -19,9 +19,6 @@ let CurrentCampaign = React.createClass({
         <div>
           {/*<CurrentAmount activeCandidate={activeCandidate} />*/}
           <Picture {...this.props} />
-          <div className='tap-to-change'>
-            <h3>Top Five Fundraisers</h3>
-          </div>
           <CurrentChart {...this.props} activeCandidate={activeCandidate} />
         </div>
       </ReactCSSTransitionGroup>
