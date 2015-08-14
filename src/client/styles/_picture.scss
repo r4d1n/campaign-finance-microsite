@@ -1,7 +1,9 @@
 #picture-div {
+  position: relative;
   width: 80%;
   margin: $spacing-unit auto 0 auto;
   height: 200px;
+  color: #fff;
   overflow: hidden;
   h1 {
     font-size: 3em;
@@ -14,31 +16,84 @@
 #picture-div img {
   display: block;
   margin: auto;
-  margin-top: -150px;
+  margin-top: -275px;
   z-index: 1;
-  width: 500px;
+  width: 100%;
   height: auto;
 }
 
-@media (max-width: 600px) {
-  #picture-div img {
-    margin-left: -70px;
-  }
-}
 
-.picture-amount-container {
+.picture-name-container {
   z-index: 2;
-  color: #fff;
   position: absolute;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
-  top: 150px;
+  top: 15%;
 }
 
-.picture-amount-header {
+.picture-name-header {
   text-align: center;
   text-transform: uppercase;
   padding: $spacing-unit / 2;
+}
+
+.arrow-icon {
+  position: absolute;
+  top: 20%;
+  width: $spacing-unit * 2;
+  height: $spacing-unit * 2;
+  padding: $spacing-unit;
+}
+
+.left-icon {
+  @extend .arrow-icon;
+  right: 80%;
+}
+
+.right-icon {
+  @extend .arrow-icon;
+  left: 80%;
+}
+
+
+@media (max-width: 445px) {
+  #picture-div {
+    width: 100%;
+  }
+  #picture-div img {
+    margin-top: -70px;
+  }
+  .arrow-icon {
+    bottom: 75px;
+  }
+  .right-icon {
+    right: 0px;
+    padding-right: 0px;
+  }
+
+  .left-icon {
+    left: 0px;
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 550) and (max-width: 799) {
+  #picture-div img {
+    margin-top: -200px;
+  }
+}
+
+@media (max-width: 800) {
+  #picture-div img {
+    margin-top: -100px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #picture-div img {
+    // margin-top: -400px;
+  }
 }

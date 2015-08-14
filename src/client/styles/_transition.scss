@@ -15,3 +15,21 @@
   opacity: 0.01;
   transition: opacity .5s ease-in;
 }
+
+.picture-div-appear {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}
+
+.picture-div-appear.picture-div-appear-active {
+  opacity: 1;
+}
+
+.picture-div-leave {
+  opacity: 1;
+}
+
+.picture-div-leave.picture-div-leave-active {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}

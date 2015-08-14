@@ -5,7 +5,7 @@ let targetEl = document.getElementById('bar-chart-target');
 let containerHeight = targetEl.offsetHeight;
 let containerWidth = targetEl.offsetWidth;
 
-let margin = { top: 0, right: 10, bottom: 10, left: 10};
+let margin = { top: 0, right: 10, bottom: 20, left: 10};
 let height = containerHeight - margin.top - margin.bottom;
 let width = containerWidth - margin.left - margin.right;
 

@@ -28,9 +28,16 @@ main {
 
 .primary-header {
   font-size: 48px;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   text-align: center;
   text-transform: uppercase;
+}
+
+@media (max-width: 445px) {
+  .primary-header {
+    font-size: 24px;
+  }
 }
 
 .general-container {

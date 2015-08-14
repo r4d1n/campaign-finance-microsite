@@ -53,6 +53,18 @@ function draw (data) {
   .attr('opacity', 1)
   .attr("y", function(d,i) { return y(d.totalReceipts) - 30 } )
 
+  let initials = svg.selectAll("g")
+  .append("text")
+  .attr("text-anchor", "middle")
+  .attr('class', 'bar-label-white')
+  .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2} )
+  .attr("dy", ".75em")
+  .attr('opacity', 0)
+  .text(function(d) { return d.initials; })
+  .attr("y", height - 30) // height here is the whole chart
+  .transition()
+  .delay(function (d, i) { return i * 200; })
+  .attr('opacity', 1)
 }
 
 module.exports = draw;

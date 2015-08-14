@@ -1,10 +1,36 @@
 'use strict';
 
+let React = require('react/addons');
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+let { updateSelectedCandidate } = require('../actions/Actions.jsx');
+let CandidateStore = require('../stores/CandidateStore.jsx');
+
+
 let Picture = React.createClass({
+
+  beforeCandidate(e) {
+    // update active candidate by tapping on a bar in the d3 chart
+    let { candidates, activeCandidate } = this.props;
+    let i = candidates.indexOf(_.find(candidates, item => new RegExp(item.id).exec(activeCandidate.id)))
+    let m = i - 1;
+    if (m < 0) m = candidates.length - 1;
+    updateSelectedCandidate(candidates[m]);
+  },
+
+  afterCandidate(e) {
+    // update active candidate by tapping on a bar in the d3 chart
+    let { candidates, activeCandidate } = this.props;
+    let i = candidates.indexOf(_.find(candidates, item => new RegExp(item.id).exec(activeCandidate.id)))
+    let m = i + 1;
+    if (m >= candidates.length) m = 0;
+    console.log('after', i , m )
+    updateSelectedCandidate(candidates[m]);
+  },
 
   componentDidUpdate() {
     let { activeCandidate } = this.props;
-    // console.log(activeCandidate)
+    console.log(activeCandidate.id)
     // document.getElementById("picture-div").style.backgroundImage = `url(${activeCandidate.image})`;
   },
 
@@ -16,15 +42,19 @@ let Picture = React.createClass({
     let lastName = activeCandidate.familiarName.split(' ')[1]
 
     return (
-      <div id='picture-div'>
-        <div className='picture-amount-container'>
-          <h1 className='picture-amount-header'>{activeCandidate.familiarName.split(' ')[0]}</h1>
-          <h1 className='picture-amount-header'>{activeCandidate.familiarName.split(' ')[1]}</h1>
+      <ReactCSSTransitionGroup transitionName="picture-div" transitionAppear={true}>
+        <div id='picture-div'>
+          <div key={activeCandidate.id + '_div'} className='picture-name-container'>
+            <div onClick={this.beforeCandidate} className='left-icon'><i className='fa fa-chevron-left fa-3x'></i></div>
+            <h1 key={activeCandidate.id + '_0'} className='picture-name-header'>{activeCandidate.familiarName.split(' ')[0]}</h1>
+            <h1 key={activeCandidate.id + '_1'}className='picture-name-header'>{activeCandidate.familiarName.split(' ')[1]}</h1>
+            <div onClick={this.afterCandidate} className='right-icon'><i className='fa fa-chevron-right fa-3x'></i></div>
           </div>
-          <img src={activeCandidate.image} />
+          <img key={activeCandidate.id + '_img'} src={activeCandidate.image} />
         </div>
-      );
-    }
-  });
+      </ReactCSSTransitionGroup>
+    );
+  }
+});
 
-  module.exports = Picture;
+module.exports = Picture;

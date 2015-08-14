@@ -8,13 +8,13 @@ rect {
   height: 400px;
   margin: $spacing-unit / 2 auto;
   position: relative;
+  padding-bottom: $spacing-unit;
 }
 
 @media screen and (max-width: 600px) {
   #bar-chart-target {
     height: 250px;
     width: 300px;
-    margin: $spacing-unit / 2 auto;
   }
 }
 

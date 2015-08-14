@@ -54,7 +54,7 @@ function draw (data) {
   .transition()
   .delay(function (d, i) { return i * 400; })
   .attr('opacity', 1)
-  .text(function(d) { return d.name.split(' ')[1]; }) // last name
+  .text(function(d) { return d.name.toUpperCase().split(' ')[1]; }) // last name
 
   let million = svg.selectAll("g")
   .append("text")
