@@ -11,7 +11,7 @@ if (process.env.NODE_ENV==='production') {
 
 var CronJob = require('cron').CronJob;
 var job = new CronJob({
-  cronTime: '00 00 00 * * 0-6',
+  cronTime: '00 00 00 * * 0',
   onTick: function() {
     console.log('Executing Sunlight Requests');
     sunlightRequest.init();
