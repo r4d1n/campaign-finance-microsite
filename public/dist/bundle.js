@@ -49902,17 +49902,7 @@
 	        React.createElement(
 	          'h3',
 	          null,
-	          'raised'
-	        ),
-	        React.createElement(
-	          'h3',
-	          { className: 'past-difference' },
-	          '$' + difference
-	        ),
-	        React.createElement(
-	          'h3',
-	          null,
-	          'More Than '
+	          'outraised'
 	        ),
 	        React.createElement(
 	          'h3',
