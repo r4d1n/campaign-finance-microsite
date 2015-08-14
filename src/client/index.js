@@ -19,7 +19,7 @@ let formatMillionString = require('./utils/formatMillionString');
 
 
 // Routing
-let routes = require('../shared/routes')
+let routes = require('../client/routes')
 
 
 // load data from server and render

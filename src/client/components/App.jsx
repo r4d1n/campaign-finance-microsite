@@ -41,13 +41,6 @@ let App = React.createClass({
     updateSelectedCandidate(candidates[0]);
   },
 
-  componentWillUpdate(nextProps, nextState) {
-    if (this.state.activeYear != nextState.activeYear) {
-      let href = this.makeHref('past', {year: nextState.activeYear});
-      this.replaceWith(href);
-    }
-  },
-
   render: function () {
     let { candidates } = this.props
     , { activeCandidate, activeYear } = this.state

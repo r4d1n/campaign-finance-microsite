@@ -16,6 +16,6 @@ module.exports = [
     <DefaultRoute handler={CurrentCampaign} />
     <NotFoundRoute handler={CurrentCampaign} />
     <Route name="current" path="current" handler={CurrentCampaign} />
-    <Route name="past" path="past/:year" handler={PastCampaign} ignoreScrollBehavior />
+    <Route name="past" path="past" handler={PastCampaign} ignoreScrollBehavior />
   </Route>
 ]
