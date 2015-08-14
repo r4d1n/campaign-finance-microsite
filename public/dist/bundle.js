@@ -54,24 +54,25 @@
 
 	var App = __webpack_require__(196),
 	    CurrentCampaign = __webpack_require__(225),
-	    PastCampaign = __webpack_require__(252);
+	    PastCampaign = __webpack_require__(253);
 
 	// scss
-	__webpack_require__(256);
+	__webpack_require__(257);
 
 	// client side js utils
-	var load = __webpack_require__(260);
-	var formatCandidates = __webpack_require__(264);
+	var load = __webpack_require__(261);
+	var formatCandidates = __webpack_require__(265);
 	var formatDollarAmount = __webpack_require__(220);
-	var formatMillionString = __webpack_require__(266);
+	var formatMillionString = __webpack_require__(267);
 
 	// Routing
-	var routes = __webpack_require__(267);
+	var routes = __webpack_require__(268);
 
 	// load data from server and render
 	load('api/records/latest').then(function (body) {
 	  var candidates = formatCandidates(body.current);
 	  var past = body.past;
+	  // format past candidates TODO MOVE TO SERVER
 	  for (var year in past) {
 	    past[year].sort(function (a, b) {
 	      return b.receipts - a.receipts;
@@ -84,6 +85,7 @@
 	      }).join('');
 	    }
 	  }
+	  console.log(candidates);
 	  Router.run(routes, Router.HistoryLocation, function (Handler) {
 	    React.render(React.createElement(Handler, { candidates: candidates, past: past }), document.body);
 	  });
@@ -23682,6 +23684,15 @@
 	          )
 	        )
 	      ),
+	      React.createElement(
+	        'header',
+	        null,
+	        React.createElement(
+	          'h1',
+	          { className: 'primary-header' },
+	          'Electionomics'
+	        )
+	      ),
 	      React.createElement(RouteHandler, _extends({}, this.props, { activeCandidate: activeCandidate, activeYear: activeYear })),
 	      React.createElement(Share, null)
 	    );
@@ -25346,7 +25357,7 @@
 	  getInitialState: function getInitialState() {
 	    this.candidate = {
 	      id: 0,
-	      tablets: 0
+	      familiarName: 'G W'
 	    };
 	    return this.candidate;
 	  },
@@ -37853,7 +37864,8 @@
 
 	// child components
 	var CurrentChart = __webpack_require__(244),
-	    CurrentAmount = __webpack_require__(251);
+	    CurrentAmount = __webpack_require__(251),
+	    Picture = __webpack_require__(252);
 
 	var CurrentCampaign = React.createClass({
 	  displayName: 'CurrentCampaign',
@@ -37869,14 +37881,14 @@
 	      React.createElement(
 	        'div',
 	        null,
-	        React.createElement(CurrentAmount, { activeCandidate: activeCandidate }),
+	        React.createElement(Picture, this.props),
 	        React.createElement(
 	          'div',
 	          { className: 'tap-to-change' },
 	          React.createElement(
 	            'h3',
 	            null,
-	            'Tap to Reveal Top Fundraisers'
+	            'Top Five Fundraisers'
 	          )
 	        ),
 	        React.createElement(CurrentChart, _extends({}, this.props, { activeCandidate: activeCandidate }))
@@ -37887,6 +37899,7 @@
 	});
 
 	module.exports = CurrentCampaign;
+	/*<CurrentAmount activeCandidate={activeCandidate} />*/
 
 /***/ },
 /* 226 */
@@ -49656,7 +49669,7 @@
 	var containerHeight = targetEl.offsetHeight;
 	var containerWidth = targetEl.offsetWidth;
 
-	var margin = { top: 20, right: 10, bottom: 20, left: 10 };
+	var margin = { top: 0, right: 10, bottom: 10, left: 10 };
 	var height = containerHeight - margin.top - margin.bottom;
 	var width = containerWidth - margin.left - margin.right;
 
@@ -49769,6 +49782,13 @@
 	var CurrentAmount = React.createClass({
 	  displayName: 'CurrentAmount',
 
+	  componentDidUpdate: function componentDidUpdate() {
+	    var activeCandidate = this.props.activeCandidate;
+
+	    console.log(activeCandidate);
+	    document.querySelector(".big-num-bar").style.backgroundImage = 'url(' + activeCandidate.image + ')';
+	  },
+
 	  render: function render() {
 	    var activeCandidate = this.props.activeCandidate;
 	    var raisedString = activeCandidate && activeCandidate.raisedString || '';
@@ -49812,6 +49832,54 @@
 /* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
+
+	var Picture = React.createClass({
+	  displayName: 'Picture',
+
+	  componentDidUpdate: function componentDidUpdate() {
+	    var activeCandidate = this.props.activeCandidate;
+
+	    // console.log(activeCandidate)
+	    // document.getElementById("picture-div").style.backgroundImage = `url(${activeCandidate.image})`;
+	  },
+
+	  render: function render() {
+	    var activeCandidate = this.props.activeCandidate;
+	    var raisedString = activeCandidate && activeCandidate.raisedString || '';
+
+	    var firstName = activeCandidate.familiarName.split(' ')[0];
+	    var lastName = activeCandidate.familiarName.split(' ')[1];
+
+	    return React.createElement(
+	      'div',
+	      { id: 'picture-div' },
+	      React.createElement(
+	        'div',
+	        { className: 'picture-amount-container' },
+	        React.createElement(
+	          'h1',
+	          { className: 'picture-amount-header' },
+	          activeCandidate.familiarName.split(' ')[0]
+	        ),
+	        React.createElement(
+	          'h1',
+	          { className: 'picture-amount-header' },
+	          activeCandidate.familiarName.split(' ')[1]
+	        )
+	      ),
+	      React.createElement('img', { src: activeCandidate.image })
+	    );
+	  }
+	});
+
+	module.exports = Picture;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/** @jsx React.DOM */'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -49822,9 +49890,9 @@
 	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 	// child components
-	var PastAmount = __webpack_require__(253),
-	    PastChart = __webpack_require__(254),
-	    YearSelect = __webpack_require__(255);
+	var PastAmount = __webpack_require__(254),
+	    PastChart = __webpack_require__(255),
+	    YearSelect = __webpack_require__(256);
 
 	var PastCampaign = React.createClass({
 	  displayName: 'PastCampaign',
@@ -49865,7 +49933,7 @@
 	module.exports = PastCampaign;
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
@@ -49919,7 +49987,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
@@ -49965,7 +50033,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React, Reflux) {/** @jsx React.DOM */'use strict';
@@ -50022,16 +50090,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(197)))
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(257);
+	var content = __webpack_require__(258);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(259)(content, {});
+	var update = __webpack_require__(260)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -50048,14 +50116,14 @@
 	}
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(258)();
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px;\n  background-color: #ffffff; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding-top: 8.33333px; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 18px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 30px; }\n  .past-difference {\n    font-size: 36px; } }\n\nrect {\n  fill: #999;\n  cursor: pointer; }\n\n#bar-chart-target {\n  width: 80%;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px;\n    margin: 12.5px auto; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 12.5px 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  width: 100px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #999;\n  background-color: #666;\n  border-color: #666; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  padding: 25px 0; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 150px;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    float: left;\n    padding: 0 12.5px;\n    width: 25%; }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 20px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #666;\n  color: #fff;\n  cursor: pointer; }\n\nli.nav-tab.active {\n  background-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.general-container {\n  width: 80%;\n  margin: 25px auto; }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
+	exports = module.exports = __webpack_require__(259)();
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding-top: 8.33333px; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 36px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 48px; }\n  .past-difference {\n    font-size: 36px; } }\n\nrect {\n  fill: #999;\n  cursor: pointer; }\n\n#bar-chart-target {\n  width: 80%;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px;\n    margin: 12.5px auto; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 0 auto 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 0 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  width: 125px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #999;\n  background-color: #666;\n  border-color: #666; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n#picture-div {\n  width: 80%;\n  margin: 25px auto 0 auto;\n  height: 200px;\n  overflow: hidden; }\n  #picture-div h1 {\n    font-size: 3em; }\n  #picture-div h3 {\n    font-size: 2em; }\n\n#picture-div img {\n  display: block;\n  margin: auto;\n  margin-top: -150px;\n  z-index: 1;\n  width: 500px;\n  height: auto; }\n\n@media (max-width: 600px) {\n  #picture-div img {\n    margin-left: -70px; } }\n\n.picture-amount-container {\n  z-index: 2;\n  color: #fff;\n  position: absolute;\n  margin-left: auto;\n  margin-right: auto;\n  left: 0;\n  right: 0;\n  top: 150px; }\n\n.picture-amount-header {\n  text-align: center;\n  text-transform: uppercase;\n  padding: 12.5px; }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  padding: 25px 0; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 150px;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    float: left;\n    padding: 0 12.5px;\n    width: 25%; }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 20px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #666;\n  color: #fff;\n  cursor: pointer; }\n\nli.nav-tab.active {\n  background-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.primary-header {\n  font-size: 48px;\n  width: 100%;\n  text-align: center;\n  text-transform: uppercase; }\n\n.general-container {\n  width: 80%;\n  margin: 25px auto; }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports) {
 
 	/*
@@ -50111,7 +50179,7 @@
 
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -50336,12 +50404,12 @@
 
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var ajax = __webpack_require__(261);
+	var ajax = __webpack_require__(262);
 
 	function load(url) {
 	  var _this = this;
@@ -50361,15 +50429,15 @@
 	module.exports = load;
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(262);
-	var reduce = __webpack_require__(263);
+	var Emitter = __webpack_require__(263);
+	var reduce = __webpack_require__(264);
 
 	/**
 	 * Root reference for iframes.
@@ -51505,7 +51573,7 @@
 
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports) {
 
 	
@@ -51675,7 +51743,7 @@
 
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports) {
 
 	
@@ -51704,15 +51772,15 @@
 	};
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(_) {'use strict';
 
-	var commons = __webpack_require__(265);
+	var commons = __webpack_require__(266);
 
 	var formatDollarAmount = __webpack_require__(220);
-	var formatMillionString = __webpack_require__(266);
+	var formatMillionString = __webpack_require__(267);
 
 	function firstName(name) {
 	  var arr = name.split(',').reverse();
@@ -51743,14 +51811,18 @@
 	    element.initials = element.familiarName.split(' ').map(function (word) {
 	      return word.slice(0, 1);
 	    }).join('');
+	    element.image = _.result(_.find(commons, function (cand) {
+	      return cand.fecId === element.fecId;
+	    }), 'image');
 	  });
 	  return candidates;
 	}
 
 	module.exports = formatCandidates;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)))
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -51758,83 +51830,102 @@
 	module.exports = [{
 	  "last": "Chafee",
 	  "common": "Lincoln",
-	  "fecId": "P60008075"
+	  "fecId": "P60008075",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Lincoln_Chafee_official_portrait.jpg/440px-Lincoln_Chafee_official_portrait.jpg"
 	}, {
 	  "last": "Clinton",
 	  "common": "Hillary",
-	  "fecId": "P00003392"
+	  "fecId": "P00003392",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Hillary_Clinton_official_Secretary_of_State_portrait_crop.jpg/440px-Hillary_Clinton_official_Secretary_of_State_portrait_crop.jpg"
 	}, {
 	  "last": "O'Malley",
 	  "common": "Martin",
-	  "fecId": "P60007671"
+	  "fecId": "P60007671",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Governor_O%27Malley_Portrait.jpg/440px-Governor_O%27Malley_Portrait.jpg"
 	}, {
 	  "last": "Sanders",
 	  "common": "Bernie",
-	  "fecId": "P60007168"
+	  "fecId": "P60007168",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Bernie_Sanders.jpg/440px-Bernie_Sanders.jpg"
 	}, {
 	  "last": "Webb",
 	  "common": "Jim",
-	  "fecId": "P60008885"
+	  "fecId": "P60008885",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Jim_Webb_official_110th_Congress_photo.jpg/440px-Jim_Webb_official_110th_Congress_photo.jpg"
 	}, {
 	  "last": "Bush",
 	  "common": "Jeb",
-	  "fecId": "P60008059"
+	  "fecId": "P60008059",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg/500px-Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg"
 	}, {
 	  "last": "Carson",
 	  "common": "Ben",
-	  "fecId": "P60005915"
+	  "fecId": "P60005915",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Ben_Carson%2C_MD.jpg/340px-Ben_Carson%2C_MD.jpg"
 	}, {
 	  "last": "Christie",
 	  "common": "Chris",
-	  "fecId": "P60008521"
+	  "fecId": "P60008521",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Chris_Christie_April_2015.jpg/440px-Chris_Christie_April_2015.jpg"
 	}, {
 	  "last": "Cruz",
 	  "common": "Ted",
-	  "fecId": "P60006111"
+	  "fecId": "P60006111",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Ted_Cruz%2C_official_portrait%2C_113th_Congress.jpg/440px-Ted_Cruz%2C_official_portrait%2C_113th_Congress.jpg"
 	}, {
 	  "last": "Fiorina",
 	  "common": "Carly",
-	  "fecId": "P60007242"
+	  "fecId": "P60007242",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Carly_fiorina_speaking.jpg/440px-Carly_fiorina_speaking.jpg"
 	}, {
 	  "last": "Graham",
 	  "common": "Lindsey",
-	  "fecId": "P60007697"
+	  "fecId": "P60007697",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Lindsey_Graham%2C_Official_Portrait_2006.jpg/440px-Lindsey_Graham%2C_Official_Portrait_2006.jpg"
 	}, {
 	  "last": "Huckabee",
 	  "common": "Mike",
-	  "fecId": "P80003478"
+	  "fecId": "P80003478",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Mike_Huckabee.jpg/440px-Mike_Huckabee.jpg"
 	}, {
 	  "last": "Jindal",
 	  "common": "Bobby",
-	  "fecId": "P60008398"
+	  "fecId": "P60008398",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Gov._Bobby_Jindal_in_Oklahoma_2015.jpg/440px-Gov._Bobby_Jindal_in_Oklahoma_2015.jpg"
 	}, {
 	  "last": "Pataki",
 	  "common": "George",
-	  "fecId": "P60007572"
+	  "fecId": "P60007572",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Governor_Pataki_2015.jpg/440px-Governor_Pataki_2015.jpg"
 	}, {
 	  "last": "Paul",
 	  "common": "Rand",
-	  "fecId": "P40003576"
+	  "fecId": "P40003576",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Rand_Paul%2C_official_portrait%2C_112th_Congress_alternate.jpg/440px-Rand_Paul%2C_official_portrait%2C_112th_Congress_alternate.jpg"
 	}, {
 	  "last": "Perry",
 	  "common": "Rick P",
-	  "fecId": "P20003281"
+	  "fecId": "P20003281",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Governor_Rick_Perry_in_October_2013.jpg/370px-Governor_Rick_Perry_in_October_2013.jpg"
 	}, {
 	  "last": "Rubio",
 	  "common": "Marco",
-	  "fecId": "P60006723"
+	  "fecId": "P60006723",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Marco_Rubio%2C_Official_Portrait%2C_112th_Congress.jpg/440px-Marco_Rubio%2C_Official_Portrait%2C_112th_Congress.jpg"
 	}, {
 	  "last": "Santorum",
 	  "common": "Rick S",
-	  "fecId": "P20002721"
+	  "fecId": "P20002721",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rick_Santorum_by_Gage_Skidmore_8.jpg/440px-Rick_Santorum_by_Gage_Skidmore_8.jpg"
 	}, {
 	  "last": "Trump",
 	  "common": "Donald",
-	  "fecId": "P80001571"
+	  "fecId": "P80001571",
+	  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Donald_Trump_March_2015.jpg/440px-Donald_Trump_March_2015.jpg"
 	}];
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {'use strict';
@@ -51849,7 +51940,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)))
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51866,7 +51957,7 @@
 
 	var App = __webpack_require__(196),
 	    CurrentCampaign = __webpack_require__(225),
-	    PastCampaign = __webpack_require__(252);
+	    PastCampaign = __webpack_require__(253);
 
 	/* export react routes for BOTH client and server use */
 
