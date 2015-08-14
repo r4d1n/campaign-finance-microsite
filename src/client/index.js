@@ -27,6 +27,7 @@ load('api/records/latest')
 .then((body) => {
   let candidates = formatCandidates(body.current);
   let past = body.past;
+  // format past candidates TODO MOVE TO SERVER 
   for (let year in past) {
     past[year].sort((a,b) => {
       return b.receipts - a.receipts;
@@ -39,6 +40,7 @@ load('api/records/latest')
       }).join('')
     }
   }
+  console.log(candidates)
   Router.run(routes, Router.HistoryLocation, function (Handler) {
     React.render(<Handler candidates={candidates} past={past}/>, document.body);
   });

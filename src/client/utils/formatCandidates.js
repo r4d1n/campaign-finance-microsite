@@ -36,6 +36,9 @@ function formatCandidates (candidates) {
     element.initials = element.familiarName.split(' ').map((word) => {
       return word.slice(0,1)
     }).join('')
+    element.image = _.result(_.find(commons, (cand) => {
+      return cand.fecId === element.fecId;
+    }), 'image')
   })
   return candidates
 }
