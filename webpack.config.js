@@ -17,7 +17,7 @@ module.exports = {
       { test: /\.json$/, loader: 'json' },
       { test: /\.css$/, loader: 'style!css' },
       { test: /\.scss$/, loader: 'style!css!autoprefixer!sass!' },
-      { test: /\.jsx$/, loader: 'jsx-loader?insertPragma=React.DOM&harmony!babel' },
+      { test: /\.jsx$/, loader: 'jsx-loader?insertPragma=React.DOM!babel' },
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
     ]
   },
