@@ -25,11 +25,11 @@ function draw (data) {
   .data(data)
   .enter()
   .append("g")
+  .attr("id", function(d) { return 'svg-bar-' + d.id }) // for click events
 
   let bars = svg.selectAll("g")
   .append("rect")
   .attr("class", "bar")
-  .attr("id", function(d) { return 'svg-bar-' + d.id }) // for click events
   .attr("x", function(d) { return x(d.name); })
   .attr("width", x.rangeBand())
   .attr("height", 0 )
