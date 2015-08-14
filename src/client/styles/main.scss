@@ -38,3 +38,7 @@ section {
   height: 100%;
   // padding-top: $spacing-unit;
 }
+
+*{
+    -webkit-tap-highlight-color:transparent; // prevent flicker on ios
+}
