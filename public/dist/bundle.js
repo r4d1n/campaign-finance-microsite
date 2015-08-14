@@ -49953,7 +49953,7 @@
 	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 	// child components
-	var PastAmount = __webpack_require__(254),
+	var PastNames = __webpack_require__(254),
 	    PastChart = __webpack_require__(255),
 	    YearSelect = __webpack_require__(256);
 
@@ -49984,7 +49984,7 @@
 	      React.createElement(
 	        'div',
 	        null,
-	        React.createElement(PastAmount, _extends({}, this.props, { difference: difference, candidates: candidates })),
+	        React.createElement(PastNames, _extends({}, this.props, { difference: difference, candidates: candidates })),
 	        React.createElement(PastChart, _extends({}, this.props, { candidates: candidates })),
 	        React.createElement(YearSelect, { activeYear: activeYear })
 	      )
@@ -50001,8 +50001,8 @@
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
 
-	var PastAmount = React.createClass({
-	  displayName: 'PastAmount',
+	var PastNames = React.createClass({
+	  displayName: 'PastNames',
 
 	  render: function render() {
 	    var _props = this.props;
@@ -50046,7 +50046,7 @@
 	  }
 	});
 
-	module.exports = PastAmount;
+	module.exports = PastNames;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },

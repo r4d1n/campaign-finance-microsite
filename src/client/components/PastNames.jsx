@@ -1,6 +1,6 @@
 'use strict';
 
-let PastAmount = React.createClass({
+let PastNames = React.createClass({
 
   render() {
     let { activeYear, candidates, difference } = this.props
@@ -13,7 +13,7 @@ let PastAmount = React.createClass({
         <div className='amount'>
           <hr/>
           <h1 className={winnerClass}>{candidates[0].name}</h1>
-          <h3>outraised</h3>
+          <h3 className='outraised'>outraised</h3>
           <h3 className={loserClass}>{candidates[1].name}</h3>
           <hr/>
           <h3 className='past-year'>{`In ${activeYear}`}</h3>
@@ -23,4 +23,4 @@ let PastAmount = React.createClass({
   }
 });
 
-module.exports = PastAmount;
+module.exports = PastNames;
