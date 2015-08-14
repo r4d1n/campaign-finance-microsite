@@ -36,7 +36,7 @@ function formatCandidates (candidates) {
     element.initials = element.familiarName.split(' ').map((word) => {
       return word.slice(0,1)
     }).join('')
-    element.image = "/images/" + lastName(element.name.toLowerCase()) + ".jpg"
+    element.image = "/images/" + lastName(element.name.toLowerCase()) + ".png"
   })
   return candidates
 }
