@@ -39,7 +39,6 @@ load('api/records/latest')
       }).join('')
     }
   }
-  console.log(past, candidates)
   Router.run(routes, Router.HistoryLocation, function (Handler) {
     React.render(<Handler candidates={candidates} past={past}/>, document.body);
   });
