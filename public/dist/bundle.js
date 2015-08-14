@@ -23620,6 +23620,7 @@
 	  },
 
 	  clickTab: function clickTab(e) {
+	    e.preventDefault();
 	    if (e.target.children[0] && e.target.children[0].tagName === 'A') {
 	      e.target.children[0].click();
 	    }
@@ -23664,7 +23665,7 @@
 	          { role: 'tablist' },
 	          React.createElement(
 	            'li',
-	            { id: 'left-tab', className: currentTabClass, onClick: this.clickTab },
+	            { id: 'left-tab', className: currentTabClass, onClick: this.clickTab, onTouch: this.clickTab },
 	            React.createElement(
 	              Link,
 	              { to: 'current', className: 'nav-link', role: 'tab' },
@@ -23673,7 +23674,7 @@
 	          ),
 	          React.createElement(
 	            'li',
-	            { id: 'right-tab', className: pastTabClass, onClick: this.clickTab },
+	            { id: 'right-tab', className: pastTabClass, onClick: this.clickTab, onTouch: this.clickTab },
 	            React.createElement(
 	              Link,
 	              { to: 'past', params: { year: activeYear }, className: 'nav-link', role: 'tab' },
@@ -40030,6 +40031,7 @@
 	    // update active candidate by tapping on a bar in the d3 chart
 	    var candidates = this.props.candidates;
 
+	    console.log(e.target);
 	    var selected = _.find(candidates, function (item) {
 	      return new RegExp(item.id).exec(e.target.id);
 	    });
@@ -40050,7 +40052,7 @@
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {},
 
 	  render: function render() {
-	    return React.createElement('div', { onClick: this.selectCandidate, id: 'bar-chart-target' });
+	    return React.createElement('div', { onClick: this.selectCandidate, onTouch: this.selectCandidate, id: 'bar-chart-target' });
 	  }
 	});
 
