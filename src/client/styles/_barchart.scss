@@ -6,6 +6,7 @@ rect {
   width: 80%;
   height: 400px;
   margin: $spacing-unit / 2 auto;
+  position: relative;
 }
 
 @media screen and (max-width: 600px) {
@@ -23,14 +24,6 @@ rect {
     margin: $spacing-unit / 2 auto;
   }
 }
-//
-// @media screen and (max-width: 1500px) {
-//   #bar-chart-target {
-//     height: 500;
-//     width: 600;
-//     margin: $spacing-unit / 2 auto;
-//   }
-// }
 
 .bar.selected {
   transition: fill .5s;
@@ -50,8 +43,11 @@ rect {
 }
 
 .tap-to-change {
+  position: relative;
   width: 80%;
+  height: $spacing-unit;
   margin: 0 auto;
+  padding: $spacing-unit 0 $spacing-unit / 2 0;
   h3 {
     text-align: center;
     font-size: 1.25em;

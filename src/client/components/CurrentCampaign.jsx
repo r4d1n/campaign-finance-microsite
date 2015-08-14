@@ -16,10 +16,10 @@ let CurrentCampaign = React.createClass({
       <ReactCSSTransitionGroup transitionName="campaign" transitionAppear={true}>
         <div>
           <CurrentAmount activeCandidate={activeCandidate} />
-          <CurrentChart {...this.props} activeCandidate={activeCandidate} />
           <div className='tap-to-change'>
             <h3>Tap Bars to Reveal Leading Fundraisers</h3>
           </div>
+          <CurrentChart {...this.props} activeCandidate={activeCandidate} />
         </div>
       </ReactCSSTransitionGroup>
     );
