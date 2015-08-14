@@ -11,17 +11,20 @@
 
 li.nav-tab {
   width: 50%;
-  height: 20px;
+  height: $spacing-unit * 2;
   float: left;
   padding: $spacing-unit / 2 0 $spacing-unit / 2 0;
   text-align: center;
-  background-color: #666;
+  background-color: #eaeaea;
   color: #fff;
   cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid #999;
 }
 
 li.nav-tab.active {
   background-color: #fff;
+  border-color: #fff;
   a.nav-link {
     color: #000;
   }

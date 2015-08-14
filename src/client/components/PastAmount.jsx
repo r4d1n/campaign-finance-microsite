@@ -11,12 +11,12 @@ let PastAmount = React.createClass({
     return (
       <div className='big-num-bar'>
         <div className='amount'>
-          <h3 className='past-year'>{`In ${activeYear}`}</h3>
           <hr/>
           <h1 className={winnerClass}>{candidates[0].name}</h1>
           <h3>outraised</h3>
           <h3 className={loserClass}>{candidates[1].name}</h3>
           <hr/>
+          <h3 className='past-year'>{`In ${activeYear}`}</h3>
         </div>
       </div>
     );

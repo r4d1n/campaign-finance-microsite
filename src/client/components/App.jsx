@@ -73,7 +73,6 @@ let App = React.createClass({
             </li>
           </ul>
         </nav>
-        <header><h1 className="primary-header">Who Will Win The Race?</h1></header>
         <RouteHandler {...this.props} activeCandidate={activeCandidate} activeYear={activeYear} />
         <Share />
       </div>

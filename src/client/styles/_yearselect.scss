@@ -1,9 +1,10 @@
 button.year {
   font-family: inherit;
   font-size: inherit;
-  background-color: #ffffff;
-  border: 1px solid $base-black;
-  color: $base-black;
+  background-color: #eaeaea;
+  border: 2px solid $base-black;
+  color: #999;
+  border-color: #999;
   width: 125px;
   border-radius: 10px;
   margin: $spacing-unit / 4;
@@ -13,9 +14,9 @@ button.year {
 }
 
 button.year.active {
-  color: #999;
-  background-color: #666;
-  border-color: #666;
+  color: $base-black;
+  background-color: $base-white;
+  border-color: $base-black;
 }
 
 .year-select-container {
@@ -36,8 +37,15 @@ button.year.active {
   padding-right: $spacing-unit;
 }
 
-// @media screen and (max-width: 600px) {
-//   .year-select-container.ul {
-//     width: 300px;
-//   }
-// }
+
+@media (max-width: 450px) {
+  button.year {
+    width: 75px;
+  }
+}
+
+@media (max-width: 600px) {
+  button.year {
+    width: 100px;
+  }
+}
