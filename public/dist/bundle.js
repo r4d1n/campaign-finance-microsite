@@ -23633,13 +23633,6 @@
 	    updateSelectedCandidate(candidates[0]);
 	  },
 
-	  componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
-	    if (this.state.activeYear != nextState.activeYear) {
-	      var href = this.makeHref('past', { year: nextState.activeYear });
-	      this.replaceWith(href);
-	    }
-	  },
-
 	  render: function render() {
 	    var candidates = this.props.candidates;
 	    var _state = this.state;
@@ -23682,15 +23675,6 @@
 	              'Past'
 	            )
 	          )
-	        )
-	      ),
-	      React.createElement(
-	        'header',
-	        null,
-	        React.createElement(
-	          'h1',
-	          { className: 'primary-header' },
-	          'Electionomics'
 	        )
 	      ),
 	      React.createElement(RouteHandler, _extends({}, this.props, { activeCandidate: activeCandidate, activeYear: activeYear })),
@@ -37881,16 +37865,16 @@
 	      React.createElement(
 	        'div',
 	        null,
-	        React.createElement(Picture, this.props),
 	        React.createElement(
-	          'div',
-	          { className: 'tap-to-change' },
+	          'header',
+	          null,
 	          React.createElement(
-	            'h3',
-	            null,
-	            'Top Five Fundraisers'
+	            'h1',
+	            { className: 'primary-header' },
+	            'Who Will Win The Race?'
 	          )
 	        ),
+	        React.createElement(Picture, this.props),
 	        React.createElement(CurrentChart, _extends({}, this.props, { activeCandidate: activeCandidate }))
 	      )
 	    );
@@ -37899,7 +37883,6 @@
 	});
 
 	module.exports = CurrentCampaign;
-	/*<CurrentAmount activeCandidate={activeCandidate} />*/
 
 /***/ },
 /* 226 */
@@ -40043,8 +40026,8 @@
 	    // update active candidate by tapping on a bar in the d3 chart
 	    var candidates = this.props.candidates;
 
-	    var targetId = e.target.id;
-	    if (!targetId) targetId = e.target.parentNode.firstChild.id;
+	    // get id from parent 'g' element
+	    var targetId = e.target.parentNode.id;
 	    var selected = _.find(candidates, function (item) {
 	      return new RegExp(item.id).exec(targetId);
 	    });
@@ -40121,12 +40104,11 @@
 	    return d.totalReceipts;
 	  }) + 10000000]);
 
-	  var group = svg.selectAll("g").data(data).enter().append("g");
-
-	  var bars = svg.selectAll("g").append("rect").attr("class", "bar").attr("id", function (d) {
+	  var group = svg.selectAll("g").data(data).enter().append("g").attr("class", "current-bar-group").attr("id", function (d) {
 	    return 'svg-bar-' + d.id;
-	  }) // for click events
-	  .attr("x", function (d) {
+	  }); // for click events
+
+	  var bars = svg.selectAll("g").append("rect").attr("class", "bar").attr("x", function (d) {
 	    return x(d.name);
 	  }).attr("width", x.rangeBand()).attr("height", 0).attr("y", height) // height here is the whole chart
 	  .transition().delay(function (d, i) {
@@ -49882,15 +49864,7 @@
 	    }));
 	    var m = i + 1;
 	    if (m >= candidates.length) m = 0;
-	    console.log('after', i, m);
 	    updateSelectedCandidate(candidates[m]);
-	  },
-
-	  componentDidUpdate: function componentDidUpdate() {
-	    var activeCandidate = this.props.activeCandidate;
-
-	    console.log(activeCandidate.id);
-	    // document.getElementById("picture-div").style.backgroundImage = `url(${activeCandidate.image})`;
 	  },
 
 	  render: function render() {
@@ -50019,11 +49993,6 @@
 	      React.createElement(
 	        'div',
 	        { className: 'amount' },
-	        React.createElement(
-	          'h3',
-	          { className: 'past-year' },
-	          'In ' + activeYear
-	        ),
 	        React.createElement('hr', null),
 	        React.createElement(
 	          'h1',
@@ -50032,7 +50001,7 @@
 	        ),
 	        React.createElement(
 	          'h3',
-	          null,
+	          { className: 'outraised' },
 	          'outraised'
 	        ),
 	        React.createElement(
@@ -50040,7 +50009,12 @@
 	          { className: loserClass },
 	          candidates[1].name
 	        ),
-	        React.createElement('hr', null)
+	        React.createElement('hr', null),
+	        React.createElement(
+	          'h3',
+	          { className: 'past-year' },
+	          'In ' + activeYear
+	        )
 	      )
 	    );
 	  }
@@ -50183,7 +50157,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(259)();
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding-top: 8.33333px; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 36px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 48px; }\n  .past-difference {\n    font-size: 36px; } }\n\nrect {\n  fill: #999;\n  cursor: pointer; }\n\n#bar-chart-target {\n  width: 80%;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative;\n  padding-bottom: 25px; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 0 auto 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 0 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #ffffff;\n  border: 1px solid #000000;\n  color: #000000;\n  width: 125px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #999;\n  background-color: #666;\n  border-color: #666; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n#picture-div {\n  position: relative;\n  width: 80%;\n  margin: 25px auto 0 auto;\n  height: 200px;\n  color: #fff;\n  overflow: hidden; }\n  #picture-div h1 {\n    font-size: 3em; }\n  #picture-div h3 {\n    font-size: 2em; }\n\n#picture-div img {\n  display: block;\n  margin: auto;\n  margin-top: -200px;\n  z-index: 1;\n  width: 100%;\n  height: auto; }\n\n.picture-name-container {\n  z-index: 2;\n  position: absolute;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n  left: 0;\n  right: 0;\n  top: 15%; }\n\n.picture-name-header {\n  text-align: center;\n  text-transform: uppercase;\n  padding: 12.5px; }\n\n.arrow-icon, .left-icon, .right-icon {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  margin-top: auto;\n  margin-bottom: auto;\n  width: 100px;\n  height: 100px;\n  opacity: .7;\n  cursor: pointer; }\n\n.left-icon {\n  left: 0px;\n  text-align: left; }\n\n.right-icon {\n  right: 0px;\n  text-align: right; }\n\n@media (max-width: 450px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -70px; }\n  .right-icon {\n    right: 0px;\n    padding-right: 0px; }\n  .left-icon {\n    left: 0px;\n    padding-left: 0px; } }\n\n@media (min-width: 500) and (max-width: 800) {\n  #picture-div img {\n    margin-top: -100px; } }\n\n@media (min-width: 1200px) {\n  #picture-div img {\n    margin-top: -400px; } }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  padding: 25px 0; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 150px;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    float: left;\n    padding: 0 12.5px;\n    width: 25%; }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 20px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #666;\n  color: #fff;\n  cursor: pointer; }\n\nli.nav-tab.active {\n  background-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.picture-div-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\n.picture-div-appear.picture-div-appear-active {\n  opacity: 1; }\n\n.picture-div-leave {\n  opacity: 1; }\n\n.picture-div-leave.picture-div-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.primary-header {\n  font-size: 48px;\n  width: 80%;\n  margin: 0 auto;\n  text-align: center;\n  text-transform: uppercase; }\n\n@media (max-width: 445px) {\n  .primary-header {\n    font-size: 24px; } }\n\n.general-container {\n  width: 80%;\n  margin: 25px auto; }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  max-width: 600px;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\n.outraised {\n  font-size: 24px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding: 8.33333px 0; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 36px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 48px; }\n  .past-difference {\n    font-size: 36px; } }\n\n#bar-chart-target {\n  width: 80%;\n  max-width: 600px;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative;\n  padding-bottom: 25px; }\n\ng.current-bar-group {\n  cursor: pointer; }\n\nrect {\n  fill: #999; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 0 auto 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  max-width: 600px;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 0 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #eaeaea;\n  border: 2px solid #000000;\n  color: #999;\n  border-color: #999;\n  width: 125px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #000000;\n  background-color: #ffffff;\n  border-color: #000000; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  max-width: 600px;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n@media (max-width: 450px) {\n  button.year {\n    width: 75px; } }\n\n@media (max-width: 600px) {\n  button.year {\n    width: 100px; } }\n\n#picture-div {\n  position: relative;\n  width: 80%;\n  max-width: 600px;\n  margin: 25px auto 0 auto;\n  height: 200px;\n  color: #fff;\n  overflow: hidden; }\n\n#picture-div img {\n  display: block;\n  margin: auto;\n  margin-top: -200px;\n  z-index: 1;\n  width: 100%;\n  height: auto; }\n\n.picture-name-container {\n  z-index: 2;\n  position: absolute;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: 25px;\n  left: 0;\n  right: 0;\n  top: 15%; }\n\n.picture-name-header {\n  text-align: center;\n  text-transform: uppercase;\n  padding: 12.5px;\n  font-size: 60px; }\n\n.arrow-icon, .left-icon, .right-icon {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  margin-top: auto;\n  margin-bottom: auto;\n  width: 100px;\n  height: 100px;\n  opacity: .5;\n  cursor: pointer;\n  padding: 0 10px; }\n\n.left-icon {\n  left: 0px;\n  text-align: left; }\n\n.right-icon {\n  right: 0px;\n  text-align: right; }\n\n@media (max-width: 450px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -70px; }\n  .picture-name-header {\n    font-size: 48px; }\n  .right-icon {\n    right: 0px; }\n  .left-icon {\n    left: 0px; } }\n\n@media (min-width: 451px) and (max-width: 600px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -100px; } }\n\n@media (min-width: 601px) and (max-width: 800px) {\n  #picture-div img {\n    margin-top: -100px; } }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 100%;\n  height: 50px;\n  background-color: #ffffff;\n  padding: 25px 0; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 150px;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    float: left;\n    padding: 0 12.5px;\n    width: 25%; }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 50px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #eaeaea;\n  color: #fff;\n  cursor: pointer;\n  box-sizing: border-box;\n  border: 1px solid #999; }\n\nli.nav-tab.active {\n  background-color: #fff;\n  border-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.picture-div-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\n.picture-div-appear.picture-div-appear-active {\n  opacity: 1; }\n\n.picture-div-leave {\n  opacity: 1; }\n\n.picture-div-leave.picture-div-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.primary-header {\n  font-size: 36px;\n  width: 80%;\n  max-width: 600px;\n  margin: 0 auto;\n  padding-top: 10px;\n  text-align: center;\n  text-transform: uppercase; }\n\n@media (max-width: 550px) {\n  .primary-header {\n    font-size: 20px; } }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
 
 /***/ },
 /* 259 */
@@ -51874,7 +51848,7 @@
 	    element.initials = element.familiarName.split(' ').map(function (word) {
 	      return word.slice(0, 1);
 	    }).join('');
-	    element.image = "/images/" + lastName(element.name.toLowerCase()) + ".jpg";
+	    element.image = "/images/" + lastName(element.name.toLowerCase()) + ".png";
 	  });
 	  return candidates;
 	}
@@ -52027,7 +52001,7 @@
 	  React.createElement(DefaultRoute, { handler: CurrentCampaign }),
 	  React.createElement(NotFoundRoute, { handler: CurrentCampaign }),
 	  React.createElement(Route, { name: 'current', path: 'current', handler: CurrentCampaign }),
-	  React.createElement(Route, { name: 'past', path: 'past/:year', handler: PastCampaign, ignoreScrollBehavior: true })
+	  React.createElement(Route, { name: 'past', path: 'past', handler: PastCampaign, ignoreScrollBehavior: true })
 	)];
 
 /***/ }
