@@ -25,6 +25,7 @@ function draw (data) {
   .data(data)
   .enter()
   .append("g")
+  .attr("class", "current-bar-group")
   .attr("id", function(d) { return 'svg-bar-' + d.id }) // for click events
 
   let bars = svg.selectAll("g")
