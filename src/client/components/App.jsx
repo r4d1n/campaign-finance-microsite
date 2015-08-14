@@ -31,6 +31,7 @@ let App = React.createClass({
   },
 
   clickTab(e) {
+    e.preventDefault()
     if (e.target.children[0] && e.target.children[0].tagName === 'A') {
       e.target.children[0].click();
     }
@@ -65,10 +66,10 @@ let App = React.createClass({
       <div>
         <nav className='nav-main'>
           <ul role='tablist'>
-            <li id='left-tab' className={currentTabClass} onClick={this.clickTab}>
+            <li id='left-tab' className={currentTabClass} onClick={this.clickTab} onTouch={this.clickTab}>
               <Link to="current" className='nav-link' role='tab'>Upcoming</Link>
             </li>
-            <li id='right-tab' className={pastTabClass} onClick={this.clickTab}>
+            <li id='right-tab' className={pastTabClass} onClick={this.clickTab} onTouch={this.clickTab}>
               <Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link>
             </li>
           </ul>

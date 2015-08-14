@@ -11,6 +11,7 @@ let CurrentChart = React.createClass({
   selectCandidate(e) {
     // update active candidate by tapping on a bar in the d3 chart
     let { candidates } = this.props;
+    console.log(e.target)
     let selected = _.find(candidates, item => new RegExp(item.id).exec(e.target.id) )
     if (selected) {
       updateSelectedCandidate(selected);
@@ -32,7 +33,7 @@ let CurrentChart = React.createClass({
 
   render: function () {
     return (
-      <div onClick={this.selectCandidate} id='bar-chart-target'></div>
+      <div onClick={this.selectCandidate} onTouch={this.selectCandidate} id='bar-chart-target'></div>
     );
   }
 });
