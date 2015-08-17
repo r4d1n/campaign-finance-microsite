@@ -38872,7 +38872,7 @@
 	          React.createElement(
 	            'h1',
 	            { className: 'primary-header' },
-	            'Who Will Win The Fund Race?'
+	            'Who\'s Winning The Fund Race?'
 	          )
 	        ),
 	        React.createElement(Picture, _extends({}, this.props, { displayCandidate: activeCandidate })),
