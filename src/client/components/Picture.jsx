@@ -49,8 +49,8 @@ let Picture = React.createClass({
     <div onClick={this.afterCandidate} className='right-icon'><i className='fa fa-angle-right fa-5x'></i></div> ];
 
       let leftArrow, rightArrow;
-      let showArrows = this.shouldShowArrows();
-      if (showArrows) {
+
+      if (this.shouldShowArrows()) {
         leftArrow = arrows[0];
         rightArrow = arrows[1];
       }

@@ -11,6 +11,7 @@ button.year {
   line-height: $spacing-unit;
   height: $spacing-unit * 2;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 button.year.active {
