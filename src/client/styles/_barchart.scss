@@ -29,6 +29,9 @@ rect {
     width: 400;
     margin: 0 auto $spacing-unit / 2 auto;
   }
+  .bar-label-black.bar-label-current {
+    font-size: 1em;
+  }
 }
 
 .bar.selected {

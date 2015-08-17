@@ -43,7 +43,7 @@ function draw (data) {
   let millions = svg.selectAll("g")
   .append("text")
   .attr("text-anchor", "middle")
-  .attr('class', 'bar-label-black')
+  .attr('class', 'bar-label-black bar-label-current')
   .attr("x", function(d,i) { return x(d.name) + x.rangeBand() / 2} )
   .attr("dy", ".75em")
   .attr('opacity', 0)
