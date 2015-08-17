@@ -6,13 +6,14 @@ let { height, width, margin, colors } = require('./setup');
 
 
 function draw (data) {
-
   let svg = d3.select('#bar-chart-target').append('svg')
   .attr("id", "past-chart-svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+  .attr("title", "Past Campaigns Chart")
+  .attr("desc", "A Bar Chart Comparing Fundraising in Past Presidential Campaigns")
 
   let x = d3.scale.ordinal()
   .rangeRoundBands([0, width], .1);

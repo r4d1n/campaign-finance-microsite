@@ -11,6 +11,15 @@ function draw (data) {
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+  .attr("title", "Upcoming Campaign Chart")
+  .attr("desc", "A Bar Chart Comparing Fundraising in the Upcoming Presidential Campaign")
+
+  // svg.append("text")
+  // .attr("x", (width / 2))
+  // .attr("y", 0 - (margin.top / 2))
+  // .attr("text-anchor", "middle")
+  // .attr("class", "bar-label-black")
+  // .text("Official Campaign Receipts");
 
   let x = d3.scale.ordinal()
   .rangeRoundBands([0, width], .1);
