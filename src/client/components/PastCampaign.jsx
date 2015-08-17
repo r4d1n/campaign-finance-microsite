@@ -30,6 +30,7 @@ let PastCampaign = React.createClass({
     return (
       <ReactCSSTransitionGroup transitionName="campaign" transitionAppear={true}>
         <div>
+          <header><h1 className="primary-header">Past Winners</h1></header>
           <Picture displayCandidate={candidates[0]} />
           <PastChart {...this.props} candidates={candidates} />
           <YearSelect activeYear={activeYear} />
