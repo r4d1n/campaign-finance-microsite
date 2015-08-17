@@ -23,7 +23,7 @@ var mongoose = require('mongoose');
 if (process.env.NODE_ENV==='development') {
   mongoose.connect('mongodb://localhost/' + config.DEV_DB);
   console.log(process.env.NODE_ENV)
-  // require('./src/server/sunlightRequest').init()
+  require('./src/server/sunlightRequest').init()
 }
 
 if (process.env.NODE_ENV==='test') {
