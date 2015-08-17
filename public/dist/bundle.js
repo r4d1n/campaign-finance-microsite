@@ -72,24 +72,29 @@
 	load('api/records/latest').then(function (body) {
 	  var candidates = formatCandidates(body.current);
 	  var past = body.past;
+	  // console.log(candidates, past)
 	  // format past candidates TODO MOVE TO SERVER
-	  for (var year in past) {
-	    past[year].sort(function (a, b) {
-	      return b.receipts - a.receipts;
-	    });
-	    for (var i = 0; i < past[year].length; i++) {
-	      past[year][i].raisedString = formatDollarAmount(past[year][i].receipts);
-	      past[year][i].million = formatMillionString(past[year][i].raisedString);
-	      past[year][i].initials = past[year][i].name.split(' ').map(function (word) {
-	        return word.slice(0, 1);
-	      }).join('');
+	  if (candidates && past) {
+
+	    for (var year in past) {
+	      past[year].sort(function (a, b) {
+	        return b.receipts - a.receipts;
+	      });
+	      for (var i = 0; i < past[year].length; i++) {
+	        past[year][i].raisedString = formatDollarAmount(past[year][i].receipts);
+	        past[year][i].million = formatMillionString(past[year][i].raisedString);
+	        past[year][i].initials = past[year][i].name.split(' ').map(function (word) {
+	          return word.slice(0, 1);
+	        }).join('');
+	      }
 	    }
+	    console.log(candidates, past);
+	    Router.run(routes, Router.HistoryLocation, function (Handler) {
+	      React.render(React.createElement(Handler, { candidates: candidates, past: past }), document.body);
+	    });
 	  }
-	  console.log(candidates);
-	  Router.run(routes, Router.HistoryLocation, function (Handler) {
-	    React.render(React.createElement(Handler, { candidates: candidates, past: past }), document.body);
-	  });
-	  // document.getElementById('app-container'));
+	})['catch'](function (err) {
+	  console.log(err);
 	});
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5)))
 
@@ -37876,10 +37881,10 @@
 	          React.createElement(
 	            'h1',
 	            { className: 'primary-header' },
-	            'Who Will Win The Race?'
+	            'Who Will Win The Fund Race?'
 	          )
 	        ),
-	        React.createElement(Picture, this.props),
+	        React.createElement(Picture, _extends({}, this.props, { displayCandidate: activeCandidate })),
 	        React.createElement(CurrentChart, _extends({}, this.props, { activeCandidate: activeCandidate }))
 	      )
 	    );
@@ -40124,7 +40129,7 @@
 	    return height - y(d.totalReceipts);
 	  });
 
-	  var millions = svg.selectAll("g").append("text").attr("text-anchor", "middle").attr('class', 'bar-label-black').attr("x", function (d, i) {
+	  var millions = svg.selectAll("g").append("text").attr("text-anchor", "middle").attr('class', 'bar-label-black bar-label-current').attr("x", function (d, i) {
 	    return x(d.name) + x.rangeBand() / 2;
 	  }).attr("dy", ".75em").attr('opacity', 0).text(function (d) {
 	    return d.million;
@@ -49872,12 +49877,40 @@
 	    updateSelectedCandidate(candidates[m]);
 	  },
 
-	  render: function render() {
-	    var activeCandidate = this.props.activeCandidate;
-	    var raisedString = activeCandidate && activeCandidate.raisedString || '';
+	  shouldShowArrows: function shouldShowArrows() {
+	    if (/current/.exec(window.location.pathname)) {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  },
 
-	    var firstName = activeCandidate.familiarName.split(' ')[0];
-	    var lastName = activeCandidate.familiarName.split(' ')[1];
+	  render: function render() {
+	    var displayCandidate = this.props.displayCandidate;
+
+	    var name = displayCandidate.name;
+	    // current cands have official and familiar name
+	    if (displayCandidate.familiarName) name = displayCandidate.familiarName;
+
+	    var image = '/images' + window.location.pathname + '/' + name.toLowerCase().split(' ')[1] + '.jpg';
+
+	    var arrows = [React.createElement(
+	      'div',
+	      { onClick: this.beforeCandidate, className: 'left-icon' },
+	      React.createElement('i', { className: 'fa fa-angle-left fa-5x' })
+	    ), React.createElement(
+	      'div',
+	      { onClick: this.afterCandidate, className: 'right-icon' },
+	      React.createElement('i', { className: 'fa fa-angle-right fa-5x' })
+	    )];
+
+	    var leftArrow = undefined,
+	        rightArrow = undefined;
+	    var showArrows = this.shouldShowArrows();
+	    if (showArrows) {
+	      leftArrow = arrows[0];
+	      rightArrow = arrows[1];
+	    }
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
@@ -49887,29 +49920,21 @@
 	        { id: 'picture-div' },
 	        React.createElement(
 	          'div',
-	          { key: activeCandidate.id + '_div', className: 'picture-name-container' },
+	          { key: name.split(' ')[0] + '_div', className: 'picture-name-container' },
+	          leftArrow,
 	          React.createElement(
-	            'div',
-	            { onClick: this.beforeCandidate, className: 'left-icon' },
-	            React.createElement('i', { className: 'fa fa-angle-left fa-5x' })
+	            'h1',
+	            { key: name.split(' ')[0] + '_0', className: 'picture-name-header' },
+	            name.split(' ')[0]
 	          ),
 	          React.createElement(
 	            'h1',
-	            { key: activeCandidate.id + '_0', className: 'picture-name-header' },
-	            activeCandidate.familiarName.split(' ')[0]
+	            { key: name.split(' ')[0] + '_1', className: 'picture-name-header' },
+	            name.split(' ')[1]
 	          ),
-	          React.createElement(
-	            'h1',
-	            { key: activeCandidate.id + '_1', className: 'picture-name-header' },
-	            activeCandidate.familiarName.split(' ')[1]
-	          ),
-	          React.createElement(
-	            'div',
-	            { onClick: this.afterCandidate, className: 'right-icon' },
-	            React.createElement('i', { className: 'fa fa-angle-right fa-5x' })
-	          )
+	          rightArrow
 	        ),
-	        React.createElement('img', { key: activeCandidate.id + '_img', src: activeCandidate.image })
+	        React.createElement('img', { key: name.split(' ')[0] + '_img', src: image })
 	      )
 	    );
 	  }
@@ -49932,9 +49957,10 @@
 	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 	// child components
-	var PastNames = __webpack_require__(254),
-	    PastChart = __webpack_require__(255),
-	    YearSelect = __webpack_require__(256);
+	var PastChart = __webpack_require__(254),
+	    Picture = __webpack_require__(252),
+	    YearSelect = __webpack_require__(255),
+	    PastNames = __webpack_require__(256);
 
 	var PastCampaign = React.createClass({
 	  displayName: 'PastCampaign',
@@ -49963,7 +49989,16 @@
 	      React.createElement(
 	        'div',
 	        null,
-	        React.createElement(PastNames, _extends({}, this.props, { difference: difference, candidates: candidates })),
+	        React.createElement(
+	          'header',
+	          null,
+	          React.createElement(
+	            'h1',
+	            { className: 'primary-header' },
+	            'Past Winners'
+	          )
+	        ),
+	        React.createElement(Picture, { displayCandidate: candidates[0] }),
 	        React.createElement(PastChart, _extends({}, this.props, { candidates: candidates })),
 	        React.createElement(YearSelect, { activeYear: activeYear })
 	      )
@@ -49976,6 +50011,109 @@
 
 /***/ },
 /* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
+
+	var _require = __webpack_require__(217);
+
+	var updateSelectedCandidate = _require.updateSelectedCandidate;
+
+	var CandidateStore = __webpack_require__(218);
+
+	var viz = __webpack_require__(245);
+
+	var PastChart = React.createClass({
+	  displayName: 'PastChart',
+
+	  renderChart: function renderChart() {
+	    var _props = this.props;
+	    var past = _props.past;
+	    var activeYear = _props.activeYear;
+
+	    var candidates = past[activeYear];
+	    viz.initPast(candidates);
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.renderChart();
+	  },
+
+	  componentDidUpdate: function componentDidUpdate() {
+	    // this.forceUpdate()
+	    var target = document.getElementById('bar-chart-target');
+	    var svg = document.getElementById('past-chart-svg');
+	    target.removeChild(svg);
+	    this.renderChart();
+	  },
+
+	  render: function render() {
+	    return React.createElement('div', { id: 'bar-chart-target' });
+	  }
+	});
+
+	module.exports = PastChart;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React, Reflux) {/** @jsx React.DOM */'use strict';
+
+	var _require = __webpack_require__(217);
+
+	var updateSelectedYear = _require.updateSelectedYear;
+
+	var YearSelect = React.createClass({
+	  displayName: 'YearSelect',
+
+	  mixins: [Reflux.connect(__webpack_require__(224), 'activeYear')],
+
+	  handleChange: function handleChange(e) {
+	    var updateYear = e.target.value;
+	    if (updateYear) {
+	      updateSelectedYear(updateYear);
+	    }
+	  },
+
+	  activateClass: function activateClass() {},
+
+	  render: function render() {
+	    var _this = this;
+
+	    var _props = this.props;
+	    var candidates = _props.candidates;
+	    var activeCandidate = _props.activeCandidate;
+	    var activeYear = _props.activeYear;
+
+	    var years = [2012, 2008, 2004, 2000];
+	    var buttons = years.map(function (year) {
+	      var buttonStatus = year == activeYear ? 'year active' : 'year';
+	      return React.createElement(
+	        'button',
+	        { key: year, className: buttonStatus, onClick: _this.handleChange, value: year },
+	        year
+	      );
+	    });
+
+	    return React.createElement(
+	      'div',
+	      { className: 'year-select-container' },
+	      React.createElement(
+	        'ul',
+	        { className: 'year-select', ref: 'yearSelect' },
+	        buttons
+	      )
+	    );
+	  }
+	});
+
+	module.exports = YearSelect;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(197)))
+
+/***/ },
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
@@ -50029,109 +50167,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
-
-	var _require = __webpack_require__(217);
-
-	var updateSelectedCandidate = _require.updateSelectedCandidate;
-
-	var CandidateStore = __webpack_require__(218);
-
-	var viz = __webpack_require__(245);
-
-	var PastChart = React.createClass({
-	  displayName: 'PastChart',
-
-	  renderChart: function renderChart() {
-	    var _props = this.props;
-	    var past = _props.past;
-	    var activeYear = _props.activeYear;
-
-	    var candidates = past[activeYear];
-	    viz.initPast(candidates);
-	  },
-
-	  componentDidMount: function componentDidMount() {
-	    this.renderChart();
-	  },
-
-	  componentDidUpdate: function componentDidUpdate() {
-	    // this.forceUpdate()
-	    var target = document.getElementById('bar-chart-target');
-	    var svg = document.getElementById('past-chart-svg');
-	    target.removeChild(svg);
-	    this.renderChart();
-	  },
-
-	  render: function render() {
-	    return React.createElement('div', { id: 'bar-chart-target' });
-	  }
-	});
-
-	module.exports = PastChart;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
-
-/***/ },
-/* 256 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(React, Reflux) {/** @jsx React.DOM */'use strict';
-
-	var _require = __webpack_require__(217);
-
-	var updateSelectedYear = _require.updateSelectedYear;
-
-	var YearSelect = React.createClass({
-	  displayName: 'YearSelect',
-
-	  mixins: [Reflux.connect(__webpack_require__(224), 'activeYear')],
-
-	  handleChange: function handleChange(e) {
-	    var updateYear = e.target.value;
-	    if (updateYear) {
-	      updateSelectedYear(updateYear);
-	    }
-	  },
-
-	  activateClass: function activateClass() {},
-
-	  render: function render() {
-	    var _this = this;
-
-	    var _props = this.props;
-	    var candidates = _props.candidates;
-	    var activeCandidate = _props.activeCandidate;
-	    var activeYear = _props.activeYear;
-
-	    var years = [2012, 2008, 2004, 2000].reverse();
-	    var buttons = years.map(function (year) {
-	      var buttonStatus = year == activeYear ? 'year active' : 'year';
-	      return React.createElement(
-	        'button',
-	        { key: year, className: buttonStatus, onClick: _this.handleChange, value: year },
-	        year
-	      );
-	    });
-
-	    return React.createElement(
-	      'div',
-	      { className: 'year-select-container' },
-	      React.createElement(
-	        'ul',
-	        { className: 'year-select', ref: 'yearSelect' },
-	        buttons
-	      )
-	    );
-	  }
-	});
-
-	module.exports = YearSelect;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(197)))
-
-/***/ },
 /* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -50162,7 +50197,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(259)();
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  max-width: 600px;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\n.outraised {\n  font-size: 24px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding: 8.33333px 0; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 36px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 48px; }\n  .past-difference {\n    font-size: 36px; } }\n\n#bar-chart-target {\n  width: 80%;\n  max-width: 600px;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative;\n  padding-bottom: 25px; }\n\ng.current-bar-group {\n  cursor: pointer; }\n\nrect {\n  fill: #999; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 0 auto 12.5px auto; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  max-width: 600px;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 0 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #eaeaea;\n  border: 2px solid #000000;\n  color: #999;\n  border-color: #999;\n  width: 125px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #000000;\n  background-color: #ffffff;\n  border-color: #000000; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  max-width: 600px;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n@media (max-width: 450px) {\n  button.year {\n    width: 75px; } }\n\n@media (max-width: 600px) {\n  button.year {\n    width: 100px; } }\n\n#picture-div {\n  position: relative;\n  width: 80%;\n  max-width: 600px;\n  margin: 25px auto 0 auto;\n  height: 200px;\n  color: #fff;\n  overflow: hidden; }\n\n#picture-div img {\n  display: block;\n  margin: auto;\n  margin-top: -200px;\n  z-index: 1;\n  width: 100%;\n  height: auto; }\n\n.picture-name-container {\n  z-index: 2;\n  position: absolute;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: 25px;\n  left: 0;\n  right: 0;\n  top: 15%; }\n\n.picture-name-header {\n  text-align: center;\n  text-transform: uppercase;\n  padding: 12.5px;\n  font-size: 60px; }\n\n.arrow-icon, .left-icon, .right-icon {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  margin-top: auto;\n  margin-bottom: auto;\n  width: 100px;\n  height: 100px;\n  opacity: .5;\n  cursor: pointer;\n  padding: 0 10px; }\n\n.left-icon {\n  left: 0px;\n  text-align: left; }\n\n.right-icon {\n  right: 0px;\n  text-align: right; }\n\n@media (max-width: 450px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -70px; }\n  .picture-name-header {\n    font-size: 48px; }\n  .right-icon {\n    right: 0px; }\n  .left-icon {\n    left: 0px; } }\n\n@media (min-width: 451px) and (max-width: 600px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -100px; } }\n\n@media (min-width: 601px) and (max-width: 800px) {\n  #picture-div img {\n    margin-top: -100px; } }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 80%;\n  margin: 0 auto;\n  background-color: #ffffff;\n  padding: 25px; }\n\n.share-title {\n  width: 80%;\n  margin: 0 auto;\n  padding: 12.5px 25px;\n  text-align: center;\n  font-size: 36px;\n  text-transform: uppercase; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 80%;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    vertical-align: middle;\n    display: inline-block;\n    padding: 0 12.5px;\n    width: 75px;\n    margin: 0 auto; }\n\n@media (max-width: 550px) {\n  .share-title {\n    font-size: 20px; } }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 50px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #eaeaea;\n  color: #fff;\n  cursor: pointer;\n  box-sizing: border-box;\n  border: 1px solid #999; }\n\nli.nav-tab.active {\n  background-color: #fff;\n  border-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.picture-div-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\n.picture-div-appear.picture-div-appear-active {\n  opacity: 1; }\n\n.picture-div-leave {\n  opacity: 1; }\n\n.picture-div-leave.picture-div-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.primary-header {\n  font-size: 36px;\n  width: 80%;\n  max-width: 600px;\n  margin: 0 auto;\n  padding-top: 10px;\n  text-align: center;\n  text-transform: uppercase; }\n\n@media (max-width: 550px) {\n  .primary-header {\n    font-size: 20px; } }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  max-width: 600px;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\n.outraised {\n  font-size: 24px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding: 8.33333px 0; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 36px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 48px; }\n  .past-difference {\n    font-size: 36px; } }\n\n#bar-chart-target {\n  width: 80%;\n  max-width: 600px;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative;\n  padding-bottom: 25px; }\n\ng.current-bar-group {\n  cursor: pointer; }\n\nrect {\n  fill: #999; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 0 auto 12.5px auto; }\n  .bar-label-black.bar-label-current {\n    font-size: 1em; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  max-width: 600px;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 0 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #eaeaea;\n  border: 2px solid #000000;\n  color: #999;\n  border-color: #999;\n  width: 125px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #000000;\n  background-color: #ffffff;\n  border-color: #000000; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  max-width: 600px;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n@media (max-width: 450px) {\n  button.year {\n    width: 75px; } }\n\n@media (max-width: 600px) {\n  button.year {\n    width: 100px; } }\n\n#picture-div {\n  position: relative;\n  width: 80%;\n  max-width: 600px;\n  margin: 25px auto 0 auto;\n  height: 200px;\n  color: #fff;\n  overflow: hidden; }\n\n#picture-div img {\n  display: block;\n  margin: auto;\n  margin-top: -200px;\n  z-index: 1;\n  width: 100%;\n  height: auto; }\n\n.picture-name-container {\n  z-index: 2;\n  position: absolute;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: 25px;\n  left: 0;\n  right: 0;\n  top: 15%; }\n\n.picture-name-header {\n  text-align: center;\n  text-transform: uppercase;\n  padding: 12.5px;\n  font-size: 60px; }\n\n.arrow-icon, .left-icon, .right-icon {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  margin-top: auto;\n  margin-bottom: auto;\n  width: 100px;\n  height: 100px;\n  opacity: .5;\n  cursor: pointer;\n  padding: 0 10px; }\n\n.left-icon {\n  left: 0px;\n  text-align: left; }\n\n.right-icon {\n  right: 0px;\n  text-align: right; }\n\n@media (max-width: 450px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -70px; }\n  .picture-name-header {\n    font-size: 48px; }\n  .right-icon {\n    right: 0px; }\n  .left-icon {\n    left: 0px; } }\n\n@media (min-width: 451px) and (max-width: 600px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -100px; } }\n\n@media (min-width: 601px) and (max-width: 800px) {\n  #picture-div img {\n    margin-top: -100px; } }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 80%;\n  margin: 0 auto;\n  background-color: #ffffff;\n  padding: 25px; }\n\n.share-title {\n  width: 80%;\n  margin: 0 auto;\n  padding: 12.5px 25px;\n  text-align: center;\n  font-size: 36px;\n  text-transform: uppercase; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 80%;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    vertical-align: middle;\n    display: inline-block;\n    padding: 0 12.5px;\n    width: 75px;\n    margin: 0 auto; }\n\n@media (max-width: 550px) {\n  .share-title {\n    font-size: 20px; } }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 50px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #eaeaea;\n  color: #fff;\n  cursor: pointer;\n  box-sizing: border-box;\n  border: 1px solid #999; }\n\nli.nav-tab.active {\n  background-color: #fff;\n  border-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.picture-div-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\n.picture-div-appear.picture-div-appear-active {\n  opacity: 1; }\n\n.picture-div-leave {\n  opacity: 1; }\n\n.picture-div-leave.picture-div-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.primary-header {\n  font-size: 36px;\n  width: 80%;\n  max-width: 600px;\n  margin: 0 auto;\n  padding-top: 10px;\n  text-align: center;\n  text-transform: uppercase; }\n\n@media (max-width: 550px) {\n  .primary-header {\n    font-size: 20px;\n    width: 100%; } }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
 
 /***/ },
 /* 259 */
@@ -51853,7 +51888,7 @@
 	    element.initials = element.familiarName.split(' ').map(function (word) {
 	      return word.slice(0, 1);
 	    }).join('');
-	    element.image = "/images/" + lastName(element.name.toLowerCase()) + ".png";
+	    // element.image = "/images/" + lastName(element.name.toLowerCase()) + ".png"
 	  });
 	  return candidates;
 	}
@@ -51972,7 +52007,7 @@
 	// expects previously formatted dollar amount string
 
 	module.exports = function formatMillionString(amount) {
-	  return _.takeWhile(String(amount).split(''), function (n) {
+	  return "$" + _.takeWhile(String(amount).split(''), function (n) {
 	    return n !== ',';
 	  }).join('') + 'M';
 	};
