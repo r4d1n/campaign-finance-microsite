@@ -64,7 +64,7 @@ let Picture = React.createClass({
               <h1 key={name.split(' ')[0] + '_1'}className='picture-name-header'>{name.split(' ')[1]}</h1>
               {rightArrow}
             </div>
-            <img key={name.split(' ')[0] + '_img'} src={image} />
+            <img key={name.split(' ')[0] + '_img'} src={image} alt={`a picture of ${name}`}/>
           </div>
         </ReactCSSTransitionGroup>
       );
