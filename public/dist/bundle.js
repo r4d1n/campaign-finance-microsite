@@ -49892,7 +49892,8 @@
 	    // current cands have official and familiar name
 	    if (displayCandidate.familiarName) name = displayCandidate.familiarName;
 
-	    var image = '/images' + window.location.pathname + '/' + name.toLowerCase().split(' ')[1] + '.jpg';
+	    var imageDir = /past/.exec(window.location.pathname) ? 'past' : 'current'; // remember initial load w/ no path
+	    var image = '/images/' + imageDir + '/' + name.toLowerCase().split(' ')[1] + '.jpg';
 
 	    var arrows = [React.createElement(
 	      'div',
