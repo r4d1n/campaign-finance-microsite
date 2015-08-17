@@ -18,7 +18,7 @@ let CurrentCampaign = React.createClass({
       <ReactCSSTransitionGroup transitionName="campaign" transitionAppear={true}>
         <div>
           <header><h1 className="primary-header">Who Will Win The Fund Race?</h1></header>
-          <Picture {...this.props} />
+          <Picture {...this.props} displayCandidate={activeCandidate} />
           <CurrentChart {...this.props} activeCandidate={activeCandidate} />
         </div>
       </ReactCSSTransitionGroup>

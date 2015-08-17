@@ -6,9 +6,10 @@ let React = require('react/addons');
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 // child components
-let PastNames = require('./PastNames.jsx')
-, PastChart = require('./PastChart.jsx')
+let PastChart = require('./PastChart.jsx')
+, Picture = require('./Picture.jsx')
 , YearSelect = require('./YearSelect.jsx')
+, PastNames = require('./PastNames.jsx')
 
 let PastCampaign = React.createClass({
 
@@ -29,7 +30,7 @@ let PastCampaign = React.createClass({
     return (
       <ReactCSSTransitionGroup transitionName="campaign" transitionAppear={true}>
         <div>
-          <PastNames {...this.props} difference={difference} candidates={candidates} />
+          <Picture displayCandidate={candidates[0]} />
           <PastChart {...this.props} candidates={candidates} />
           <YearSelect activeYear={activeYear} />
         </div>
