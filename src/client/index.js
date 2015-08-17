@@ -1,6 +1,10 @@
 'use strict';
 
 
+if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+  let Promise = require('es6-promise').Promise;
+}
+
 // react router and top level components
 let { Route, DefaultRoute, NotFoundRoute } = Router;
 let App = require('./components/App.jsx')

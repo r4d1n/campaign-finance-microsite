@@ -46,27 +46,31 @@
 
 	/* WEBPACK VAR INJECTION */(function(Router, React) {'use strict';
 
+	if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+	  var _Promise = __webpack_require__(196).Promise;
+	}
+
 	// react router and top level components
 	var _Router = Router;
 	var Route = _Router.Route;
 	var DefaultRoute = _Router.DefaultRoute;
 	var NotFoundRoute = _Router.NotFoundRoute;
 
-	var App = __webpack_require__(196),
-	    CurrentCampaign = __webpack_require__(225),
-	    PastCampaign = __webpack_require__(253);
+	var App = __webpack_require__(200),
+	    CurrentCampaign = __webpack_require__(228),
+	    PastCampaign = __webpack_require__(256);
 
 	// scss
-	__webpack_require__(257);
+	__webpack_require__(260);
 
 	// client side js utils
-	var load = __webpack_require__(261);
-	var formatCandidates = __webpack_require__(265);
-	var formatDollarAmount = __webpack_require__(220);
-	var formatMillionString = __webpack_require__(267);
+	var load = __webpack_require__(264);
+	var formatCandidates = __webpack_require__(268);
+	var formatDollarAmount = __webpack_require__(224);
+	var formatMillionString = __webpack_require__(270);
 
 	// Routing
-	var routes = __webpack_require__(268);
+	var routes = __webpack_require__(271);
 
 	// load data from server and render
 	load('api/records/latest').then(function (body) {
@@ -23588,17 +23592,1020 @@
 /* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	 * @overview es6-promise - a tiny implementation of Promises/A+.
+	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+	 * @license   Licensed under MIT license
+	 *            See https://raw.githubusercontent.com/jakearchibald/es6-promise/master/LICENSE
+	 * @version   3.0.2
+	 */
+
+	(function() {
+	    "use strict";
+	    function lib$es6$promise$utils$$objectOrFunction(x) {
+	      return typeof x === 'function' || (typeof x === 'object' && x !== null);
+	    }
+
+	    function lib$es6$promise$utils$$isFunction(x) {
+	      return typeof x === 'function';
+	    }
+
+	    function lib$es6$promise$utils$$isMaybeThenable(x) {
+	      return typeof x === 'object' && x !== null;
+	    }
+
+	    var lib$es6$promise$utils$$_isArray;
+	    if (!Array.isArray) {
+	      lib$es6$promise$utils$$_isArray = function (x) {
+	        return Object.prototype.toString.call(x) === '[object Array]';
+	      };
+	    } else {
+	      lib$es6$promise$utils$$_isArray = Array.isArray;
+	    }
+
+	    var lib$es6$promise$utils$$isArray = lib$es6$promise$utils$$_isArray;
+	    var lib$es6$promise$asap$$len = 0;
+	    var lib$es6$promise$asap$$toString = {}.toString;
+	    var lib$es6$promise$asap$$vertxNext;
+	    var lib$es6$promise$asap$$customSchedulerFn;
+
+	    var lib$es6$promise$asap$$asap = function asap(callback, arg) {
+	      lib$es6$promise$asap$$queue[lib$es6$promise$asap$$len] = callback;
+	      lib$es6$promise$asap$$queue[lib$es6$promise$asap$$len + 1] = arg;
+	      lib$es6$promise$asap$$len += 2;
+	      if (lib$es6$promise$asap$$len === 2) {
+	        // If len is 2, that means that we need to schedule an async flush.
+	        // If additional callbacks are queued before the queue is flushed, they
+	        // will be processed by this flush that we are scheduling.
+	        if (lib$es6$promise$asap$$customSchedulerFn) {
+	          lib$es6$promise$asap$$customSchedulerFn(lib$es6$promise$asap$$flush);
+	        } else {
+	          lib$es6$promise$asap$$scheduleFlush();
+	        }
+	      }
+	    }
+
+	    function lib$es6$promise$asap$$setScheduler(scheduleFn) {
+	      lib$es6$promise$asap$$customSchedulerFn = scheduleFn;
+	    }
+
+	    function lib$es6$promise$asap$$setAsap(asapFn) {
+	      lib$es6$promise$asap$$asap = asapFn;
+	    }
+
+	    var lib$es6$promise$asap$$browserWindow = (typeof window !== 'undefined') ? window : undefined;
+	    var lib$es6$promise$asap$$browserGlobal = lib$es6$promise$asap$$browserWindow || {};
+	    var lib$es6$promise$asap$$BrowserMutationObserver = lib$es6$promise$asap$$browserGlobal.MutationObserver || lib$es6$promise$asap$$browserGlobal.WebKitMutationObserver;
+	    var lib$es6$promise$asap$$isNode = typeof process !== 'undefined' && {}.toString.call(process) === '[object process]';
+
+	    // test for web worker but not in IE10
+	    var lib$es6$promise$asap$$isWorker = typeof Uint8ClampedArray !== 'undefined' &&
+	      typeof importScripts !== 'undefined' &&
+	      typeof MessageChannel !== 'undefined';
+
+	    // node
+	    function lib$es6$promise$asap$$useNextTick() {
+	      // node version 0.10.x displays a deprecation warning when nextTick is used recursively
+	      // see https://github.com/cujojs/when/issues/410 for details
+	      return function() {
+	        process.nextTick(lib$es6$promise$asap$$flush);
+	      };
+	    }
+
+	    // vertx
+	    function lib$es6$promise$asap$$useVertxTimer() {
+	      return function() {
+	        lib$es6$promise$asap$$vertxNext(lib$es6$promise$asap$$flush);
+	      };
+	    }
+
+	    function lib$es6$promise$asap$$useMutationObserver() {
+	      var iterations = 0;
+	      var observer = new lib$es6$promise$asap$$BrowserMutationObserver(lib$es6$promise$asap$$flush);
+	      var node = document.createTextNode('');
+	      observer.observe(node, { characterData: true });
+
+	      return function() {
+	        node.data = (iterations = ++iterations % 2);
+	      };
+	    }
+
+	    // web worker
+	    function lib$es6$promise$asap$$useMessageChannel() {
+	      var channel = new MessageChannel();
+	      channel.port1.onmessage = lib$es6$promise$asap$$flush;
+	      return function () {
+	        channel.port2.postMessage(0);
+	      };
+	    }
+
+	    function lib$es6$promise$asap$$useSetTimeout() {
+	      return function() {
+	        setTimeout(lib$es6$promise$asap$$flush, 1);
+	      };
+	    }
+
+	    var lib$es6$promise$asap$$queue = new Array(1000);
+	    function lib$es6$promise$asap$$flush() {
+	      for (var i = 0; i < lib$es6$promise$asap$$len; i+=2) {
+	        var callback = lib$es6$promise$asap$$queue[i];
+	        var arg = lib$es6$promise$asap$$queue[i+1];
+
+	        callback(arg);
+
+	        lib$es6$promise$asap$$queue[i] = undefined;
+	        lib$es6$promise$asap$$queue[i+1] = undefined;
+	      }
+
+	      lib$es6$promise$asap$$len = 0;
+	    }
+
+	    function lib$es6$promise$asap$$attemptVertx() {
+	      try {
+	        var r = require;
+	        var vertx = __webpack_require__(198);
+	        lib$es6$promise$asap$$vertxNext = vertx.runOnLoop || vertx.runOnContext;
+	        return lib$es6$promise$asap$$useVertxTimer();
+	      } catch(e) {
+	        return lib$es6$promise$asap$$useSetTimeout();
+	      }
+	    }
+
+	    var lib$es6$promise$asap$$scheduleFlush;
+	    // Decide what async method to use to triggering processing of queued callbacks:
+	    if (lib$es6$promise$asap$$isNode) {
+	      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useNextTick();
+	    } else if (lib$es6$promise$asap$$BrowserMutationObserver) {
+	      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMutationObserver();
+	    } else if (lib$es6$promise$asap$$isWorker) {
+	      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMessageChannel();
+	    } else if (lib$es6$promise$asap$$browserWindow === undefined && "function" === 'function') {
+	      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$attemptVertx();
+	    } else {
+	      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useSetTimeout();
+	    }
+
+	    function lib$es6$promise$$internal$$noop() {}
+
+	    var lib$es6$promise$$internal$$PENDING   = void 0;
+	    var lib$es6$promise$$internal$$FULFILLED = 1;
+	    var lib$es6$promise$$internal$$REJECTED  = 2;
+
+	    var lib$es6$promise$$internal$$GET_THEN_ERROR = new lib$es6$promise$$internal$$ErrorObject();
+
+	    function lib$es6$promise$$internal$$selfFulfillment() {
+	      return new TypeError("You cannot resolve a promise with itself");
+	    }
+
+	    function lib$es6$promise$$internal$$cannotReturnOwn() {
+	      return new TypeError('A promises callback cannot return that same promise.');
+	    }
+
+	    function lib$es6$promise$$internal$$getThen(promise) {
+	      try {
+	        return promise.then;
+	      } catch(error) {
+	        lib$es6$promise$$internal$$GET_THEN_ERROR.error = error;
+	        return lib$es6$promise$$internal$$GET_THEN_ERROR;
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$tryThen(then, value, fulfillmentHandler, rejectionHandler) {
+	      try {
+	        then.call(value, fulfillmentHandler, rejectionHandler);
+	      } catch(e) {
+	        return e;
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$handleForeignThenable(promise, thenable, then) {
+	       lib$es6$promise$asap$$asap(function(promise) {
+	        var sealed = false;
+	        var error = lib$es6$promise$$internal$$tryThen(then, thenable, function(value) {
+	          if (sealed) { return; }
+	          sealed = true;
+	          if (thenable !== value) {
+	            lib$es6$promise$$internal$$resolve(promise, value);
+	          } else {
+	            lib$es6$promise$$internal$$fulfill(promise, value);
+	          }
+	        }, function(reason) {
+	          if (sealed) { return; }
+	          sealed = true;
+
+	          lib$es6$promise$$internal$$reject(promise, reason);
+	        }, 'Settle: ' + (promise._label || ' unknown promise'));
+
+	        if (!sealed && error) {
+	          sealed = true;
+	          lib$es6$promise$$internal$$reject(promise, error);
+	        }
+	      }, promise);
+	    }
+
+	    function lib$es6$promise$$internal$$handleOwnThenable(promise, thenable) {
+	      if (thenable._state === lib$es6$promise$$internal$$FULFILLED) {
+	        lib$es6$promise$$internal$$fulfill(promise, thenable._result);
+	      } else if (thenable._state === lib$es6$promise$$internal$$REJECTED) {
+	        lib$es6$promise$$internal$$reject(promise, thenable._result);
+	      } else {
+	        lib$es6$promise$$internal$$subscribe(thenable, undefined, function(value) {
+	          lib$es6$promise$$internal$$resolve(promise, value);
+	        }, function(reason) {
+	          lib$es6$promise$$internal$$reject(promise, reason);
+	        });
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$handleMaybeThenable(promise, maybeThenable) {
+	      if (maybeThenable.constructor === promise.constructor) {
+	        lib$es6$promise$$internal$$handleOwnThenable(promise, maybeThenable);
+	      } else {
+	        var then = lib$es6$promise$$internal$$getThen(maybeThenable);
+
+	        if (then === lib$es6$promise$$internal$$GET_THEN_ERROR) {
+	          lib$es6$promise$$internal$$reject(promise, lib$es6$promise$$internal$$GET_THEN_ERROR.error);
+	        } else if (then === undefined) {
+	          lib$es6$promise$$internal$$fulfill(promise, maybeThenable);
+	        } else if (lib$es6$promise$utils$$isFunction(then)) {
+	          lib$es6$promise$$internal$$handleForeignThenable(promise, maybeThenable, then);
+	        } else {
+	          lib$es6$promise$$internal$$fulfill(promise, maybeThenable);
+	        }
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$resolve(promise, value) {
+	      if (promise === value) {
+	        lib$es6$promise$$internal$$reject(promise, lib$es6$promise$$internal$$selfFulfillment());
+	      } else if (lib$es6$promise$utils$$objectOrFunction(value)) {
+	        lib$es6$promise$$internal$$handleMaybeThenable(promise, value);
+	      } else {
+	        lib$es6$promise$$internal$$fulfill(promise, value);
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$publishRejection(promise) {
+	      if (promise._onerror) {
+	        promise._onerror(promise._result);
+	      }
+
+	      lib$es6$promise$$internal$$publish(promise);
+	    }
+
+	    function lib$es6$promise$$internal$$fulfill(promise, value) {
+	      if (promise._state !== lib$es6$promise$$internal$$PENDING) { return; }
+
+	      promise._result = value;
+	      promise._state = lib$es6$promise$$internal$$FULFILLED;
+
+	      if (promise._subscribers.length !== 0) {
+	        lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publish, promise);
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$reject(promise, reason) {
+	      if (promise._state !== lib$es6$promise$$internal$$PENDING) { return; }
+	      promise._state = lib$es6$promise$$internal$$REJECTED;
+	      promise._result = reason;
+
+	      lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publishRejection, promise);
+	    }
+
+	    function lib$es6$promise$$internal$$subscribe(parent, child, onFulfillment, onRejection) {
+	      var subscribers = parent._subscribers;
+	      var length = subscribers.length;
+
+	      parent._onerror = null;
+
+	      subscribers[length] = child;
+	      subscribers[length + lib$es6$promise$$internal$$FULFILLED] = onFulfillment;
+	      subscribers[length + lib$es6$promise$$internal$$REJECTED]  = onRejection;
+
+	      if (length === 0 && parent._state) {
+	        lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publish, parent);
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$publish(promise) {
+	      var subscribers = promise._subscribers;
+	      var settled = promise._state;
+
+	      if (subscribers.length === 0) { return; }
+
+	      var child, callback, detail = promise._result;
+
+	      for (var i = 0; i < subscribers.length; i += 3) {
+	        child = subscribers[i];
+	        callback = subscribers[i + settled];
+
+	        if (child) {
+	          lib$es6$promise$$internal$$invokeCallback(settled, child, callback, detail);
+	        } else {
+	          callback(detail);
+	        }
+	      }
+
+	      promise._subscribers.length = 0;
+	    }
+
+	    function lib$es6$promise$$internal$$ErrorObject() {
+	      this.error = null;
+	    }
+
+	    var lib$es6$promise$$internal$$TRY_CATCH_ERROR = new lib$es6$promise$$internal$$ErrorObject();
+
+	    function lib$es6$promise$$internal$$tryCatch(callback, detail) {
+	      try {
+	        return callback(detail);
+	      } catch(e) {
+	        lib$es6$promise$$internal$$TRY_CATCH_ERROR.error = e;
+	        return lib$es6$promise$$internal$$TRY_CATCH_ERROR;
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$invokeCallback(settled, promise, callback, detail) {
+	      var hasCallback = lib$es6$promise$utils$$isFunction(callback),
+	          value, error, succeeded, failed;
+
+	      if (hasCallback) {
+	        value = lib$es6$promise$$internal$$tryCatch(callback, detail);
+
+	        if (value === lib$es6$promise$$internal$$TRY_CATCH_ERROR) {
+	          failed = true;
+	          error = value.error;
+	          value = null;
+	        } else {
+	          succeeded = true;
+	        }
+
+	        if (promise === value) {
+	          lib$es6$promise$$internal$$reject(promise, lib$es6$promise$$internal$$cannotReturnOwn());
+	          return;
+	        }
+
+	      } else {
+	        value = detail;
+	        succeeded = true;
+	      }
+
+	      if (promise._state !== lib$es6$promise$$internal$$PENDING) {
+	        // noop
+	      } else if (hasCallback && succeeded) {
+	        lib$es6$promise$$internal$$resolve(promise, value);
+	      } else if (failed) {
+	        lib$es6$promise$$internal$$reject(promise, error);
+	      } else if (settled === lib$es6$promise$$internal$$FULFILLED) {
+	        lib$es6$promise$$internal$$fulfill(promise, value);
+	      } else if (settled === lib$es6$promise$$internal$$REJECTED) {
+	        lib$es6$promise$$internal$$reject(promise, value);
+	      }
+	    }
+
+	    function lib$es6$promise$$internal$$initializePromise(promise, resolver) {
+	      try {
+	        resolver(function resolvePromise(value){
+	          lib$es6$promise$$internal$$resolve(promise, value);
+	        }, function rejectPromise(reason) {
+	          lib$es6$promise$$internal$$reject(promise, reason);
+	        });
+	      } catch(e) {
+	        lib$es6$promise$$internal$$reject(promise, e);
+	      }
+	    }
+
+	    function lib$es6$promise$enumerator$$Enumerator(Constructor, input) {
+	      var enumerator = this;
+
+	      enumerator._instanceConstructor = Constructor;
+	      enumerator.promise = new Constructor(lib$es6$promise$$internal$$noop);
+
+	      if (enumerator._validateInput(input)) {
+	        enumerator._input     = input;
+	        enumerator.length     = input.length;
+	        enumerator._remaining = input.length;
+
+	        enumerator._init();
+
+	        if (enumerator.length === 0) {
+	          lib$es6$promise$$internal$$fulfill(enumerator.promise, enumerator._result);
+	        } else {
+	          enumerator.length = enumerator.length || 0;
+	          enumerator._enumerate();
+	          if (enumerator._remaining === 0) {
+	            lib$es6$promise$$internal$$fulfill(enumerator.promise, enumerator._result);
+	          }
+	        }
+	      } else {
+	        lib$es6$promise$$internal$$reject(enumerator.promise, enumerator._validationError());
+	      }
+	    }
+
+	    lib$es6$promise$enumerator$$Enumerator.prototype._validateInput = function(input) {
+	      return lib$es6$promise$utils$$isArray(input);
+	    };
+
+	    lib$es6$promise$enumerator$$Enumerator.prototype._validationError = function() {
+	      return new Error('Array Methods must be provided an Array');
+	    };
+
+	    lib$es6$promise$enumerator$$Enumerator.prototype._init = function() {
+	      this._result = new Array(this.length);
+	    };
+
+	    var lib$es6$promise$enumerator$$default = lib$es6$promise$enumerator$$Enumerator;
+
+	    lib$es6$promise$enumerator$$Enumerator.prototype._enumerate = function() {
+	      var enumerator = this;
+
+	      var length  = enumerator.length;
+	      var promise = enumerator.promise;
+	      var input   = enumerator._input;
+
+	      for (var i = 0; promise._state === lib$es6$promise$$internal$$PENDING && i < length; i++) {
+	        enumerator._eachEntry(input[i], i);
+	      }
+	    };
+
+	    lib$es6$promise$enumerator$$Enumerator.prototype._eachEntry = function(entry, i) {
+	      var enumerator = this;
+	      var c = enumerator._instanceConstructor;
+
+	      if (lib$es6$promise$utils$$isMaybeThenable(entry)) {
+	        if (entry.constructor === c && entry._state !== lib$es6$promise$$internal$$PENDING) {
+	          entry._onerror = null;
+	          enumerator._settledAt(entry._state, i, entry._result);
+	        } else {
+	          enumerator._willSettleAt(c.resolve(entry), i);
+	        }
+	      } else {
+	        enumerator._remaining--;
+	        enumerator._result[i] = entry;
+	      }
+	    };
+
+	    lib$es6$promise$enumerator$$Enumerator.prototype._settledAt = function(state, i, value) {
+	      var enumerator = this;
+	      var promise = enumerator.promise;
+
+	      if (promise._state === lib$es6$promise$$internal$$PENDING) {
+	        enumerator._remaining--;
+
+	        if (state === lib$es6$promise$$internal$$REJECTED) {
+	          lib$es6$promise$$internal$$reject(promise, value);
+	        } else {
+	          enumerator._result[i] = value;
+	        }
+	      }
+
+	      if (enumerator._remaining === 0) {
+	        lib$es6$promise$$internal$$fulfill(promise, enumerator._result);
+	      }
+	    };
+
+	    lib$es6$promise$enumerator$$Enumerator.prototype._willSettleAt = function(promise, i) {
+	      var enumerator = this;
+
+	      lib$es6$promise$$internal$$subscribe(promise, undefined, function(value) {
+	        enumerator._settledAt(lib$es6$promise$$internal$$FULFILLED, i, value);
+	      }, function(reason) {
+	        enumerator._settledAt(lib$es6$promise$$internal$$REJECTED, i, reason);
+	      });
+	    };
+	    function lib$es6$promise$promise$all$$all(entries) {
+	      return new lib$es6$promise$enumerator$$default(this, entries).promise;
+	    }
+	    var lib$es6$promise$promise$all$$default = lib$es6$promise$promise$all$$all;
+	    function lib$es6$promise$promise$race$$race(entries) {
+	      /*jshint validthis:true */
+	      var Constructor = this;
+
+	      var promise = new Constructor(lib$es6$promise$$internal$$noop);
+
+	      if (!lib$es6$promise$utils$$isArray(entries)) {
+	        lib$es6$promise$$internal$$reject(promise, new TypeError('You must pass an array to race.'));
+	        return promise;
+	      }
+
+	      var length = entries.length;
+
+	      function onFulfillment(value) {
+	        lib$es6$promise$$internal$$resolve(promise, value);
+	      }
+
+	      function onRejection(reason) {
+	        lib$es6$promise$$internal$$reject(promise, reason);
+	      }
+
+	      for (var i = 0; promise._state === lib$es6$promise$$internal$$PENDING && i < length; i++) {
+	        lib$es6$promise$$internal$$subscribe(Constructor.resolve(entries[i]), undefined, onFulfillment, onRejection);
+	      }
+
+	      return promise;
+	    }
+	    var lib$es6$promise$promise$race$$default = lib$es6$promise$promise$race$$race;
+	    function lib$es6$promise$promise$resolve$$resolve(object) {
+	      /*jshint validthis:true */
+	      var Constructor = this;
+
+	      if (object && typeof object === 'object' && object.constructor === Constructor) {
+	        return object;
+	      }
+
+	      var promise = new Constructor(lib$es6$promise$$internal$$noop);
+	      lib$es6$promise$$internal$$resolve(promise, object);
+	      return promise;
+	    }
+	    var lib$es6$promise$promise$resolve$$default = lib$es6$promise$promise$resolve$$resolve;
+	    function lib$es6$promise$promise$reject$$reject(reason) {
+	      /*jshint validthis:true */
+	      var Constructor = this;
+	      var promise = new Constructor(lib$es6$promise$$internal$$noop);
+	      lib$es6$promise$$internal$$reject(promise, reason);
+	      return promise;
+	    }
+	    var lib$es6$promise$promise$reject$$default = lib$es6$promise$promise$reject$$reject;
+
+	    var lib$es6$promise$promise$$counter = 0;
+
+	    function lib$es6$promise$promise$$needsResolver() {
+	      throw new TypeError('You must pass a resolver function as the first argument to the promise constructor');
+	    }
+
+	    function lib$es6$promise$promise$$needsNew() {
+	      throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
+	    }
+
+	    var lib$es6$promise$promise$$default = lib$es6$promise$promise$$Promise;
+	    /**
+	      Promise objects represent the eventual result of an asynchronous operation. The
+	      primary way of interacting with a promise is through its `then` method, which
+	      registers callbacks to receive either a promise's eventual value or the reason
+	      why the promise cannot be fulfilled.
+
+	      Terminology
+	      -----------
+
+	      - `promise` is an object or function with a `then` method whose behavior conforms to this specification.
+	      - `thenable` is an object or function that defines a `then` method.
+	      - `value` is any legal JavaScript value (including undefined, a thenable, or a promise).
+	      - `exception` is a value that is thrown using the throw statement.
+	      - `reason` is a value that indicates why a promise was rejected.
+	      - `settled` the final resting state of a promise, fulfilled or rejected.
+
+	      A promise can be in one of three states: pending, fulfilled, or rejected.
+
+	      Promises that are fulfilled have a fulfillment value and are in the fulfilled
+	      state.  Promises that are rejected have a rejection reason and are in the
+	      rejected state.  A fulfillment value is never a thenable.
+
+	      Promises can also be said to *resolve* a value.  If this value is also a
+	      promise, then the original promise's settled state will match the value's
+	      settled state.  So a promise that *resolves* a promise that rejects will
+	      itself reject, and a promise that *resolves* a promise that fulfills will
+	      itself fulfill.
+
+
+	      Basic Usage:
+	      ------------
+
+	      ```js
+	      var promise = new Promise(function(resolve, reject) {
+	        // on success
+	        resolve(value);
+
+	        // on failure
+	        reject(reason);
+	      });
+
+	      promise.then(function(value) {
+	        // on fulfillment
+	      }, function(reason) {
+	        // on rejection
+	      });
+	      ```
+
+	      Advanced Usage:
+	      ---------------
+
+	      Promises shine when abstracting away asynchronous interactions such as
+	      `XMLHttpRequest`s.
+
+	      ```js
+	      function getJSON(url) {
+	        return new Promise(function(resolve, reject){
+	          var xhr = new XMLHttpRequest();
+
+	          xhr.open('GET', url);
+	          xhr.onreadystatechange = handler;
+	          xhr.responseType = 'json';
+	          xhr.setRequestHeader('Accept', 'application/json');
+	          xhr.send();
+
+	          function handler() {
+	            if (this.readyState === this.DONE) {
+	              if (this.status === 200) {
+	                resolve(this.response);
+	              } else {
+	                reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
+	              }
+	            }
+	          };
+	        });
+	      }
+
+	      getJSON('/posts.json').then(function(json) {
+	        // on fulfillment
+	      }, function(reason) {
+	        // on rejection
+	      });
+	      ```
+
+	      Unlike callbacks, promises are great composable primitives.
+
+	      ```js
+	      Promise.all([
+	        getJSON('/posts'),
+	        getJSON('/comments')
+	      ]).then(function(values){
+	        values[0] // => postsJSON
+	        values[1] // => commentsJSON
+
+	        return values;
+	      });
+	      ```
+
+	      @class Promise
+	      @param {function} resolver
+	      Useful for tooling.
+	      @constructor
+	    */
+	    function lib$es6$promise$promise$$Promise(resolver) {
+	      this._id = lib$es6$promise$promise$$counter++;
+	      this._state = undefined;
+	      this._result = undefined;
+	      this._subscribers = [];
+
+	      if (lib$es6$promise$$internal$$noop !== resolver) {
+	        if (!lib$es6$promise$utils$$isFunction(resolver)) {
+	          lib$es6$promise$promise$$needsResolver();
+	        }
+
+	        if (!(this instanceof lib$es6$promise$promise$$Promise)) {
+	          lib$es6$promise$promise$$needsNew();
+	        }
+
+	        lib$es6$promise$$internal$$initializePromise(this, resolver);
+	      }
+	    }
+
+	    lib$es6$promise$promise$$Promise.all = lib$es6$promise$promise$all$$default;
+	    lib$es6$promise$promise$$Promise.race = lib$es6$promise$promise$race$$default;
+	    lib$es6$promise$promise$$Promise.resolve = lib$es6$promise$promise$resolve$$default;
+	    lib$es6$promise$promise$$Promise.reject = lib$es6$promise$promise$reject$$default;
+	    lib$es6$promise$promise$$Promise._setScheduler = lib$es6$promise$asap$$setScheduler;
+	    lib$es6$promise$promise$$Promise._setAsap = lib$es6$promise$asap$$setAsap;
+	    lib$es6$promise$promise$$Promise._asap = lib$es6$promise$asap$$asap;
+
+	    lib$es6$promise$promise$$Promise.prototype = {
+	      constructor: lib$es6$promise$promise$$Promise,
+
+	    /**
+	      The primary way of interacting with a promise is through its `then` method,
+	      which registers callbacks to receive either a promise's eventual value or the
+	      reason why the promise cannot be fulfilled.
+
+	      ```js
+	      findUser().then(function(user){
+	        // user is available
+	      }, function(reason){
+	        // user is unavailable, and you are given the reason why
+	      });
+	      ```
+
+	      Chaining
+	      --------
+
+	      The return value of `then` is itself a promise.  This second, 'downstream'
+	      promise is resolved with the return value of the first promise's fulfillment
+	      or rejection handler, or rejected if the handler throws an exception.
+
+	      ```js
+	      findUser().then(function (user) {
+	        return user.name;
+	      }, function (reason) {
+	        return 'default name';
+	      }).then(function (userName) {
+	        // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
+	        // will be `'default name'`
+	      });
+
+	      findUser().then(function (user) {
+	        throw new Error('Found user, but still unhappy');
+	      }, function (reason) {
+	        throw new Error('`findUser` rejected and we're unhappy');
+	      }).then(function (value) {
+	        // never reached
+	      }, function (reason) {
+	        // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
+	        // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
+	      });
+	      ```
+	      If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
+
+	      ```js
+	      findUser().then(function (user) {
+	        throw new PedagogicalException('Upstream error');
+	      }).then(function (value) {
+	        // never reached
+	      }).then(function (value) {
+	        // never reached
+	      }, function (reason) {
+	        // The `PedgagocialException` is propagated all the way down to here
+	      });
+	      ```
+
+	      Assimilation
+	      ------------
+
+	      Sometimes the value you want to propagate to a downstream promise can only be
+	      retrieved asynchronously. This can be achieved by returning a promise in the
+	      fulfillment or rejection handler. The downstream promise will then be pending
+	      until the returned promise is settled. This is called *assimilation*.
+
+	      ```js
+	      findUser().then(function (user) {
+	        return findCommentsByAuthor(user);
+	      }).then(function (comments) {
+	        // The user's comments are now available
+	      });
+	      ```
+
+	      If the assimliated promise rejects, then the downstream promise will also reject.
+
+	      ```js
+	      findUser().then(function (user) {
+	        return findCommentsByAuthor(user);
+	      }).then(function (comments) {
+	        // If `findCommentsByAuthor` fulfills, we'll have the value here
+	      }, function (reason) {
+	        // If `findCommentsByAuthor` rejects, we'll have the reason here
+	      });
+	      ```
+
+	      Simple Example
+	      --------------
+
+	      Synchronous Example
+
+	      ```javascript
+	      var result;
+
+	      try {
+	        result = findResult();
+	        // success
+	      } catch(reason) {
+	        // failure
+	      }
+	      ```
+
+	      Errback Example
+
+	      ```js
+	      findResult(function(result, err){
+	        if (err) {
+	          // failure
+	        } else {
+	          // success
+	        }
+	      });
+	      ```
+
+	      Promise Example;
+
+	      ```javascript
+	      findResult().then(function(result){
+	        // success
+	      }, function(reason){
+	        // failure
+	      });
+	      ```
+
+	      Advanced Example
+	      --------------
+
+	      Synchronous Example
+
+	      ```javascript
+	      var author, books;
+
+	      try {
+	        author = findAuthor();
+	        books  = findBooksByAuthor(author);
+	        // success
+	      } catch(reason) {
+	        // failure
+	      }
+	      ```
+
+	      Errback Example
+
+	      ```js
+
+	      function foundBooks(books) {
+
+	      }
+
+	      function failure(reason) {
+
+	      }
+
+	      findAuthor(function(author, err){
+	        if (err) {
+	          failure(err);
+	          // failure
+	        } else {
+	          try {
+	            findBoooksByAuthor(author, function(books, err) {
+	              if (err) {
+	                failure(err);
+	              } else {
+	                try {
+	                  foundBooks(books);
+	                } catch(reason) {
+	                  failure(reason);
+	                }
+	              }
+	            });
+	          } catch(error) {
+	            failure(err);
+	          }
+	          // success
+	        }
+	      });
+	      ```
+
+	      Promise Example;
+
+	      ```javascript
+	      findAuthor().
+	        then(findBooksByAuthor).
+	        then(function(books){
+	          // found books
+	      }).catch(function(reason){
+	        // something went wrong
+	      });
+	      ```
+
+	      @method then
+	      @param {Function} onFulfilled
+	      @param {Function} onRejected
+	      Useful for tooling.
+	      @return {Promise}
+	    */
+	      then: function(onFulfillment, onRejection) {
+	        var parent = this;
+	        var state = parent._state;
+
+	        if (state === lib$es6$promise$$internal$$FULFILLED && !onFulfillment || state === lib$es6$promise$$internal$$REJECTED && !onRejection) {
+	          return this;
+	        }
+
+	        var child = new this.constructor(lib$es6$promise$$internal$$noop);
+	        var result = parent._result;
+
+	        if (state) {
+	          var callback = arguments[state - 1];
+	          lib$es6$promise$asap$$asap(function(){
+	            lib$es6$promise$$internal$$invokeCallback(state, child, callback, result);
+	          });
+	        } else {
+	          lib$es6$promise$$internal$$subscribe(parent, child, onFulfillment, onRejection);
+	        }
+
+	        return child;
+	      },
+
+	    /**
+	      `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
+	      as the catch block of a try/catch statement.
+
+	      ```js
+	      function findAuthor(){
+	        throw new Error('couldn't find that author');
+	      }
+
+	      // synchronous
+	      try {
+	        findAuthor();
+	      } catch(reason) {
+	        // something went wrong
+	      }
+
+	      // async with promises
+	      findAuthor().catch(function(reason){
+	        // something went wrong
+	      });
+	      ```
+
+	      @method catch
+	      @param {Function} onRejection
+	      Useful for tooling.
+	      @return {Promise}
+	    */
+	      'catch': function(onRejection) {
+	        return this.then(null, onRejection);
+	      }
+	    };
+	    function lib$es6$promise$polyfill$$polyfill() {
+	      var local;
+
+	      if (typeof global !== 'undefined') {
+	          local = global;
+	      } else if (typeof self !== 'undefined') {
+	          local = self;
+	      } else {
+	          try {
+	              local = Function('return this')();
+	          } catch (e) {
+	              throw new Error('polyfill failed because global object is unavailable in this environment');
+	          }
+	      }
+
+	      var P = local.Promise;
+
+	      if (P && Object.prototype.toString.call(P.resolve()) === '[object Promise]' && !P.cast) {
+	        return;
+	      }
+
+	      local.Promise = lib$es6$promise$promise$$default;
+	    }
+	    var lib$es6$promise$polyfill$$default = lib$es6$promise$polyfill$$polyfill;
+
+	    var lib$es6$promise$umd$$ES6Promise = {
+	      'Promise': lib$es6$promise$promise$$default,
+	      'polyfill': lib$es6$promise$polyfill$$default
+	    };
+
+	    /* global define:true module:true window: true */
+	    if ("function" === 'function' && __webpack_require__(199)['amd']) {
+	      !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return lib$es6$promise$umd$$ES6Promise; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof module !== 'undefined' && module['exports']) {
+	      module['exports'] = lib$es6$promise$umd$$ES6Promise;
+	    } else if (typeof this !== 'undefined') {
+	      this['ES6Promise'] = lib$es6$promise$umd$$ES6Promise;
+	    }
+
+	    lib$es6$promise$polyfill$$default();
+	}).call(this);
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), (function() { return this; }()), __webpack_require__(197)(module)))
+
+/***/ },
+/* 197 */
+/***/ function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
+
+/***/ },
+/* 198 */
+/***/ function(module, exports) {
+
+	/* (ignored) */
+
+/***/ },
+/* 199 */
+/***/ function(module, exports) {
+
+	module.exports = function() { throw new Error("define cannot be used indirect"); };
+
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(Router, React, Reflux) {/** @jsx React.DOM */'use strict';
 
 	// flux
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _require = __webpack_require__(217);
+	var _require = __webpack_require__(221);
 
 	var updateSelectedCandidate = _require.updateSelectedCandidate;
 
-	var Store = __webpack_require__(218);
+	var Store = __webpack_require__(222);
 
 	// router
 	var _Router = Router;
@@ -23607,12 +24614,12 @@
 	var Link = _Router.Link;
 
 	// child components
-	var Share = __webpack_require__(223);
+	var Share = __webpack_require__(226);
 
 	var App = React.createClass({
 	  displayName: 'App',
 
-	  mixins: [Reflux.connect(__webpack_require__(218), 'activeCandidate'), Reflux.connect(__webpack_require__(224), 'activeYear'), Router.Navigation],
+	  mixins: [Reflux.connect(__webpack_require__(222), 'activeCandidate'), Reflux.connect(__webpack_require__(227), 'activeYear'), Router.Navigation],
 
 	  highlightTab: function highlightTab() {
 	    var currentTabClass = 'nav-tab';
@@ -23689,29 +24696,29 @@
 	});
 
 	module.exports = App;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5), __webpack_require__(197)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5), __webpack_require__(201)))
 
 /***/ },
-/* 197 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Reflux = __webpack_require__(198);
+	var Reflux = __webpack_require__(202);
 
-	Reflux.connect = __webpack_require__(212);
+	Reflux.connect = __webpack_require__(216);
 
-	Reflux.connectFilter = __webpack_require__(214);
+	Reflux.connectFilter = __webpack_require__(218);
 
-	Reflux.ListenerMixin = __webpack_require__(213);
+	Reflux.ListenerMixin = __webpack_require__(217);
 
-	Reflux.listenTo = __webpack_require__(215);
+	Reflux.listenTo = __webpack_require__(219);
 
-	Reflux.listenToMany = __webpack_require__(216);
+	Reflux.listenToMany = __webpack_require__(220);
 
 	module.exports = Reflux;
 
 
 /***/ },
-/* 198 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23725,19 +24732,19 @@
 	    }
 	};
 
-	Reflux.ActionMethods = __webpack_require__(199);
+	Reflux.ActionMethods = __webpack_require__(203);
 
-	Reflux.ListenerMethods = __webpack_require__(200);
+	Reflux.ListenerMethods = __webpack_require__(204);
 
-	Reflux.PublisherMethods = __webpack_require__(210);
+	Reflux.PublisherMethods = __webpack_require__(214);
 
-	Reflux.StoreMethods = __webpack_require__(209);
+	Reflux.StoreMethods = __webpack_require__(213);
 
-	Reflux.createAction = __webpack_require__(211);
+	Reflux.createAction = __webpack_require__(215);
 
-	Reflux.createStore = __webpack_require__(205);
+	Reflux.createStore = __webpack_require__(209);
 
-	var maker = __webpack_require__(204).staticJoinCreator;
+	var maker = __webpack_require__(208).staticJoinCreator;
 
 	Reflux.joinTrailing = Reflux.all = maker("last"); // Reflux.all alias for backward compatibility
 
@@ -23747,7 +24754,7 @@
 
 	Reflux.joinConcat = maker("all");
 
-	var _ = Reflux.utils = __webpack_require__(201);
+	var _ = Reflux.utils = __webpack_require__(205);
 
 	Reflux.EventEmitter = _.EventEmitter;
 
@@ -23821,7 +24828,7 @@
 	 * Provides the set of created actions and stores for introspection
 	 */
 	/*eslint-disable no-underscore-dangle*/
-	Reflux.__keep = __webpack_require__(206);
+	Reflux.__keep = __webpack_require__(210);
 	/*eslint-enable no-underscore-dangle*/
 
 	/**
@@ -23835,7 +24842,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 199 */
+/* 203 */
 /***/ function(module, exports) {
 
 	/**
@@ -23847,13 +24854,13 @@
 	module.exports = {};
 
 /***/ },
-/* 200 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(201),
-	    maker = __webpack_require__(204).instanceJoinCreator;
+	var _ = __webpack_require__(205),
+	    maker = __webpack_require__(208).instanceJoinCreator;
 
 	/**
 	 * Extract child listenables from a parent from their
@@ -24085,7 +25092,7 @@
 	};
 
 /***/ },
-/* 201 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(setImmediate) {"use strict";
@@ -24163,7 +25170,7 @@
 	    return typeof value === "function";
 	}
 
-	exports.EventEmitter = __webpack_require__(203);
+	exports.EventEmitter = __webpack_require__(207);
 
 	if (environment.hasSetImmediate) {
 	    exports.nextTick = function (callback) {
@@ -24203,10 +25210,10 @@
 	        throw Error(msg || val);
 	    }
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(202).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(206).setImmediate))
 
 /***/ },
-/* 202 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(7).nextTick;
@@ -24285,10 +25292,10 @@
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(202).setImmediate, __webpack_require__(202).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(206).setImmediate, __webpack_require__(206).clearImmediate))
 
 /***/ },
-/* 203 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24556,7 +25563,7 @@
 
 
 /***/ },
-/* 204 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24565,8 +25572,8 @@
 
 	"use strict";
 
-	var createStore = __webpack_require__(205),
-	    _ = __webpack_require__(201);
+	var createStore = __webpack_require__(209),
+	    _ = __webpack_require__(205);
 
 	var slice = Array.prototype.slice,
 	    strategyMethodNames = {
@@ -24677,15 +25684,15 @@
 	}
 
 /***/ },
-/* 205 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(201),
-	    Keep = __webpack_require__(206),
-	    mixer = __webpack_require__(207),
-	    bindMethods = __webpack_require__(208);
+	var _ = __webpack_require__(205),
+	    Keep = __webpack_require__(210),
+	    mixer = __webpack_require__(211),
+	    bindMethods = __webpack_require__(212);
 
 	var allowed = { preEmit: 1, shouldEmit: 1 };
 
@@ -24699,9 +25706,9 @@
 	 */
 	module.exports = function (definition) {
 
-	    var StoreMethods = __webpack_require__(209),
-	        PublisherMethods = __webpack_require__(210),
-	        ListenerMethods = __webpack_require__(200);
+	    var StoreMethods = __webpack_require__(213),
+	        PublisherMethods = __webpack_require__(214),
+	        ListenerMethods = __webpack_require__(204);
 
 	    definition = definition || {};
 
@@ -24746,7 +25753,7 @@
 	};
 
 /***/ },
-/* 206 */
+/* 210 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24765,12 +25772,12 @@
 	};
 
 /***/ },
-/* 207 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(201);
+	var _ = __webpack_require__(205);
 
 	module.exports = function mix(def) {
 	    var composed = {
@@ -24829,7 +25836,7 @@
 	};
 
 /***/ },
-/* 208 */
+/* 212 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24859,7 +25866,7 @@
 	};
 
 /***/ },
-/* 209 */
+/* 213 */
 /***/ function(module, exports) {
 
 	/**
@@ -24871,12 +25878,12 @@
 	module.exports = {};
 
 /***/ },
-/* 210 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(201);
+	var _ = __webpack_require__(205);
 
 	/**
 	 * A module of methods for object that you want to be able to listen to.
@@ -25059,15 +26066,15 @@
 	};
 
 /***/ },
-/* 211 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(201),
-	    ActionMethods = __webpack_require__(199),
-	    PublisherMethods = __webpack_require__(210),
-	    Keep = __webpack_require__(206);
+	var _ = __webpack_require__(205),
+	    ActionMethods = __webpack_require__(203),
+	    PublisherMethods = __webpack_require__(214),
+	    Keep = __webpack_require__(210);
 
 	var allowed = { preEmit: 1, shouldEmit: 1 };
 
@@ -25130,12 +26137,12 @@
 	module.exports = createAction;
 
 /***/ },
-/* 212 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ListenerMethods = __webpack_require__(200),
-	    ListenerMixin = __webpack_require__(213),
-	    _ = __webpack_require__(201);
+	var ListenerMethods = __webpack_require__(204),
+	    ListenerMixin = __webpack_require__(217),
+	    _ = __webpack_require__(205);
 
 	module.exports = function(listenable,key){
 	    return {
@@ -25163,11 +26170,11 @@
 
 
 /***/ },
-/* 213 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(201),
-	    ListenerMethods = __webpack_require__(200);
+	var _ = __webpack_require__(205),
+	    ListenerMethods = __webpack_require__(204);
 
 	/**
 	 * A module meant to be consumed as a mixin by a React component. Supplies the methods from
@@ -25186,12 +26193,12 @@
 
 
 /***/ },
-/* 214 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ListenerMethods = __webpack_require__(200),
-	    ListenerMixin = __webpack_require__(213),
-	    _ = __webpack_require__(201);
+	var ListenerMethods = __webpack_require__(204),
+	    ListenerMixin = __webpack_require__(217),
+	    _ = __webpack_require__(205);
 
 	module.exports = function(listenable, key, filterFunc) {
 	    filterFunc = _.isFunction(key) ? key : filterFunc;
@@ -25232,10 +26239,10 @@
 
 
 /***/ },
-/* 215 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ListenerMethods = __webpack_require__(200);
+	var ListenerMethods = __webpack_require__(204);
 
 	/**
 	 * A mixin factory for a React component. Meant as a more convenient way of using the `ListenerMixin`,
@@ -25273,10 +26280,10 @@
 
 
 /***/ },
-/* 216 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ListenerMethods = __webpack_require__(200);
+	var ListenerMethods = __webpack_require__(204);
 
 	/**
 	 * A mixin factory for a React component. Meant as a more convenient way of using the `listenerMixin`,
@@ -25312,7 +26319,7 @@
 
 
 /***/ },
-/* 217 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Reflux) {/** @jsx React.DOM */'use strict';
@@ -25327,19 +26334,19 @@
 	 */
 
 	module.exports = Reflux.createActions(['updateSelectedCandidate', 'updateSelectedYear']);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(197)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(201)))
 
 /***/ },
-/* 218 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Reflux) {/** @jsx React.DOM */'use strict';
 
-	var howManyTablets = __webpack_require__(219);
-	var formatDollarAmount = __webpack_require__(220);
+	var howManyTablets = __webpack_require__(223);
+	var formatDollarAmount = __webpack_require__(224);
 
 	var CandidateStore = Reflux.createStore({
-	  listenables: [__webpack_require__(217)],
+	  listenables: [__webpack_require__(221)],
 
 	  init: function init() {},
 
@@ -25360,10 +26367,10 @@
 	});
 
 	module.exports = CandidateStore;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(197)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(201)))
 
 /***/ },
-/* 219 */
+/* 223 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25375,7 +26382,7 @@
 	module.exports = howManyTablets;
 
 /***/ },
-/* 220 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {'use strict';
@@ -25392,10 +26399,10 @@
 	    }
 	  });
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(225)))
 
 /***/ },
-/* 221 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global, _) {/**
@@ -37750,26 +38757,10 @@
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(222)(module), (function() { return this; }()), __webpack_require__(221)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(197)(module), (function() { return this; }()), __webpack_require__(225)))
 
 /***/ },
-/* 222 */
-/***/ function(module, exports) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 223 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
@@ -37818,17 +38809,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 224 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Reflux) {/** @jsx React.DOM */'use strict';
 
 	// this store is for keeping track of which election year should be shown
 
-	var formatDollarAmount = __webpack_require__(220);
+	var formatDollarAmount = __webpack_require__(224);
 
 	var YearStore = Reflux.createStore({
-	  listenables: [__webpack_require__(217)],
+	  listenables: [__webpack_require__(221)],
 
 	  getInitialState: function getInitialState() {
 	    this.year = 2012;
@@ -37843,23 +38834,23 @@
 	});
 
 	module.exports = YearStore;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(197)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(201)))
 
 /***/ },
-/* 225 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = __webpack_require__(226);
+	var React = __webpack_require__(229);
 	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 	// child components
-	var CurrentChart = __webpack_require__(244),
-	    CurrentAmount = __webpack_require__(251),
-	    Picture = __webpack_require__(252);
+	var CurrentChart = __webpack_require__(247),
+	    CurrentAmount = __webpack_require__(254),
+	    Picture = __webpack_require__(255);
 
 	var CurrentCampaign = React.createClass({
 	  displayName: 'CurrentCampaign',
@@ -37895,14 +38886,14 @@
 	module.exports = CurrentCampaign;
 
 /***/ },
-/* 226 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(227);
+	module.exports = __webpack_require__(230);
 
 
 /***/ },
-/* 227 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -37925,18 +38916,18 @@
 
 	'use strict';
 
-	var LinkedStateMixin = __webpack_require__(228);
+	var LinkedStateMixin = __webpack_require__(231);
 	var React = __webpack_require__(6);
 	var ReactComponentWithPureRenderMixin =
-	  __webpack_require__(231);
-	var ReactCSSTransitionGroup = __webpack_require__(232);
+	  __webpack_require__(234);
+	var ReactCSSTransitionGroup = __webpack_require__(235);
 	var ReactFragment = __webpack_require__(14);
-	var ReactTransitionGroup = __webpack_require__(233);
+	var ReactTransitionGroup = __webpack_require__(236);
 	var ReactUpdates = __webpack_require__(29);
 
-	var cx = __webpack_require__(241);
-	var cloneWithProps = __webpack_require__(235);
-	var update = __webpack_require__(242);
+	var cx = __webpack_require__(244);
+	var cloneWithProps = __webpack_require__(238);
+	var update = __webpack_require__(245);
 
 	React.addons = {
 	  CSSTransitionGroup: ReactCSSTransitionGroup,
@@ -37953,7 +38944,7 @@
 
 	if ("production" !== process.env.NODE_ENV) {
 	  React.addons.Perf = __webpack_require__(153);
-	  React.addons.TestUtils = __webpack_require__(243);
+	  React.addons.TestUtils = __webpack_require__(246);
 	}
 
 	module.exports = React;
@@ -37961,7 +38952,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 228 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -37978,8 +38969,8 @@
 
 	'use strict';
 
-	var ReactLink = __webpack_require__(229);
-	var ReactStateSetters = __webpack_require__(230);
+	var ReactLink = __webpack_require__(232);
+	var ReactStateSetters = __webpack_require__(233);
 
 	/**
 	 * A simple mixin around ReactLink.forState().
@@ -38006,7 +38997,7 @@
 
 
 /***/ },
-/* 229 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38083,7 +39074,7 @@
 
 
 /***/ },
-/* 230 */
+/* 233 */
 /***/ function(module, exports) {
 
 	/**
@@ -38193,7 +39184,7 @@
 
 
 /***/ },
-/* 231 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38246,7 +39237,7 @@
 
 
 /***/ },
-/* 232 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38268,10 +39259,10 @@
 	var assign = __webpack_require__(4);
 
 	var ReactTransitionGroup = React.createFactory(
-	  __webpack_require__(233)
+	  __webpack_require__(236)
 	);
 	var ReactCSSTransitionGroupChild = React.createFactory(
-	  __webpack_require__(238)
+	  __webpack_require__(241)
 	);
 
 	var ReactCSSTransitionGroup = React.createClass({
@@ -38320,7 +39311,7 @@
 
 
 /***/ },
-/* 233 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38337,10 +39328,10 @@
 	'use strict';
 
 	var React = __webpack_require__(6);
-	var ReactTransitionChildMapping = __webpack_require__(234);
+	var ReactTransitionChildMapping = __webpack_require__(237);
 
 	var assign = __webpack_require__(4);
-	var cloneWithProps = __webpack_require__(235);
+	var cloneWithProps = __webpack_require__(238);
 	var emptyFunction = __webpack_require__(19);
 
 	var ReactTransitionGroup = React.createClass({
@@ -38554,7 +39545,7 @@
 
 
 /***/ },
-/* 234 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38663,7 +39654,7 @@
 
 
 /***/ },
-/* 235 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -38681,7 +39672,7 @@
 	'use strict';
 
 	var ReactElement = __webpack_require__(15);
-	var ReactPropTransferer = __webpack_require__(236);
+	var ReactPropTransferer = __webpack_require__(239);
 
 	var keyOf = __webpack_require__(42);
 	var warning = __webpack_require__(18);
@@ -38725,7 +39716,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 236 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38743,7 +39734,7 @@
 
 	var assign = __webpack_require__(4);
 	var emptyFunction = __webpack_require__(19);
-	var joinClasses = __webpack_require__(237);
+	var joinClasses = __webpack_require__(240);
 
 	/**
 	 * Creates a transfer strategy that will merge prop values using the supplied
@@ -38839,7 +39830,7 @@
 
 
 /***/ },
-/* 237 */
+/* 240 */
 /***/ function(module, exports) {
 
 	/**
@@ -38884,7 +39875,7 @@
 
 
 /***/ },
-/* 238 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -38903,8 +39894,8 @@
 
 	var React = __webpack_require__(6);
 
-	var CSSCore = __webpack_require__(239);
-	var ReactTransitionEvents = __webpack_require__(240);
+	var CSSCore = __webpack_require__(242);
+	var ReactTransitionEvents = __webpack_require__(243);
 
 	var onlyChild = __webpack_require__(159);
 	var warning = __webpack_require__(18);
@@ -39035,7 +40026,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 239 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -39150,7 +40141,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 240 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -39265,7 +40256,7 @@
 
 
 /***/ },
-/* 241 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -39324,7 +40315,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 242 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -39498,7 +40489,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 243 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -40016,18 +41007,18 @@
 
 
 /***/ },
-/* 244 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React, _) {/** @jsx React.DOM */'use strict';
 
-	var _require = __webpack_require__(217);
+	var _require = __webpack_require__(221);
 
 	var updateSelectedCandidate = _require.updateSelectedCandidate;
 
-	var CandidateStore = __webpack_require__(218);
+	var CandidateStore = __webpack_require__(222);
 
-	var viz = __webpack_require__(245);
+	var viz = __webpack_require__(248);
 
 	var CurrentChart = React.createClass({
 	  displayName: 'CurrentChart',
@@ -40063,37 +41054,37 @@
 	});
 
 	module.exports = CurrentChart;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(221)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(225)))
 
 /***/ },
-/* 245 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	function initCurrent(data) {
-	  __webpack_require__(246)(data);
+	  __webpack_require__(249)(data);
 	}
 
 	function initPast(data) {
-	  __webpack_require__(249)(data);
+	  __webpack_require__(252)(data);
 	}
 
 	module.exports = {
 	  initCurrent: initCurrent,
 	  initPast: initPast,
-	  highlight: __webpack_require__(250)
+	  highlight: __webpack_require__(253)
 	};
 
 /***/ },
-/* 246 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var d3 = __webpack_require__(247);
+	var d3 = __webpack_require__(250);
 
-	var _require = __webpack_require__(248);
+	var _require = __webpack_require__(251);
 
 	var height = _require.height;
 	var width = _require.width;
@@ -40153,7 +41144,7 @@
 	module.exports = draw;
 
 /***/ },
-/* 247 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -49662,7 +50653,7 @@
 	}();
 
 /***/ },
-/* 248 */
+/* 251 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -49686,14 +50677,14 @@
 	};
 
 /***/ },
-/* 249 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var d3 = __webpack_require__(247);
+	var d3 = __webpack_require__(250);
 
-	var _require = __webpack_require__(248);
+	var _require = __webpack_require__(251);
 
 	var height = _require.height;
 	var width = _require.width;
@@ -49752,12 +50743,12 @@
 	module.exports = draw;
 
 /***/ },
-/* 250 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var d3 = __webpack_require__(247);
+	var d3 = __webpack_require__(250);
 
 	var highlight = function highlight(activeCandidate) {
 	  if (activeCandidate) {
@@ -49777,7 +50768,7 @@
 	module.exports = highlight;
 
 /***/ },
-/* 251 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
@@ -49832,19 +50823,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 252 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/** @jsx React.DOM */'use strict';
 
-	var React = __webpack_require__(226);
+	var React = __webpack_require__(229);
 	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-	var _require = __webpack_require__(217);
+	var _require = __webpack_require__(221);
 
 	var updateSelectedCandidate = _require.updateSelectedCandidate;
 
-	var CandidateStore = __webpack_require__(218);
+	var CandidateStore = __webpack_require__(222);
 
 	var Picture = React.createClass({
 	  displayName: 'Picture',
@@ -49942,26 +50933,26 @@
 	});
 
 	module.exports = Picture;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(225)))
 
 /***/ },
-/* 253 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var formatDollarAmount = __webpack_require__(220);
+	var formatDollarAmount = __webpack_require__(224);
 
-	var React = __webpack_require__(226);
+	var React = __webpack_require__(229);
 	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 	// child components
-	var PastChart = __webpack_require__(254),
-	    Picture = __webpack_require__(252),
-	    YearSelect = __webpack_require__(255),
-	    PastNames = __webpack_require__(256);
+	var PastChart = __webpack_require__(257),
+	    Picture = __webpack_require__(255),
+	    YearSelect = __webpack_require__(258),
+	    PastNames = __webpack_require__(259);
 
 	var PastCampaign = React.createClass({
 	  displayName: 'PastCampaign',
@@ -50011,18 +51002,18 @@
 	module.exports = PastCampaign;
 
 /***/ },
-/* 254 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
 
-	var _require = __webpack_require__(217);
+	var _require = __webpack_require__(221);
 
 	var updateSelectedCandidate = _require.updateSelectedCandidate;
 
-	var CandidateStore = __webpack_require__(218);
+	var CandidateStore = __webpack_require__(222);
 
-	var viz = __webpack_require__(245);
+	var viz = __webpack_require__(248);
 
 	var PastChart = React.createClass({
 	  displayName: 'PastChart',
@@ -50057,19 +51048,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 255 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React, Reflux) {/** @jsx React.DOM */'use strict';
 
-	var _require = __webpack_require__(217);
+	var _require = __webpack_require__(221);
 
 	var updateSelectedYear = _require.updateSelectedYear;
 
 	var YearSelect = React.createClass({
 	  displayName: 'YearSelect',
 
-	  mixins: [Reflux.connect(__webpack_require__(224), 'activeYear')],
+	  mixins: [Reflux.connect(__webpack_require__(227), 'activeYear')],
 
 	  handleChange: function handleChange(e) {
 	    var updateYear = e.target.value;
@@ -50111,10 +51102,10 @@
 	});
 
 	module.exports = YearSelect;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(197)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(201)))
 
 /***/ },
-/* 256 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
@@ -50168,16 +51159,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 257 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(258);
+	var content = __webpack_require__(261);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(260)(content, {});
+	var update = __webpack_require__(263)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -50194,14 +51185,14 @@
 	}
 
 /***/ },
-/* 258 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(259)();
+	exports = module.exports = __webpack_require__(262)();
 	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\nv2.0 | 20110126\nLicense: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.big-num-bar {\n  text-transform: uppercase;\n  width: 80%;\n  max-width: 600px;\n  margin: 6.25px auto;\n  position: relative;\n  top: 25px;\n  padding: 5px 6.25px 5px 6.25px; }\n  .big-num-bar h1 {\n    padding: 8.33333px 0;\n    font-size: 2.5em;\n    text-align: left; }\n\n.candidate-name, h1.gop, h1.dem {\n  font-size: 28px; }\n\n.outraised {\n  font-size: 24px; }\n\nh1.gop {\n  color: #ff4c4c; }\n\nh1.dem {\n  color: #4c4cff; }\n\nh3.lost {\n  font-size: 24px;\n  padding: 8.33333px 0; }\n\n.lost.dem {\n  color: #4c4cff; }\n\n.lost.gop {\n  color: #ff4c4c; }\n\n.past-difference {\n  padding: 12.5px 0;\n  font-size: 24px; }\n\n.past-year {\n  padding: 12.5px 0;\n  font-size: 36px; }\n\n@media screen and (min-width: 1000px) {\n  h3.lost {\n    font-size: 36px; }\n  .candidate-name, h1.gop, h1.dem {\n    font-size: 48px; }\n  .past-year {\n    font-size: 48px; }\n  .past-difference {\n    font-size: 36px; } }\n\n#bar-chart-target {\n  width: 80%;\n  max-width: 600px;\n  height: 400px;\n  margin: 12.5px auto;\n  position: relative;\n  padding-bottom: 25px; }\n\ng.current-bar-group {\n  cursor: pointer; }\n\nrect {\n  fill: #999; }\n\n@media screen and (max-width: 600px) {\n  #bar-chart-target {\n    height: 250px;\n    width: 300px; } }\n\n@media screen and (max-width: 800px) {\n  #bar-chart-target {\n    height: 300px;\n    width: 400;\n    margin: 0 auto 12.5px auto; }\n  .bar-label-black.bar-label-current {\n    font-size: 1em; } }\n\n.bar.selected {\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.inactive {\n  fill: #999;\n  -webkit-transition: fill 0.5s;\n          transition: fill 0.5s; }\n\n.bar.selected.dem {\n  fill: #4c4cff; }\n\n.bar.selected.gop {\n  fill: #ff4c4c; }\n\n.tap-to-change {\n  position: relative;\n  width: 80%;\n  max-width: 600px;\n  height: 25px;\n  margin: 0 auto;\n  padding: 25px 0 0 0; }\n  .tap-to-change h3 {\n    text-align: center;\n    font-size: 1.25em; }\n\n.bar-label-white {\n  fill: #ffffff;\n  font-size: 1.5em; }\n\n.bar-label-black {\n  fill: #000000;\n  font-size: 1.5em; }\n\nbutton.year {\n  font-family: inherit;\n  font-size: inherit;\n  background-color: #eaeaea;\n  border: 2px solid #000000;\n  color: #999;\n  border-color: #999;\n  width: 125px;\n  border-radius: 10px;\n  margin: 6.25px;\n  line-height: 25px;\n  height: 50px;\n  text-transform: uppercase; }\n\nbutton.year.active {\n  color: #000000;\n  background-color: #ffffff;\n  border-color: #000000; }\n\n.year-select-container {\n  text-align: center;\n  width: 80%;\n  max-width: 600px;\n  margin: 0 auto;\n  font-size: 24px; }\n\n.year-select-container.ul {\n  width: 100%; }\n\n.year-select-label {\n  display: inline-block;\n  width: auto;\n  padding-right: 25px; }\n\n@media (max-width: 450px) {\n  button.year {\n    width: 75px; } }\n\n@media (max-width: 600px) {\n  button.year {\n    width: 100px; } }\n\n#picture-div {\n  position: relative;\n  width: 80%;\n  max-width: 600px;\n  margin: 25px auto 0 auto;\n  height: 200px;\n  color: #fff;\n  overflow: hidden; }\n\n#picture-div img {\n  display: block;\n  margin: auto;\n  margin-top: -200px;\n  z-index: 1;\n  width: 100%;\n  height: auto; }\n\n.picture-name-container {\n  z-index: 2;\n  position: absolute;\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n  margin-bottom: 25px;\n  left: 0;\n  right: 0;\n  top: 15%; }\n\n.picture-name-header {\n  text-align: center;\n  text-transform: uppercase;\n  padding: 12.5px;\n  font-size: 60px; }\n\n.arrow-icon, .left-icon, .right-icon {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  margin-top: auto;\n  margin-bottom: auto;\n  width: 100px;\n  height: 100px;\n  opacity: .5;\n  cursor: pointer;\n  padding: 0 10px; }\n\n.left-icon {\n  left: 0px;\n  text-align: left; }\n\n.right-icon {\n  right: 0px;\n  text-align: right; }\n\n@media (max-width: 450px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -70px; }\n  .picture-name-header {\n    font-size: 48px; }\n  .right-icon {\n    right: 0px; }\n  .left-icon {\n    left: 0px; } }\n\n@media (min-width: 451px) and (max-width: 600px) {\n  #picture-div {\n    width: 100%; }\n  #picture-div img {\n    margin-top: -100px; } }\n\n@media (min-width: 601px) and (max-width: 800px) {\n  #picture-div img {\n    margin-top: -100px; } }\n\n.share-container {\n  position: relative;\n  bottom: 0px;\n  width: 80%;\n  margin: 0 auto;\n  background-color: #ffffff;\n  padding: 25px; }\n\n.share-title {\n  width: 80%;\n  margin: 0 auto;\n  padding: 12.5px 25px;\n  text-align: center;\n  font-size: 36px;\n  text-transform: uppercase; }\n\nul.share-icons {\n  text-align: center;\n  margin: 0 auto;\n  position: relative;\n  height: 35px;\n  width: 80%;\n  margin: 0 auto;\n  padding: 12.5px; }\n  ul.share-icons li {\n    vertical-align: middle;\n    display: inline-block;\n    padding: 0 12.5px;\n    width: 75px;\n    margin: 0 auto; }\n\n@media (max-width: 550px) {\n  .share-title {\n    font-size: 20px; } }\n\n.share-text {\n  padding-top: 5px;\n  text-transform: uppercase;\n  font-size: 24px;\n  font-weight: bold; }\n\n.twitter-link {\n  color: #55acee; }\n  .twitter-link:hover {\n    color: #1689e0; }\n\n.facebook-link {\n  color: #3b5998; }\n  .facebook-link:hover {\n    color: #263961; }\n\n.nav-main {\n  height: 50px;\n  width: 100%;\n  margin-bottom: 12.5px; }\n  .nav-main ul {\n    height: 40px;\n    width: 100%; }\n\nli.nav-tab {\n  width: 50%;\n  height: 50px;\n  float: left;\n  padding: 12.5px 0 12.5px 0;\n  text-align: center;\n  background-color: #eaeaea;\n  color: #fff;\n  cursor: pointer;\n  box-sizing: border-box;\n  border: 1px solid #999; }\n\nli.nav-tab.active {\n  background-color: #fff;\n  border-color: #fff; }\n  li.nav-tab.active a.nav-link {\n    color: #000; }\n\na.nav-link {\n  width: 100%;\n  margin: 0 auto;\n  color: #999;\n  text-decoration: none;\n  font-size: 20px; }\n\n#left-tab {\n  border-bottom-right-radius: 5px; }\n\n#right-tab {\n  border-bottom-left-radius: 5px; }\n\n.campaign-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.campaign-appear.campaign-appear-active {\n  opacity: 1; }\n\n.campaign-leave {\n  opacity: 1; }\n\n.campaign-leave.campaign-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 0.5s ease-in;\n          transition: opacity 0.5s ease-in; }\n\n.picture-div-appear {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\n.picture-div-appear.picture-div-appear-active {\n  opacity: 1; }\n\n.picture-div-leave {\n  opacity: 1; }\n\n.picture-div-leave.picture-div-leave-active {\n  opacity: 0.01;\n  -webkit-transition: opacity 1s ease-in;\n          transition: opacity 1s ease-in; }\n\nhtml {\n  height: 100%; }\n\nbody {\n  height: 100%;\n  font-family: \"canada-type-gibson\", sans-serif;\n  background-color: #ffffff;\n  font-size: 1em;\n  padding-bottom: 25px; }\n\nmain {\n  height: 100%; }\n\n.primary-header {\n  font-size: 36px;\n  width: 80%;\n  max-width: 600px;\n  margin: 0 auto;\n  padding-top: 10px;\n  text-align: center;\n  text-transform: uppercase; }\n\n@media (max-width: 550px) {\n  .primary-header {\n    font-size: 20px;\n    width: 100%; } }\n\nsection {\n  margin-bottom: 25px; }\n\n#app-container {\n  height: 100%; }\n\n* {\n  -webkit-tap-highlight-color: transparent; }\n", ""]);
 
 /***/ },
-/* 259 */
+/* 262 */
 /***/ function(module, exports) {
 
 	/*
@@ -50257,7 +51248,7 @@
 
 
 /***/ },
-/* 260 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -50482,12 +51473,12 @@
 
 
 /***/ },
-/* 261 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var ajax = __webpack_require__(262);
+	var ajax = __webpack_require__(265);
 
 	function load(url) {
 	  var _this = this;
@@ -50507,15 +51498,15 @@
 	module.exports = load;
 
 /***/ },
-/* 262 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(263);
-	var reduce = __webpack_require__(264);
+	var Emitter = __webpack_require__(266);
+	var reduce = __webpack_require__(267);
 
 	/**
 	 * Root reference for iframes.
@@ -51651,7 +52642,7 @@
 
 
 /***/ },
-/* 263 */
+/* 266 */
 /***/ function(module, exports) {
 
 	
@@ -51821,7 +52812,7 @@
 
 
 /***/ },
-/* 264 */
+/* 267 */
 /***/ function(module, exports) {
 
 	
@@ -51850,15 +52841,15 @@
 	};
 
 /***/ },
-/* 265 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var commons = __webpack_require__(266);
+	var commons = __webpack_require__(269);
 
-	var formatDollarAmount = __webpack_require__(220);
-	var formatMillionString = __webpack_require__(267);
+	var formatDollarAmount = __webpack_require__(224);
+	var formatMillionString = __webpack_require__(270);
 
 	function firstName(name) {
 	  var arr = name.split(',').reverse();
@@ -51897,7 +52888,7 @@
 	module.exports = formatCandidates;
 
 /***/ },
-/* 266 */
+/* 269 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -52000,7 +52991,7 @@
 	}];
 
 /***/ },
-/* 267 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {'use strict';
@@ -52012,10 +53003,10 @@
 	    return n !== ',';
 	  }).join('') + 'M';
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(225)))
 
 /***/ },
-/* 268 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52030,9 +53021,9 @@
 	var DefaultRoute = _require.DefaultRoute;
 	var NotFoundRoute = _require.NotFoundRoute;
 
-	var App = __webpack_require__(196),
-	    CurrentCampaign = __webpack_require__(225),
-	    PastCampaign = __webpack_require__(253);
+	var App = __webpack_require__(200),
+	    CurrentCampaign = __webpack_require__(228),
+	    PastCampaign = __webpack_require__(256);
 
 	/* export react routes for BOTH client and server use */
 
