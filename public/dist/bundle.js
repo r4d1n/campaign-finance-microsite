@@ -50869,10 +50869,10 @@
 	  },
 
 	  shouldShowArrows: function shouldShowArrows() {
-	    if (/current/.exec(window.location.pathname)) {
-	      return true;
-	    } else {
+	    if (/past/.exec(window.location.pathname)) {
 	      return false;
+	    } else {
+	      return true;
 	    }
 	  },
 
