@@ -62,7 +62,7 @@ let App = React.createClass({
               <Link to="current" className='nav-link' role='tab'>2016</Link>
             </li>
             <li id='right-tab' className={pastTabClass} onClick={this.clickTab}>
-              <Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past Years</Link>
+              <Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past</Link>
             </li>
           </ul>
         </nav>

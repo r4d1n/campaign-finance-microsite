@@ -24683,7 +24683,7 @@
 	            React.createElement(
 	              Link,
 	              { to: 'past', params: { year: activeYear }, className: 'nav-link', role: 'tab' },
-	              'Past Years'
+	              'Past'
 	            )
 	          )
 	        )
