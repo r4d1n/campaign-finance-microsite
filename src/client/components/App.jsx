@@ -59,10 +59,10 @@ let App = React.createClass({
         <nav className='nav-main' onClick={this.clickTab}>
           <ul role='tablist'>
             <li id='left-tab' className={currentTabClass} onClick={this.clickTab}>
-              <Link to="current" className='nav-link' role='tab'>2016 Election</Link>
+              <Link to="current" className='nav-link' role='tab'>2016</Link>
             </li>
             <li id='right-tab' className={pastTabClass} onClick={this.clickTab}>
-              <Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past Elections</Link>
+              <Link to="past" params={{year:activeYear}} className='nav-link' role='tab'>Past Years</Link>
             </li>
           </ul>
         </nav>

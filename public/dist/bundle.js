@@ -24674,7 +24674,7 @@
 	            React.createElement(
 	              Link,
 	              { to: 'current', className: 'nav-link', role: 'tab' },
-	              '2016 Election'
+	              '2016'
 	            )
 	          ),
 	          React.createElement(
@@ -24683,7 +24683,7 @@
 	            React.createElement(
 	              Link,
 	              { to: 'past', params: { year: activeYear }, className: 'nav-link', role: 'tab' },
-	              'Past Elections'
+	              'Past Years'
 	            )
 	          )
 	        )
