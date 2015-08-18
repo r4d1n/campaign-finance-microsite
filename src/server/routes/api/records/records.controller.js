@@ -44,7 +44,7 @@ controller.latestRecords = function(req, res, next) {
     .find()
     .where('requestedAt')
     .equals(timestamp[0].requestedAt)
-    .sort({ officialRaised : -1 })
+    .sort({ totalReceipts : -1 })
     .limit(limit)
     .exec()
     .then((result) => {
