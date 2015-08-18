@@ -37,6 +37,16 @@ main {
   text-transform: uppercase;
 }
 
+.secondary-header {
+  font-size: 24px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 $spacing-unit;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 @media (max-width: 550px) {
   .primary-header {
     font-size: 20px;
@@ -51,6 +61,12 @@ main {
 
 section {
   margin-bottom: $spacing-unit;
+}
+
+.top-five-div {
+  width: $container-width;
+  height: $spacing-unit * 2;
+  margin: 0 auto;
 }
 
 #app-container {

@@ -16,11 +16,14 @@ let CurrentCampaign = React.createClass({
 
     return (
       <ReactCSSTransitionGroup transitionName="campaign" transitionAppear={true}>
-        <div>
-          <header><h1 className="primary-header">Who Will Win The Race?</h1></header>
-          <Picture {...this.props} displayCandidate={activeCandidate} />
-          <CurrentChart {...this.props} activeCandidate={activeCandidate} />
-        </div>
+      <div>
+      <header><h1 className="primary-header">Who Will Win The Race?</h1></header>
+      <Picture {...this.props} displayCandidate={activeCandidate} />
+      <CurrentChart {...this.props} activeCandidate={activeCandidate} />
+      <div className="top-five-div">
+      <h3 className="secondary-header">Top Five Fundraisers as of July 2015</h3>
+      </div>
+      </div>
       </ReactCSSTransitionGroup>
     );
   }
