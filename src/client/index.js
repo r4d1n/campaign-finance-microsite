@@ -31,7 +31,6 @@ load('api/records/latest')
 .then((body) => {
   let candidates = formatCandidates(body.current);
   let past = body.past;
-  // console.log(candidates, past)
   // format past candidates TODO MOVE TO SERVER
   if (candidates && past) {
 
@@ -47,7 +46,7 @@ load('api/records/latest')
         }).join('')
       }
     }
-    console.log(candidates, past)
+    // console.log(candidates, past)
     Router.run(routes, Router.HistoryLocation, function (Handler) {
       React.render(<Handler candidates={candidates} past={past}/>, document.body);
     });

@@ -76,7 +76,6 @@
 	load('api/records/latest').then(function (body) {
 	  var candidates = formatCandidates(body.current);
 	  var past = body.past;
-	  // console.log(candidates, past)
 	  // format past candidates TODO MOVE TO SERVER
 	  if (candidates && past) {
 
@@ -92,7 +91,7 @@
 	        }).join('');
 	      }
 	    }
-	    console.log(candidates, past);
+	    // console.log(candidates, past)
 	    Router.run(routes, Router.HistoryLocation, function (Handler) {
 	      React.render(React.createElement(Handler, { candidates: candidates, past: past }), document.body);
 	    });
@@ -24675,7 +24674,7 @@
 	            React.createElement(
 	              Link,
 	              { to: 'current', className: 'nav-link', role: 'tab' },
-	              'Upcoming'
+	              '2016 Election'
 	            )
 	          ),
 	          React.createElement(
@@ -24684,7 +24683,7 @@
 	            React.createElement(
 	              Link,
 	              { to: 'past', params: { year: activeYear }, className: 'nav-link', role: 'tab' },
-	              'Past'
+	              'Past Elections'
 	            )
 	          )
 	        )
