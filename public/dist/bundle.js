@@ -38780,7 +38780,7 @@
 	          React.createElement(
 	            'a',
 	            { className: 'twitter-link',
-	              href: 'https://twitter.com/intent/tweet?via=r4d1n&text=Who%20is%20winning%20the%20election%3F&url=http://www.economocracy.info',
+	              href: 'https://twitter.com/intent/tweet?via=r4d1n&text=Who+is+winning+the+Presidential+race%3F&url=http://www.economocracy.info',
 	              target: '_blank' },
 	            React.createElement('i', { className: 'fa fa-twitter fa-3x' })
 	          )
