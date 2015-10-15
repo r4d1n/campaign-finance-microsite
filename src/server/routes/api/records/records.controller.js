@@ -37,26 +37,32 @@ controller.latestRecords = function(req, res, next) {
   Timestamp
   .find()
   .sort({requestedAt : -1})
-  .limit(1)
+  .limit(5)
   .exec()
   .then((timestamp) => {
-    return Record
-    .find()
-    .where('requestedAt')
-    .equals(timestamp[0].requestedAt)
-    .sort({ totalReceipts : -1 })
-    .limit(limit)
-    .exec()
-    .then((result) => {
-      let response = {
-        current: result,
-        past: pastYears
-      }
-      res.json(response);
-    })
-    .catch((err) => {
-      res.status(500).json({status:'error', message: err});
-    })
+    return (function getRecordByTimestamp(index) {
+      return Record
+      .find()
+      .where('requestedAt')
+      .equals(timestamp[index].requestedAt)
+      .sort({ totalReceipts : -1 })
+      .limit(limit)
+      .exec()
+      .then((result) => {
+        if (Object.keys(result)[0]) {
+          let response = {
+            current: result,
+            past: pastYears
+          }
+          res.json(response);
+        } else {
+          getRecordByTimestamp(index + 1);
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({status:'error', message: err});
+      })
+    })(0)
   })
 }
 
